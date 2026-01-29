@@ -46,44 +46,44 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-800">
       {/* Header */}
-      <header className="border-b border-emerald-200/50 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      <header className="border-b border-slate-700/50 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center">
-                <span className="text-white text-xl">🔬</span>
+              <div className="w-11 h-11 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-lg">
+                <span className="text-white text-xl">⚕️</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                   DiabeTwin
                 </h1>
-                <p className="text-sm text-gray-500">Hệ thống dự đoán tiểu đường AI</p>
+                <p className="text-xs text-slate-400">AI Diabetes Risk Assessment</p>
               </div>
             </div>
             
             {/* Mode Toggle */}
-            <div className="flex gap-2 bg-gray-100 rounded-full p-1">
+            <div className="flex gap-2 bg-slate-800 rounded-full p-1.5">
               <button
                 onClick={() => setMode("user")}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   mode === "user"
-                    ? "bg-white text-emerald-600 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg"
+                    : "text-slate-400 hover:text-slate-200"
                 }`}
               >
-                👤 Người dùng
+                👤 User
               </button>
               <button
                 onClick={() => setMode("doctor")}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                   mode === "doctor"
-                    ? "bg-white text-cyan-600 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-lg"
+                    : "text-slate-400 hover:text-slate-200"
                 }`}
               >
-                👨‍⚕️ Bác sĩ
+                👨‍⚕️ Doctor
               </button>
             </div>
           </div>
@@ -91,15 +91,18 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-8 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-3">
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        <div className="mb-12 text-center animate-fadeIn">
+          <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-4">
+            <p className="text-blue-400 text-sm font-semibold">🚀 Advanced AI Analysis</p>
+          </div>
+          <h2 className="text-5xl font-bold text-white mb-4 leading-tight">
             {mode === "doctor" 
-              ? "Chẩn đoán lâm sàng chuyên nghiệp" 
-              : "Kiểm tra nhanh nguy cơ tiểu đường"}
+              ? "Professional Clinical Diagnosis" 
+              : "Rapid Diabetes Risk Check"}
           </h2>
-          <p className="text-gray-600 text-lg">
-            Công nghệ AI tiên tiến giúp đánh giá nguy cơ tiểu đường chính xác
+          <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+            State-of-the-art AI technology for accurate diabetes risk assessment with comprehensive health insights
           </p>
         </div>
 
@@ -114,11 +117,11 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-emerald-200/50 bg-white/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-gray-600">
-          <p>© 2026 DiabeTwin - Hệ thống dự đoán tiểu đường AI</p>
-          <p className="text-sm mt-2">
-            ⚠️ Kết quả chỉ mang tính tham khảo. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa.
+      <footer className="mt-16 border-t border-slate-700/50 bg-gradient-to-t from-slate-950 to-slate-900/50 backdrop-blur-sm py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-slate-300 font-medium">© 2026 DiabeTwin - AI-Powered Health Assessment</p>
+          <p className="text-slate-400 text-sm mt-3">
+            ⚠️ Results are for reference only. Please consult with healthcare professionals for medical advice.
           </p>
         </div>
       </footer>
