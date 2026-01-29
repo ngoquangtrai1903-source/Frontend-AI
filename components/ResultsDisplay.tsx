@@ -71,20 +71,20 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
         {/* Impact Analysis - 2 columns */}
         <div className="lg:col-span-2 space-y-6">
           {/* Impact List */}
-          <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
+          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 🧠 Feature Impact (SHAP)
               </h3>
             </div>
             <div className="p-6 space-y-3">
-              <p className="text-slate-300 mb-4">
+              <p className="text-gray-700 mb-4">
                 Top factors influencing your diabetes risk assessment:
               </p>
               
               {significantImpacts.length === 0 ? (
-                <div className="p-4 bg-blue-500/10 rounded-lg border border-blue-500/30">
-                  <p className="text-blue-300">
+                <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                  <p className="text-blue-700">
                     ℹ️ All parameters are at safe levels compared to population baseline.
                   </p>
                 </div>
@@ -103,8 +103,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           </div>
 
           {/* Charts */}
-          <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-cyan-600 to-blue-600 px-6 py-4">
+          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 📊 Visual Analysis
               </h3>
@@ -115,8 +115,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           </div>
 
           {/* Waterfall Chart */}
-          <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-violet-600 to-purple-600 px-6 py-4">
+          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
+            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 📈 Waterfall Analysis
               </h3>
@@ -129,7 +129,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
 
         {/* AI Advice - 1 column */}
         <div className="space-y-6">
-          <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden sticky top-24">
+          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden sticky top-24">
             <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 👨‍⚕️ AI Doctor Recommendations
@@ -138,7 +138,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
             <div className="p-6">
               <div className="space-y-3">
                 {results.aiAdvice.split('\n').map((line, index) => (
-                  <p key={index} className="text-slate-300 leading-relaxed">
+                  <p key={index} className="text-gray-700 leading-relaxed">
                     {line}
                   </p>
                 ))}
@@ -149,7 +149,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           {/* Reset Button */}
           <button
             onClick={onReset}
-            className="w-full bg-gradient-to-r from-slate-700 to-slate-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl hover:from-slate-600 hover:to-slate-500 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl hover:from-gray-700 hover:to-gray-800 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
           >
             🔄 New Analysis
           </button>
@@ -181,12 +181,12 @@ function MetricCard({
       className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="bg-slate-800/50 backdrop-blur-xl rounded-xl shadow-xl border border-slate-700/50 overflow-hidden group hover:shadow-2xl transition-shadow">
+      <div className="bg-white rounded-lg shadow-md border border-purple-100/50 overflow-hidden group hover:shadow-lg transition-shadow">
         <div className={`bg-gradient-to-r ${gradient} px-6 py-3`}>
           <h4 className="text-white font-semibold text-sm">{title}</h4>
         </div>
         <div className="px-6 py-8">
-          <p className="text-4xl font-bold text-slate-100 text-center group-hover:scale-110 transition-transform">
+          <p className="text-4xl font-bold text-gray-900 text-center group-hover:scale-110 transition-transform">
             {value}
           </p>
         </div>
@@ -216,27 +216,27 @@ function ImpactItem({
     >
       <div className={`p-4 rounded-lg border-l-4 ${
         isPositive 
-          ? 'bg-red-500/10 border-red-500' 
-          : 'bg-emerald-500/10 border-emerald-500'
+          ? 'bg-red-50 border-red-300' 
+          : 'bg-emerald-50 border-emerald-300'
       }`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-2xl">{isPositive ? '🔴' : '🟢'}</span>
             <div>
-              <p className="font-bold text-slate-100">{impact.feature}</p>
-              <p className={`text-sm ${isPositive ? 'text-red-400' : 'text-emerald-400'}`}>
+              <p className="font-bold text-gray-900">{impact.feature}</p>
+              <p className={`text-sm ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
                 {isPositive ? 'Increases' : 'Reduces'} {Math.abs(val)}% risk
               </p>
             </div>
           </div>
           <div className="text-right">
-            <div className={`text-2xl font-bold ${isPositive ? 'text-red-400' : 'text-emerald-400'}`}>
+            <div className={`text-2xl font-bold ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
               {isPositive ? '+' : ''}{val}%
             </div>
           </div>
         </div>
         {/* Progress bar */}
-        <div className="mt-3 h-2 bg-slate-700 rounded-full overflow-hidden">
+        <div className="mt-3 h-2 bg-gray-200 rounded-full overflow-hidden">
           <div 
             className={`h-full ${isPositive ? 'bg-red-500' : 'bg-emerald-500'} transition-all duration-1000`}
             style={{ 

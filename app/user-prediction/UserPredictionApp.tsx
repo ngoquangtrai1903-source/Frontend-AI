@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Navigation } from "@/components/Navigation";
 
 // Types
 interface UserFormData {
@@ -163,8 +164,9 @@ export default function UserPredictionApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-white">
+      <Navigation />
+      <div className="max-w-4xl mx-auto py-12 px-4">
         {/* Progress Bar */}
         <ProgressBar currentStep={step} totalSteps={3} />
 

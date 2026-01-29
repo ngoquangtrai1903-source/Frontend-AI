@@ -30,9 +30,9 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
         {/* Form Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-7">
+        <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-7">
           <h3 className="text-2xl font-bold text-white flex items-center gap-3">
             <span>📋</span>
             Patient Information
@@ -96,7 +96,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("hypertension", false)}
                     className="form-radio"
                   />
-                  <span className="text-slate-300">No</span>
+                  <span className="text-gray-700">No</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -105,7 +105,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("hypertension", true)}
                     className="form-radio"
                   />
-                  <span className="text-slate-300">Yes</span>
+                  <span className="text-gray-700">Yes</span>
                 </label>
               </div>
             </FormField>
@@ -119,7 +119,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("heart_disease", false)}
                     className="form-radio"
                   />
-                  <span className="text-slate-300">No</span>
+                  <span className="text-gray-700">No</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -128,7 +128,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("heart_disease", true)}
                     className="form-radio"
                   />
-                  <span className="text-slate-300">Yes</span>
+                  <span className="text-gray-700">Yes</span>
                 </label>
               </div>
             </FormField>
@@ -166,8 +166,8 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 onChange={(e) => updateField("hba1c", parseFloat(e.target.value))}
                 className="form-input"
               />
-              <div className="mt-2 p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
-                <p className="text-xs text-blue-300">
+              <div className="mt-2 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <p className="text-xs text-blue-700">
                   {formData.hba1c < 5.7 ? "✅ Normal" : 
                    formData.hba1c < 6.5 ? "⚠️ Prediabetes" : 
                    "🔴 High Risk"}
@@ -184,8 +184,8 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 onChange={(e) => updateField("glucose", parseInt(e.target.value))}
                 className="form-input"
               />
-              <div className="mt-2 p-3 bg-cyan-500/10 rounded-lg border border-cyan-500/30">
-                <p className="text-xs text-cyan-300">
+              <div className="mt-2 p-3 bg-pink-50 rounded-lg border border-pink-200">
+                <p className="text-xs text-pink-700">
                   {formData.glucose < 100 ? "✅ Normal" : 
                    formData.glucose < 126 ? "⚠️ Prediabetes" : 
                    "🔴 Diabetes"}
@@ -200,7 +200,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-2xl hover:from-blue-600 hover:to-cyan-600 transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
           >
             {isLoading ? (
               <>
@@ -230,7 +230,7 @@ function FormField({
 }) {
   return (
     <div className="group">
-      <label className="block mb-3 text-sm font-semibold text-slate-200 flex items-center gap-2">
+      <label className="block mb-3 text-sm font-semibold text-gray-700 flex items-center gap-2">
         <span className="text-xl group-hover:scale-110 transition-transform">{icon}</span>
         {label}
       </label>
