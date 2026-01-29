@@ -24,9 +24,9 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
 
   const getRiskColor = (level: string) => {
     switch (level) {
-      case "high": return "from-red-500 to-rose-600";
-      case "medium": return "from-amber-500 to-orange-600";
-      default: return "from-emerald-500 to-teal-600";
+      case "high": return "bg-red-600";
+      case "medium": return "bg-yellow-600";
+      default: return "bg-green-600";
     }
   };
 
@@ -49,19 +49,19 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
         <MetricCard
           title="Risk Probability"
           value={`${(results.probability * 100).toFixed(1)}%`}
-          gradient="from-blue-500 to-cyan-500"
+          color="bg-blue-600"
           delay={0}
         />
         <MetricCard
           title="Conclusion"
           value={results.conclusion}
-          gradient={results.conclusion === "DƯƠNG TÍNH" ? "from-red-500 to-rose-600" : "from-emerald-500 to-teal-600"}
+          color={results.conclusion === "DƯƠNG TÍNH" ? "bg-red-600" : "bg-green-600"}
           delay={100}
         />
         <MetricCard
           title="Risk Level"
           value={getRiskEmoji(results.riskLevel)}
-          gradient={getRiskColor(results.riskLevel)}
+          color={getRiskColor(results.riskLevel)}
           delay={200}
         />
       </div>
@@ -71,8 +71,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
         {/* Impact Analysis - 2 columns */}
         <div className="lg:col-span-2 space-y-6">
           {/* Impact List */}
-          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-blue-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 🧠 Feature Impact (SHAP)
               </h3>
@@ -103,8 +103,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           </div>
 
           {/* Charts */}
-          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-4">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-green-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 📊 Visual Analysis
               </h3>
@@ -115,8 +115,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           </div>
 
           {/* Waterfall Chart */}
-          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="bg-orange-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 📈 Waterfall Analysis
               </h3>
@@ -129,8 +129,8 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
 
         {/* AI Advice - 1 column */}
         <div className="space-y-6">
-          <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden sticky top-24">
-            <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-6 py-4">
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden sticky top-24">
+            <div className="bg-purple-600 px-6 py-4">
               <h3 className="text-xl font-bold text-white flex items-center gap-2">
                 👨‍⚕️ AI Doctor Recommendations
               </h3>
@@ -149,7 +149,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
           {/* Reset Button */}
           <button
             onClick={onReset}
-            className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white py-4 rounded-lg font-bold shadow-lg hover:shadow-xl hover:from-gray-700 hover:to-gray-800 transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+            className="w-full bg-gray-600 text-white py-4 rounded-lg font-bold shadow-md hover:bg-gray-700 transition-colors flex items-center justify-center gap-2"
           >
             🔄 New Analysis
           </button>
@@ -162,12 +162,12 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
 function MetricCard({ 
   title, 
   value, 
-  gradient, 
+  color, 
   delay 
 }: { 
   title: string; 
   value: string; 
-  gradient: string;
+  color: string;
   delay: number;
 }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -178,11 +178,11 @@ function MetricCard({
 
   return (
     <div 
-      className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
+      className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="bg-white rounded-lg shadow-md border border-purple-100/50 overflow-hidden group hover:shadow-lg transition-shadow">
-        <div className={`bg-gradient-to-r ${gradient} px-6 py-3`}>
+      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow">
+        <div className={`${color} px-6 py-3`}>
           <h4 className="text-white font-semibold text-sm">{title}</h4>
         </div>
         <div className="px-6 py-8">
@@ -216,21 +216,21 @@ function ImpactItem({
     >
       <div className={`p-4 rounded-lg border-l-4 ${
         isPositive 
-          ? 'bg-red-50 border-red-300' 
-          : 'bg-emerald-50 border-emerald-300'
+          ? 'bg-red-50 border-red-400' 
+          : 'bg-green-50 border-green-400'
       }`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-2xl">{isPositive ? '🔴' : '🟢'}</span>
             <div>
               <p className="font-bold text-gray-900">{impact.feature}</p>
-              <p className={`text-sm ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
+              <p className={`text-sm ${isPositive ? 'text-red-700' : 'text-green-700'}`}>
                 {isPositive ? 'Increases' : 'Reduces'} {Math.abs(val)}% risk
               </p>
             </div>
           </div>
           <div className="text-right">
-            <div className={`text-2xl font-bold ${isPositive ? 'text-red-600' : 'text-emerald-600'}`}>
+            <div className={`text-2xl font-bold ${isPositive ? 'text-red-700' : 'text-green-700'}`}>
               {isPositive ? '+' : ''}{val}%
             </div>
           </div>

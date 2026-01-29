@@ -30,9 +30,9 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white rounded-xl shadow-md border border-purple-100/50 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
         {/* Form Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-7">
+        <div className="bg-blue-600 px-8 py-7">
           <h3 className="text-2xl font-bold text-white flex items-center gap-3">
             <span>📋</span>
             Patient Information
@@ -200,7 +200,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+            className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {isLoading ? (
               <>

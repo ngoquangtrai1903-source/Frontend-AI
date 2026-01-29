@@ -46,13 +46,13 @@ export default function DoctorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-white">
+    <div className="min-h-screen bg-white">
       <Navigation />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-md text-sm font-medium mb-4">
             <span>👨‍⚕️</span>
             <span>Doctor Mode</span>
           </div>
@@ -75,7 +75,7 @@ export default function DoctorPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-purple-100 bg-white/50 backdrop-blur-sm py-8">
+      <footer className="mt-16 border-t border-gray-200 bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-6 text-center text-gray-600">
           <p>© 2026 DiabeTwin - AI-Powered Health Assessment</p>
           <p className="text-sm mt-2">

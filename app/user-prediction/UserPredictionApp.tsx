@@ -164,7 +164,7 @@ export default function UserPredictionApp() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-pink-50 to-white">
+    <div className="min-h-screen bg-white">
       <Navigation />
       <div className="max-w-4xl mx-auto py-12 px-4">
         {/* Progress Bar */}

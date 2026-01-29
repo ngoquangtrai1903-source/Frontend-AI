@@ -9,30 +9,28 @@ export function Navigation() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <nav className="bg-white/80 backdrop-blur-xl border-b border-purple-100/50 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white text-xl font-bold">D</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                DiabeTwin
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900">DiabeTwin</h1>
               <p className="text-xs text-gray-500">Health AI</p>
             </div>
           </Link>
 
           {/* Navigation Links */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <Link
               href="/"
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
                 isActive('/')
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-purple-50'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
               Home
@@ -40,10 +38,10 @@ export function Navigation() {
 
             <Link
               href="/user-prediction"
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
                 isActive('/user-prediction')
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-purple-50'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
               User Check
@@ -51,10 +49,10 @@ export function Navigation() {
 
             <Link
               href="/doctor"
-              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
                 isActive('/doctor')
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-purple-50'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
               Doctor

@@ -3,15 +3,15 @@
 /* Enhanced Form Styles */
 .form-input,
 .form-select {
-  @apply w-full px-4 py-3 rounded-lg border-2 border-purple-200 
-         focus:border-purple-500 focus:ring-4 focus:ring-purple-100
-         transition-all outline-none bg-white
+  @apply w-full px-4 py-3 rounded-lg border-2 border-gray-300 
+         focus:border-blue-500 focus:ring-4 focus:ring-blue-100
+         transition-colors outline-none bg-white
          text-gray-900 font-medium placeholder-gray-400;
 }
 
 .form-input:hover,
 .form-select:hover {
-  @apply border-purple-300 bg-white;
+  @apply border-gray-400 bg-white;
 }
 
 /* Custom Range Slider */
@@ -29,32 +29,32 @@ input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  background: #2563eb;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 6px 16px rgba(168, 85, 247, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 24px;
   height: 24px;
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  background: #2563eb;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
   border: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 input[type="range"]::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 6px 16px rgba(168, 85, 247, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
 }
 
 /* Animations */
@@ -186,7 +186,7 @@ html {
 /* Radio and Checkbox Styling */
 input[type="radio"],
 input[type="checkbox"] {
-  @apply accent-purple-500 w-4 h-4 cursor-pointer;
+  @apply accent-blue-600 w-4 h-4 cursor-pointer;
 }
 
 /* Toggle Switch Animation */
