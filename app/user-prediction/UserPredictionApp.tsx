@@ -190,14 +190,14 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
       <div className="flex justify-between mb-2">
         {[1, 2, 3].map(step => (
           <div key={step} className="flex flex-col items-center">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-500 ${
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 ${
               currentStep >= step 
-                ? 'bg-gradient-to-br from-purple-500 to-fuchsia-500 text-white scale-110 shadow-lg' 
+                ? 'bg-blue-600 text-white shadow-md' 
                 : 'bg-gray-200 text-gray-400'
             }`}>
               {step}
             </div>
-            <span className={`text-xs mt-2 font-medium ${currentStep >= step ? 'text-purple-600' : 'text-gray-400'}`}>
+            <span className={`text-xs mt-2 font-medium ${currentStep >= step ? 'text-blue-600' : 'text-gray-400'}`}>
               {step === 1 ? 'Cá nhân' : step === 2 ? 'Y tế' : 'Lối sống'}
             </span>
           </div>
@@ -205,7 +205,7 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
       </div>
       <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
         <div 
-          className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-500 transition-all duration-700 ease-out"
+          className="h-full bg-blue-600 transition-all duration-500"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -216,8 +216,8 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
 // Step 1: Personal Info
 function Step1Personal({ formData, updateField, onNext }: any) {
   return (
-    <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-purple-100 animate-fadeIn">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
         👤 Thông tin cá nhân
       </h2>
       
@@ -227,15 +227,15 @@ function Step1Personal({ formData, updateField, onNext }: any) {
           <label className="block text-sm font-semibold text-gray-700 mb-3">Giới tính</label>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { value: 0, label: '👩 Nữ', color: 'from-pink-400 to-rose-400' },
-              { value: 1, label: '👨 Nam', color: 'from-blue-400 to-cyan-400' }
+              { value: 0, label: '👩 Nữ' },
+              { value: 1, label: '👨 Nam' }
             ].map(option => (
               <button
                 key={option.value}
                 onClick={() => updateField('sex', option.value)}
-                className={`p-4 rounded-xl font-semibold text-lg transition-all duration-300 ${
+                className={`p-4 rounded-lg font-semibold text-lg transition-colors duration-150 ${
                   formData.sex === option.value
-                    ? `bg-gradient-to-r ${option.color} text-white shadow-lg scale-105`
+                    ? 'bg-blue-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -248,7 +248,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
         {/* Age Slider */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Nhóm tuổi: <span className="text-purple-600 text-xl">{
+            Nhóm tuổi: <span className="text-blue-600 text-xl">{
               formData.age === 1 ? "18-24" :
               formData.age === 2 ? "25-29" :
               formData.age === 3 ? "30-34" :
@@ -276,7 +276,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
         {/* BMI */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Chỉ số BMI: <span className="text-purple-600 text-xl">{formData.bmi.toFixed(1)}</span>
+            Chỉ số BMI: <span className="text-blue-600 text-xl">{formData.bmi.toFixed(1)}</span>
           </label>
           <input
             type="range"
@@ -285,7 +285,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
             step="0.5"
             value={formData.bmi}
             onChange={(e) => updateField('bmi', parseFloat(e.target.value))}
-            className="w-full h-3 bg-gradient-to-r from-blue-400 via-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer"
+            className="w-full h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer"
           />
           <div className="flex justify-between text-xs text-gray-500 mt-1">
             <span>Gầy</span>
@@ -303,13 +303,13 @@ function Step1Personal({ formData, updateField, onNext }: any) {
               <button
                 key={level}
                 onClick={() => updateField('genhlth', level)}
-                className={`p-3 rounded-xl font-medium transition-all duration-300 ${
+                className={`p-3 rounded-lg font-medium transition-colors duration-150 ${
                   formData.genhlth === level
-                    ? level === 1 ? 'bg-green-500 text-white shadow-lg scale-110' :
-                      level === 2 ? 'bg-lime-500 text-white shadow-lg scale-110' :
-                      level === 3 ? 'bg-yellow-500 text-white shadow-lg scale-110' :
-                      level === 4 ? 'bg-orange-500 text-white shadow-lg scale-110' :
-                      'bg-red-500 text-white shadow-lg scale-110'
+                    ? level === 1 ? 'bg-green-600 text-white shadow-md' :
+                      level === 2 ? 'bg-green-500 text-white shadow-md' :
+                      level === 3 ? 'bg-yellow-500 text-white shadow-md' :
+                      level === 4 ? 'bg-orange-600 text-white shadow-md' :
+                      'bg-red-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -326,7 +326,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 
       <button
         onClick={onNext}
-        className="w-full mt-8 bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        className="w-full mt-8 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
       >
         Tiếp theo →
       </button>
@@ -345,11 +345,11 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
         </div>
         <button
           onClick={() => updateField(field, formData[field] === 1 ? 0 : 1)}
-          className={`relative w-16 h-8 rounded-full transition-all duration-300 ${
-            formData[field] === 1 ? 'bg-gradient-to-r from-red-400 to-rose-400' : 'bg-gray-300'
+          className={`relative w-16 h-8 rounded-full transition-colors duration-150 ${
+            formData[field] === 1 ? 'bg-red-600' : 'bg-gray-300'
           }`}
         >
-          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
+          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
             formData[field] === 1 ? 'translate-x-9' : 'translate-x-1'
           }`} />
         </button>
@@ -358,8 +358,8 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
   );
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-purple-100 animate-fadeIn">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
         🏥 Tiền sử y tế
       </h2>
       
@@ -375,13 +375,13 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
       <div className="flex gap-4 mt-8">
         <button
           onClick={onBack}
-          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-xl font-bold text-lg hover:bg-gray-300 transition-all"
+          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-lg font-bold text-lg hover:bg-gray-300 transition-colors"
         >
           ← Quay lại
         </button>
         <button
           onClick={onNext}
-          className="flex-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="flex-1 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
         >
           Tiếp theo →
         </button>
@@ -401,13 +401,13 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
         </div>
         <button
           onClick={() => updateField(field, formData[field] === goodValue ? (goodValue === 1 ? 0 : 1) : goodValue)}
-          className={`relative w-16 h-8 rounded-full transition-all duration-300 ${
+          className={`relative w-16 h-8 rounded-full transition-colors duration-150 ${
             formData[field] === goodValue 
-              ? 'bg-gradient-to-r from-green-400 to-emerald-400' 
-              : 'bg-gradient-to-r from-red-400 to-rose-400'
+              ? 'bg-green-600' 
+              : 'bg-red-600'
           }`}
         >
-          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
+          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
             formData[field] === goodValue ? 'translate-x-9' : 'translate-x-1'
           }`} />
         </button>
@@ -416,8 +416,8 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
   );
 
   return (
-    <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-purple-100 animate-fadeIn">
-      <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">
         🥗 Lối sống & Thói quen
       </h2>
       
@@ -433,7 +433,7 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
       <div className="space-y-4 mb-8">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-purple-600">{formData.mentHlth}</span>
+            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600">{formData.mentHlth}</span>
           </label>
           <input
             type="range"
@@ -446,7 +446,7 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-purple-600">{formData.physHlth}</span>
+            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600">{formData.physHlth}</span>
           </label>
           <input
             type="range"
@@ -462,13 +462,13 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
       <div className="flex gap-4">
         <button
           onClick={onBack}
-          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-xl font-bold text-lg hover:bg-gray-300 transition-all"
+          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-lg font-bold text-lg hover:bg-gray-300 transition-colors"
         >
           ← Quay lại
         </button>
         <button
           onClick={onSubmit}
-          className="flex-1 bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="flex-1 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
         >
           🔍 Phân tích nguy cơ
         </button>
@@ -480,16 +480,16 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
 // Analyzing Screen
 function AnalyzingScreen() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 flex items-center justify-center">
+    <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="text-center">
         <div className="relative w-32 h-32 mx-auto mb-8">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full animate-ping opacity-75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full animate-spin" style={{ clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' }} />
+          <div className="absolute inset-0 bg-blue-600 rounded-full animate-ping opacity-30" />
+          <div className="absolute inset-0 border-4 border-blue-600 rounded-full animate-spin" style={{ borderTopColor: 'transparent' }} />
           <div className="absolute inset-4 bg-white rounded-full flex items-center justify-center">
             <span className="text-4xl">🧬</span>
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">Đang phân tích dữ liệu...</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Đang phân tích dữ liệu...</h3>
         <p className="text-gray-600">AI đang xử lý thông tin của bạn</p>
       </div>
     </div>
@@ -500,19 +500,20 @@ function AnalyzingScreen() {
 function ResultsView({ results, onReset }: { results: PredictionResults; onReset: () => void }) {
   const getRiskColor = (level: string) => {
     switch (level) {
-      case "high": return { from: "from-red-500", to: "to-rose-500", text: "text-red-600", bg: "bg-red-50" };
-      case "medium": return { from: "from-yellow-500", to: "to-amber-500", text: "text-yellow-600", bg: "bg-yellow-50" };
-      default: return { from: "from-green-500", to: "to-emerald-500", text: "text-green-600", bg: "bg-green-50" };
+      case "high": return { bg: "bg-red-600", text: "text-red-600" };
+      case "medium": return { bg: "bg-yellow-600", text: "text-yellow-600" };
+      default: return { bg: "bg-green-600", text: "text-green-600" };
     }
   };
 
   const colors = getRiskColor(results.riskLevel);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 py-12 px-4">
+    <div className="min-h-screen bg-white py-12 px-4">
+      <Navigation />
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Hero Card */}
-        <div className={`bg-gradient-to-r ${colors.from} ${colors.to} rounded-3xl shadow-2xl p-8 text-white animate-fadeIn`}>
+        <div className={`${colors.bg} rounded-lg shadow-md p-8 text-white animate-fadeIn`}>
           <div className="text-center">
             <div className="text-6xl mb-4">
               {results.riskLevel === "high" ? "⚠️" : results.riskLevel === "medium" ? "⚡" : "✅"}
@@ -531,7 +532,7 @@ function ResultsView({ results, onReset }: { results: PredictionResults; onReset
         <div className="grid md:grid-cols-2 gap-6">
           {/* Risk Factors */}
           {results.insights.topRisks.length > 0 && (
-            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-red-100">
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
               <h3 className="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
                 ⚠️ Yếu tố nguy cơ
               </h3>
@@ -548,7 +549,7 @@ function ResultsView({ results, onReset }: { results: PredictionResults; onReset
 
           {/* Protective Factors */}
           {results.insights.protectiveFactors.length > 0 && (
-            <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-green-100">
+            <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
               <h3 className="text-xl font-bold text-green-600 mb-4 flex items-center gap-2">
                 🛡️ Yếu tố bảo vệ
               </h3>
@@ -565,8 +566,8 @@ function ResultsView({ results, onReset }: { results: PredictionResults; onReset
         </div>
 
         {/* Impact Visualization */}
-        <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-purple-100">
-          <h3 className="text-2xl font-bold text-purple-600 mb-6">📊 Phân tích tác động</h3>
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+          <h3 className="text-2xl font-bold text-blue-600 mb-6">📊 Phân tích tác động</h3>
           <div className="space-y-3">
             {results.impacts.slice(0, 8).map((impact, i) => {
               const isPositive = impact.impact > 0;
@@ -596,14 +597,14 @@ function ResultsView({ results, onReset }: { results: PredictionResults; onReset
         </div>
 
         {/* Recommendations */}
-        <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-blue-100">
+        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
           <h3 className="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
             💡 Khuyến nghị
           </h3>
           <ul className="space-y-3">
             {results.insights.recommendations.map((rec, i) => (
               <li key={i} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
-                <span className="text-blue-500 text-xl mt-0.5">{i + 1}.</span>
+                <span className="text-blue-600 text-xl mt-0.5">{i + 1}.</span>
                 <span className="text-gray-700 flex-1">{rec}</span>
               </li>
             ))}
@@ -618,7 +619,7 @@ function ResultsView({ results, onReset }: { results: PredictionResults; onReset
         {/* Reset Button */}
         <button
           onClick={onReset}
-          className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+          className="w-full bg-gray-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-gray-700 transition-colors"
         >
           🔄 Kiểm tra lại
         </button>
