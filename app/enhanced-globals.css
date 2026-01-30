@@ -183,6 +183,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Page Transition */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: pageEnter 0.3s ease-in-out;
+}
+
 /* Radio and Checkbox Styling */
 input[type="radio"],
 input[type="checkbox"] {

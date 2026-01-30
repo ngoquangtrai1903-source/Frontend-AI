@@ -13,7 +13,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-150">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white text-xl font-bold">D</span>
             </div>
@@ -27,9 +27,9 @@ export function Navigation() {
           <div className="flex items-center gap-1">
             <Link
               href="/"
-              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
                 isActive('/')
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
@@ -38,9 +38,9 @@ export function Navigation() {
 
             <Link
               href="/user-prediction"
-              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
                 isActive('/user-prediction')
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
@@ -49,9 +49,9 @@ export function Navigation() {
 
             <Link
               href="/doctor"
-              className={`px-4 py-2 rounded-md font-medium transition-colors duration-200 ${
+              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
                 isActive('/doctor')
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-blue-600 text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
               }`}
             >
