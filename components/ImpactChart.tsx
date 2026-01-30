@@ -8,10 +8,33 @@ interface ImpactChartProps {
 
 export function ImpactChart({ impacts }: ImpactChartProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setTimeout(() => setIsVisible(true), 200);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between mb-6">
+          <h4 className="font-bold text-gray-900">Tác động của từng yếu tố (%)</h4>
+          <div className="flex gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-red-500 rounded"></div>
+              <span className="text-gray-600">Tăng nguy cơ</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-green-500 rounded"></div>
+              <span className="text-gray-600">Giảm nguy cơ</span>
+            </div>
+          </div>
+        </div>
+        <div className="h-64 bg-gray-50 rounded-lg animate-pulse"></div>
+      </div>
+    );
+  }
 
   // Sort by absolute impact
   const sortedImpacts = [...impacts].sort((a, b) => 
@@ -42,7 +65,7 @@ export function ImpactChart({ impacts }: ImpactChartProps) {
           const isPositive = impact.impact > 0;
           
           return (
-            <div key={index} className="group">
+            <div key={`${impact.feature}-${index}`} className="group">
               <div className="flex items-center gap-3 mb-1">
                 <span className="text-sm font-medium text-gray-700 w-28 text-right">
                   {impact.feature}

@@ -2,9 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export function Navigation() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isActive = (path: string) => pathname === path;
 
@@ -24,40 +30,53 @@ export function Navigation() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="flex items-center gap-1">
-            <Link
-              href="/"
-              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                isActive('/')
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              Home
-            </Link>
+          {mounted && (
+            <div className="flex items-center gap-1">
+              <Link
+                href="/"
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+                  isActive('/')
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                Home
+              </Link>
 
-            <Link
-              href="/user-prediction"
-              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                isActive('/user-prediction')
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              User Check
-            </Link>
+              <Link
+                href="/user-prediction"
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+                  isActive('/user-prediction')
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                User Check
+              </Link>
 
-            <Link
-              href="/doctor"
-              className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                isActive('/doctor')
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-              }`}
-            >
-              Doctor
-            </Link>
-          </div>
+              <Link
+                href="/doctor"
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+                  isActive('/doctor')
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                Doctor
+              </Link>
+
+              <Link
+                href="/about"
+                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+                  isActive('/about')
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                About
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

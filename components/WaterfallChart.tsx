@@ -8,10 +8,24 @@ interface WaterfallChartProps {
 
 export function WaterfallChart({ impacts }: WaterfallChartProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setTimeout(() => setIsVisible(true), 300);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between mb-6">
+          <h4 className="font-bold text-gray-900">Phân tích tích lũy SHAP</h4>
+          <p className="text-sm text-gray-600">Tác động tích lũy của các yếu tố</p>
+        </div>
+        <div className="h-96 bg-gray-50 rounded-lg animate-pulse"></div>
+      </div>
+    );
+  }
 
   // Calculate cumulative values
   const chartData = impacts.map((impact, index) => {
@@ -69,7 +83,7 @@ export function WaterfallChart({ impacts }: WaterfallChartProps) {
               const barHeight = getHeight(data.start, data.end);
 
               return (
-                <div key={index} className="flex flex-col items-center flex-1 max-w-24 group">
+                <div key={`${data.feature}-${index}`} className="flex flex-col items-center flex-1 max-w-24 group">
                   {/* Value on top */}
                   <div className="h-12 flex items-end justify-center mb-2">
                     <span className="text-xs font-bold text-gray-700 group-hover:scale-110 transition-transform">

@@ -17,10 +17,20 @@ interface ResultsDisplayProps {
 
 export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setTimeout(() => setIsVisible(true), 100);
   }, []);
+
+  if (!mounted) {
+    return (
+      <div className="space-y-6">
+        <div className="h-64 bg-gray-100 rounded-lg animate-pulse"></div>
+      </div>
+    );
+  }
 
   const getRiskColor = (level: string) => {
     switch (level) {
@@ -92,7 +102,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
                 <div className="space-y-3">
                   {significantImpacts.map((impact, index) => (
                     <ImpactItem 
-                      key={index} 
+                      key={`${impact.feature}-${index}`}
                       impact={impact} 
                       delay={index * 50}
                     />
@@ -138,7 +148,7 @@ export function ResultsDisplay({ results, onReset }: ResultsDisplayProps) {
             <div className="p-6">
               <div className="space-y-3">
                 {results.aiAdvice.split('\n').map((line, index) => (
-                  <p key={index} className="text-gray-700 leading-relaxed">
+                  <p key={`advice-${index}`} className="text-gray-700 leading-relaxed">
                     {line}
                   </p>
                 ))}
