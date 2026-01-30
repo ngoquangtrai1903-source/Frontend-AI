@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./enhanced-globals.css";
+import { PageTransition } from "@/components/PageTransition";
 
 export const metadata: Metadata = {
   title: "DiabeTwin - Hệ thống Dự đoán Tiểu đường AI",
@@ -23,7 +24,9 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased font-sans">
-        {children}
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );

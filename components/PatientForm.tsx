@@ -30,12 +30,12 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-emerald-100 overflow-hidden">
+      <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
         {/* Form Header */}
-        <div className="bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-6">
+        <div className="bg-blue-600 px-8 py-7">
           <h3 className="text-2xl font-bold text-white flex items-center gap-3">
             <span>📋</span>
-            Thông tin bệnh nhân
+            Patient Information
           </h3>
         </div>
 
@@ -43,19 +43,19 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
         <div className="p-8 grid md:grid-cols-3 gap-8">
           {/* Column 1 */}
           <div className="space-y-6">
-            <FormField label="Giới tính" icon="👤">
+            <FormField label="Gender" icon="👤">
               <select
                 value={formData.gender}
                 onChange={(e) => updateField("gender", e.target.value)}
                 className="form-select"
               >
-                <option value="Male">Nam</option>
-                <option value="Female">Nữ</option>
-                <option value="Other">Khác</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </FormField>
 
-            <FormField label="Tuổi" icon="🎂">
+            <FormField label="Age" icon="🎂">
               <input
                 type="number"
                 min="0"
@@ -64,30 +64,30 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 onChange={(e) => updateField("age", parseInt(e.target.value))}
                 className="form-input"
               />
-              <div className="mt-2 flex justify-between text-xs text-gray-500">
+              <div className="mt-2 flex justify-between text-xs text-slate-500">
                 <span>0</span>
                 <span>100</span>
               </div>
             </FormField>
 
-            <FormField label="Tiền sử hút thuốc" icon="🚬">
+            <FormField label="Smoking History" icon="🚬">
               <select
                 value={formData.smoking}
                 onChange={(e) => updateField("smoking", e.target.value)}
                 className="form-select"
               >
-                <option value="never">Không bao giờ</option>
-                <option value="former">Đã bỏ</option>
-                <option value="current">Hiện tại</option>
-                <option value="ever">Thỉnh thoảng</option>
-                <option value="not current">Không hiện tại</option>
+                <option value="never">Never</option>
+                <option value="former">Former</option>
+                <option value="current">Current</option>
+                <option value="ever">Sometimes</option>
+                <option value="not current">Not Current</option>
               </select>
             </FormField>
           </div>
 
           {/* Column 2 */}
           <div className="space-y-6">
-            <FormField label="Huyết áp cao" icon="❤️">
+            <FormField label="High Blood Pressure" icon="❤️">
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -96,7 +96,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("hypertension", false)}
                     className="form-radio"
                   />
-                  <span>Không</span>
+                  <span className="text-gray-700">No</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -105,12 +105,12 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("hypertension", true)}
                     className="form-radio"
                   />
-                  <span>Có</span>
+                  <span className="text-gray-700">Yes</span>
                 </label>
               </div>
             </FormField>
 
-            <FormField label="Bệnh tim" icon="💔">
+            <FormField label="Heart Disease" icon="💔">
               <div className="flex gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -119,7 +119,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("heart_disease", false)}
                     className="form-radio"
                   />
-                  <span>Không</span>
+                  <span className="text-gray-700">No</span>
                 </label>
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
@@ -128,12 +128,12 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                     onChange={() => updateField("heart_disease", true)}
                     className="form-radio"
                   />
-                  <span>Có</span>
+                  <span className="text-gray-700">Yes</span>
                 </label>
               </div>
             </FormField>
 
-            <FormField label="Chỉ số BMI" icon="⚖️">
+            <FormField label="BMI Index" icon="⚖️">
               <input
                 type="number"
                 min="10"
@@ -144,11 +144,11 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 className="form-input"
               />
               <div className="mt-3">
-                <div className="h-2 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-full" />
-                <div className="mt-1 flex justify-between text-xs text-gray-500">
-                  <span>Gầy</span>
-                  <span>Bình thường</span>
-                  <span>Béo phì</span>
+                <div className="h-2 bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 rounded-full" />
+                <div className="mt-1 flex justify-between text-xs text-slate-500">
+                  <span>Underweight</span>
+                  <span>Normal</span>
+                  <span>Obese</span>
                 </div>
               </div>
             </FormField>
@@ -156,7 +156,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
 
           {/* Column 3 */}
           <div className="space-y-6">
-            <FormField label="Chỉ số HbA1c (%)" icon="🩸">
+            <FormField label="HbA1c Index (%)" icon="🩸">
               <input
                 type="number"
                 min="3"
@@ -168,14 +168,14 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
               />
               <div className="mt-2 p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <p className="text-xs text-blue-700">
-                  {formData.hba1c < 5.7 ? "✅ Bình thường" : 
-                   formData.hba1c < 6.5 ? "⚠️ Tiền tiểu đường" : 
-                   "🔴 Nguy cơ cao"}
+                  {formData.hba1c < 5.7 ? "✅ Normal" : 
+                   formData.hba1c < 6.5 ? "⚠️ Prediabetes" : 
+                   "🔴 High Risk"}
                 </p>
               </div>
             </FormField>
 
-            <FormField label="Đường huyết (mg/dL)" icon="🍬">
+            <FormField label="Blood Glucose (mg/dL)" icon="🍬">
               <input
                 type="number"
                 min="50"
@@ -184,11 +184,11 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 onChange={(e) => updateField("glucose", parseInt(e.target.value))}
                 className="form-input"
               />
-              <div className="mt-2 p-3 bg-purple-50 rounded-lg border border-purple-200">
-                <p className="text-xs text-purple-700">
-                  {formData.glucose < 100 ? "✅ Bình thường" : 
-                   formData.glucose < 126 ? "⚠️ Tiền tiểu đường" : 
-                   "🔴 Tiểu đường"}
+              <div className="mt-2 p-3 bg-pink-50 rounded-lg border border-pink-200">
+                <p className="text-xs text-pink-700">
+                  {formData.glucose < 100 ? "✅ Normal" : 
+                   formData.glucose < 126 ? "⚠️ Prediabetes" : 
+                   "🔴 Diabetes"}
                 </p>
               </div>
             </FormField>
@@ -200,16 +200,16 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+            className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
           >
             {isLoading ? (
               <>
                 <div className="w-6 h-6 border-3 border-white/30 border-t-white rounded-full animate-spin" />
-                Đang phân tích...
+                Analyzing...
               </>
             ) : (
               <>
-                🚀 PHÂN TÍCH NGUY CƠ
+                🚀 ANALYZE RISK
               </>
             )}
           </button>
