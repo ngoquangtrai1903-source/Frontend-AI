@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { Navigation } from "@/components/Navigation";
 import { ResultsDisplay } from "@/components/ResultsDisplay";
 import { PatientForm } from "@/components/PatientForm";
-import Link from "next/link";
 
 export default function DoctorPage() {
   const [results, setResults] = useState<any>(null);
@@ -57,54 +57,21 @@ export default function DoctorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
-      {/* Header */}
-      <header className="border-b border-teal-200/50 bg-white/90 backdrop-blur-xl sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
-                <span className="text-white text-xl">🔬</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                  DiabeTwin
-                </h1>
-                <p className="text-sm text-gray-500">Hệ thống dự đoán tiểu đường AI</p>
-              </div>
-            </Link>
-            
-            {/* Navigation */}
-            <div className="flex gap-3">
-              <Link 
-                href="/doctor"
-                className="px-4 py-2 rounded-xl text-sm font-medium bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-sm"
-              >
-                👨‍⚕️ Bác sĩ
-              </Link>
-              <Link 
-                href="/user-prediction"
-                className="px-4 py-2 rounded-xl text-sm font-medium text-cyan-600 hover:bg-cyan-50 transition-colors"
-              >
-                👤 Người dùng
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white">
+      <Navigation />
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-medium mb-4">
+      <main className="max-w-7xl mx-auto px-6 py-12">
+        <div className="mb-12 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-md text-sm font-medium mb-4">
             <span>👨‍⚕️</span>
-            <span>Chế độ Bác sĩ</span>
+            <span>Doctor Mode</span>
           </div>
           <h2 className="text-4xl font-bold text-gray-900 mb-3">
-            Chẩn đoán lâm sàng chuyên nghiệp
+            Professional Clinical Diagnosis
           </h2>
           <p className="text-gray-600 text-lg">
-            Công nghệ AI tiên tiến giúp đánh giá nguy cơ tiểu đường chính xác
+            Advanced AI technology for accurate diabetes risk assessment
           </p>
         </div>
 
@@ -119,11 +86,11 @@ export default function DoctorPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-teal-200/50 bg-white/70 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-gray-600">
-          <p className="font-semibold text-gray-800">© 2026 DiabeTwin - Hệ thống dự đoán tiểu đường AI</p>
-          <p className="text-sm mt-2 text-gray-500">
-            ⚠️ Kết quả chỉ mang tính tham khảo. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa.
+      <footer className="mt-16 border-t border-gray-200 bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-6 text-center text-gray-600">
+          <p>© 2026 DiabeTwin - AI-Powered Health Assessment</p>
+          <p className="text-sm mt-2">
+            Results are for reference only. Please consult with healthcare professionals for medical advice.
           </p>
         </div>
       </footer>
