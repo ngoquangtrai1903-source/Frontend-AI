@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
-import { ResultsDisplay } from "@/components/ResultsDisplay";
+import { EnhancedResultsDisplay } from "@/components/EnhancedResultsDisplay";
 import { PatientForm } from "@/components/PatientForm";
 import { ConnectionTest } from "@/components/ConnectionTest";
 import { predictClinical } from "@/lib/api";
@@ -100,9 +100,10 @@ export default function DoctorPage() {
         {!results ? (
           <PatientForm onSubmit={handleAnalyze} isLoading={isAnalyzing} />
         ) : (
-          <ResultsDisplay 
+          <EnhancedResultsDisplay 
             results={results} 
             onReset={() => setResults(null)}
+            isDoctorMode={true}
           />
         )}
       </main>

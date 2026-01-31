@@ -138,22 +138,28 @@ function OverviewTab() {
         <div className="bg-white rounded-xl border border-gray-200 p-8">
           <div className="grid md:grid-cols-3 gap-8">
             <TeamMember
-              name="Dr. Nguyễn Văn A"
-              role="Lead AI Researcher"
+              name="Mr. Ngô Quang Trãi"
+              role="ML Engineer"
               avatar="👨‍⚕️"
-              description="Tiến sĩ Y khoa, chuyên gia về nội tiết và AI trong y tế"
+              description="Sinh viên ngành Trí tuệ nhân tạo trường đại học FPT"
             />
             <TeamMember
-              name="Trần Thị B"
-              role="Senior ML Engineer"
+              name="Mr. Nguyễn Phương Huy"
+              role="Web Developer"
               avatar="👩‍💻"
-              description="Chuyên gia Machine Learning với 8+ năm kinh nghiệm"
+              description="Sinh viên ngành kĩ thuật phần mềm trường đại học FPT"
             />
             <TeamMember
-              name="Lê Văn C"
-              role="Clinical Advisor"
+              name="Mr. Võ Trần Gia Bảo"
+              role="Scientific Researcher"
               avatar="👨‍🔬"
-              description="Bác sĩ chuyên khoa nội tiết, tư vấn y khoa"
+              description="Sinh viên ngành Trí tuệ nhân tạo trường đại học FPT"
+            />
+            <TeamMember
+              name="Mr. Phan Văn Quốc "
+              role="Research Team Leader"
+              avatar="👨‍🔬"
+              description="Sinh viên ngành kĩ thuật phần mềm trường đại học FPT"
             />
           </div>
         </div>
