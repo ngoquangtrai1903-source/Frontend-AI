@@ -8,12 +8,12 @@ interface RiskGaugeChartProps {
 export function RiskGaugeChart({ probability, riskLevel }: RiskGaugeChartProps) {
   const percentage = Math.min(probability * 100, 100);
 
-  // SVG gauge visualization
-  const SVG_SIZE = 280;
+  // SVG gauge visualization - Enlarged for clarity
+  const SVG_SIZE = 380;
   const CENTER_X = SVG_SIZE / 2;
   const CENTER_Y = SVG_SIZE / 2;
-  const RADIUS = 80;
-  const STROKE_WIDTH = 20;
+  const RADIUS = 110;
+  const STROKE_WIDTH = 28;
 
   // Create arc path for gauge
   const getArcPath = (startAngle: number, endAngle: number, radius: number) => {
@@ -100,13 +100,14 @@ export function RiskGaugeChart({ probability, riskLevel }: RiskGaugeChartProps) 
         />
 
         {/* Center circle with percentage */}
-        <circle cx={CENTER_X} cy={CENTER_Y} r={35} fill="white" stroke="#e5e7eb" strokeWidth="2" />
+        <circle cx={CENTER_X} cy={CENTER_Y} r={50} fill="white" stroke="#e5e7eb" strokeWidth="2" />
         <text
           x={CENTER_X}
-          y={CENTER_Y}
+          y={CENTER_Y - 8}
           textAnchor="middle"
           dominantBaseline="middle"
-          className="text-3xl font-bold fill-gray-900"
+          className="font-bold fill-gray-900"
+          fontSize="48"
         >
           {percentage.toFixed(0)}%
         </text>

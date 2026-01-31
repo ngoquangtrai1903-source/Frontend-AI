@@ -98,15 +98,15 @@ export function EnhancedResultsDisplay({
 
       {/* Main Grid Layout */}
       <div className="grid lg:grid-cols-3 gap-8 mb-8">
-        {/* Left: Risk Gauge + Factors Overview - 1 col */}
-        <div className="space-y-8">
-          {/* Gauge Chart */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-6">Risk Level Gauge</h3>
+        {/* Left: Risk Gauge - Larger size */}
+        <div className="space-y-6">
+          {/* Large Gauge Chart */}
+          <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8">
+            <h3 className="text-lg font-bold text-gray-900 mb-8 text-center">Risk Level Gauge</h3>
             <RiskGaugeChart probability={results.probability} riskLevel={results.riskLevel} />
           </div>
 
-          {/* Factors Overview */}
+          {/* Factors Overview with Expandable Sections */}
           <FactorsOverview impacts={results.impacts} />
 
           {/* Conclusion */}
@@ -129,7 +129,7 @@ export function EnhancedResultsDisplay({
           </div>
         </div>
 
-        {/* Middle: Feature Impact Chart - 1 col */}
+        {/* Middle: Feature Impact Chart */}
         <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
           <h3 className="text-lg font-bold text-gray-900 mb-6">Feature Impact Analysis</h3>
           <div className="space-y-1">
@@ -141,122 +141,11 @@ export function EnhancedResultsDisplay({
           </p>
         </div>
 
-        {/* Right: AI Recommendations - 1 col */}
+        {/* Right: AI Recommendations */}
         <RecommendationsPanel aiAdvice={results.aiAdvice} isDoctorMode={isDoctorMode} />
       </div>
 
-      {/* Detailed Risk Factors Section */}
-      <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-8">Comprehensive Factor Analysis</h3>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Risk Factors */}
-          <div>
-            <h4 className="text-lg font-bold text-red-700 mb-6 flex items-center gap-2">
-              <span className="text-2xl">⚠️</span>
-              Risk Factors
-            </h4>
-            <div className="space-y-3">
-              {results.impacts
-                .filter((i) => i.impact > 0)
-                .sort((a, b) => b.impact - a.impact)
-                .slice(0, 5)
-                .map((impact, idx) => (
-                  <div key={idx} className="bg-red-50 rounded-lg p-4 border border-red-100">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-semibold text-gray-900">{impact.feature}</span>
-                      <span className="text-red-600 font-bold">+{impact.impact.toFixed(1)}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-red-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-red-500 transition-all duration-1000"
-                        style={{ width: `${Math.min((Math.abs(impact.impact) / 20) * 100, 100)}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-
-          {/* Protective Factors */}
-          <div>
-            <h4 className="text-lg font-bold text-emerald-700 mb-6 flex items-center gap-2">
-              <span className="text-2xl">🛡️</span>
-              Protective Factors
-            </h4>
-            <div className="space-y-3">
-              {results.impacts
-                .filter((i) => i.impact < 0)
-                .sort((a, b) => a.impact - b.impact)
-                .slice(0, 5)
-                .map((impact, idx) => (
-                  <div key={idx} className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                    <div className="flex justify-between items-start mb-2">
-                      <span className="font-semibold text-gray-900">{impact.feature}</span>
-                      <span className="text-emerald-600 font-bold">{impact.impact.toFixed(1)}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-emerald-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-emerald-500 transition-all duration-1000"
-                        style={{ width: `${Math.min((Math.abs(impact.impact) / 20) * 100, 100)}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* All Factors Table */}
-      <div className="bg-white rounded-xl shadow-md border border-gray-200 p-8 mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">All Contributing Factors</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-3 px-4 font-semibold text-gray-700">Factor</th>
-                <th className="text-right py-3 px-4 font-semibold text-gray-700">Impact %</th>
-                <th className="text-left py-3 px-4 font-semibold text-gray-700">Contribution</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...results.impacts]
-                .sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact))
-                .map((impact, idx) => (
-                  <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                    <td className="py-3 px-4 font-medium text-gray-900">{impact.feature}</td>
-                    <td className="text-right py-3 px-4">
-                      <span
-                        className={`font-bold ${
-                          impact.impact > 0 ? 'text-red-600' : 'text-emerald-600'
-                        }`}
-                      >
-                        {impact.impact > 0 ? '+' : ''}
-                        {impact.impact.toFixed(2)}%
-                      </span>
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-20 h-2 bg-gray-200 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full ${impact.impact > 0 ? 'bg-red-500' : 'bg-emerald-500'}`}
-                            style={{
-                              width: `${Math.min((Math.abs(impact.impact) / 20) * 100, 100)}%`,
-                            }}
-                          />
-                        </div>
-                        <span className="text-xs text-gray-500 w-8">
-                          {impact.impact > 0 ? 'Risk' : 'Protects'}
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
 
       {/* Action Buttons */}
       <div className="flex gap-4 justify-center">

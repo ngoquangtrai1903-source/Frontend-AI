@@ -14,17 +14,12 @@ export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: Recomme
     setTimeout(() => setIsVisible(true), 200);
   }, []);
 
-  // Parse AI advice into structured recommendations
-  const parseRecommendations = (advice: string) => {
-    const lines = advice
-      .split('\n')
-      .filter((line) => line.trim().length > 0)
-      .map((line) => line.replace(/^[\d\.\*\-\#\*]+\s*/, '').trim());
-
-    return lines;
-  };
-
-  const recommendations = parseRecommendations(aiAdvice);
+  // Clean up the advice text
+  const cleanAdvice = aiAdvice
+    .split('\n')
+    .filter((line) => line.trim().length > 0)
+    .map((line) => line.replace(/^[\d\.\*\-\#\*]+\s*/, '').trim())
+    .join(' ');
 
   return (
     <div
@@ -43,34 +38,16 @@ export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: Recomme
           </p>
         </div>
 
-        {/* Recommendations List */}
-        <div className="p-6 space-y-4 max-h-96 overflow-y-auto">
-          {recommendations.length === 0 ? (
+        {/* Recommendations as Continuous Text */}
+        <div className="p-6 max-h-96 overflow-y-auto">
+          {cleanAdvice.length === 0 ? (
             <p className="text-gray-600 text-sm">No recommendations available</p>
           ) : (
-            recommendations.map((rec, idx) => (
-              <div
-                key={idx}
-                className={`transition-all duration-500 ${
-                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                }`}
-                style={{
-                  transitionDelay: `${200 + idx * 50}ms`,
-                }}
-              >
-                <div className="bg-gradient-to-r from-blue-50 to-blue-100/50 rounded-lg p-3 border border-blue-200/50 hover:border-blue-300 transition-all">
-                  <div className="flex gap-3">
-                    <div className="text-xl flex-shrink-0">
-                      {idx === 0 ? '🎯' : idx === 1 ? '💪' : idx === 2 ? '🥗' : '📋'}
-                    </div>
-                    <p className="text-sm text-gray-800 leading-relaxed">
-                      <span className="font-semibold text-gray-900">{`Step ${idx + 1}:`}</span>{' '}
-                      {rec.replace(/\*\*/g, '')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))
+            <div className="space-y-4">
+              <p className="text-gray-800 leading-relaxed text-base">
+                {cleanAdvice}
+              </p>
+            </div>
           )}
         </div>
 
