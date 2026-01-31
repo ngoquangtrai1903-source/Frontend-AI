@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
+import { predictHome } from "@/lib/api";
 
 // Types
 interface UserFormData {
@@ -65,53 +66,68 @@ export default function UserPredictionApp() {
 
   const handleSubmit = async () => {
     setIsAnalyzing(true);
-    await new Promise(resolve => setTimeout(resolve, 2500));
-    
-    const mockResults: PredictionResults = {
-      probability: calculateRisk(formData),
-      riskLevel: getRiskLevel(calculateRisk(formData)),
-      impacts: generateImpacts(formData),
-      insights: generateInsights(formData)
-    };
-    
-    setResults(mockResults);
-    setIsAnalyzing(false);
-    setStep(4);
+    try {
+      // Map form data to backend API format
+      const apiData = {
+        HighBP: formData.highBP,
+        HighChol: formData.highChol,
+        CholCheck: formData.cholCheck,
+        BMI: formData.bmi,
+        Smoker: formData.smoker,
+        Stroke: formData.stroke,
+        HeartDiseaseorAttack: formData.heartDis,
+        PhysActivity: formData.physAct,
+        Fruits: formData.fruits,
+        Veggies: formData.veggies,
+        HvyAlcoholConsump: formData.hvyAlcohol,
+        GenHlth: formData.genhlth,
+        MentHlth: formData.mentHlth,
+        PhysHlth: formData.physHlth,
+        DiffWalk: formData.diffWalk,
+        Sex: formData.sex,
+        Age: formData.age,
+      };
+
+      // Call backend API
+      const response = await predictHome(apiData);
+      
+      // Parse SHAP impacts from backend
+      const impacts = response.impacts || [];
+      
+      // Convert probability to decimal (backend returns percentage)
+      const probability = response.probability / 100;
+      
+      const results: PredictionResults = {
+        probability: probability,
+        riskLevel: probability > 0.7 ? "high" : probability > 0.4 ? "medium" : "low",
+        impacts: impacts,
+        insights: {
+          topRisks: impacts
+            .filter(i => i.impact > 0)
+            .slice(0, 3)
+            .map(i => `${i.feature}: +${i.impact.toFixed(1)}%`),
+          protectiveFactors: impacts
+            .filter(i => i.impact < 0)
+            .slice(0, 3)
+            .map(i => `${i.feature}: ${i.impact.toFixed(1)}%`),
+          recommendations: generateRecommendations(response.ai_advice)
+        }
+      };
+      
+      setResults(results);
+      setStep(4);
+    } catch (error) {
+      console.error('Prediction error:', error);
+      alert('Lỗi phân tích. Vui lòng kiểm tra kết nối backend.');
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
-  const calculateRisk = (data: UserFormData): number => {
-    let risk = 0.2;
-    if (data.highBP === 1) risk += 0.15;
-    if (data.highChol === 1) risk += 0.12;
-    if (data.bmi > 30) risk += 0.1;
-    if (data.age > 8) risk += 0.08;
-    if (data.smoker === 1) risk += 0.1;
-    if (data.heartDis === 1) risk += 0.12;
-    if (data.genhlth >= 4) risk += 0.08;
-    if (data.physAct === 0) risk += 0.05;
-    return Math.min(risk, 0.95);
-  };
-
-  const getRiskLevel = (prob: number): "low" | "medium" | "high" => {
-    if (prob > 0.7) return "high";
-    if (prob > 0.4) return "medium";
-    return "low";
-  };
-
-  const generateImpacts = (data: UserFormData) => {
-    const impacts = [
-      { feature: "Huyết áp cao", impact: data.highBP === 1 ? 15 : -2 },
-      { feature: "Cholesterol cao", impact: data.highChol === 1 ? 12 : -1.5 },
-      { feature: "Chỉ số BMI", impact: data.bmi > 30 ? 10 : data.bmi < 25 ? -3 : 2 },
-      { feature: "Nhóm tuổi", impact: data.age > 8 ? 8 : -1 },
-      { feature: "Hút thuốc", impact: data.smoker === 1 ? 10 : -2 },
-      { feature: "Bệnh tim", impact: data.heartDis === 1 ? 12 : -1 },
-      { feature: "Sức khỏe tổng quát", impact: data.genhlth >= 4 ? 8 : data.genhlth <= 2 ? -4 : 1 },
-      { feature: "Vận động thể chất", impact: data.physAct === 1 ? -5 : 5 },
-      { feature: "Ăn trái cây", impact: data.fruits === 1 ? -2 : 1 },
-      { feature: "Ăn rau xanh", impact: data.veggies === 1 ? -2 : 1 },
-    ];
-    return impacts.sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact));
+  const generateRecommendations = (aiAdvice: string): string[] => {
+    // Parse AI advice to extract recommendations
+    const lines = aiAdvice.split('\n').filter(line => line.trim().length > 0);
+    return lines.slice(0, 5);
   };
 
   const generateInsights = (data: UserFormData) => {
