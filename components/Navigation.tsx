@@ -82,7 +82,7 @@ export function Navigation() {
           </Link>
 
           {/* Navigation Links - only rendered after mount to prevent hydration mismatch */}
-          {mounted ? navLinks : <div className="w-96" />}
+          {mounted ? navLinks : <div className="w-96 h-10" />}
         </div>
       </div>
     </nav>

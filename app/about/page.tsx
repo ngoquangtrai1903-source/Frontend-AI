@@ -1,19 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'model' | 'research'>('overview');
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
-
-  if (!isLoaded) {
-    return null; // Prevent hydration mismatch
-  }
 
   return (
     <div className="min-h-screen bg-white">
