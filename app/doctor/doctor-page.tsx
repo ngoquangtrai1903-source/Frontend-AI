@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
 import { ResultsDisplay } from "@/components/ResultsDisplay";
 import { PatientForm } from "@/components/PatientForm";
+import { ConnectionTest } from "@/components/ConnectionTest";
+import { predictClinical } from "@/lib/api";
 
 export default function DoctorPage() {
   const [results, setResults] = useState<any>(null);
@@ -13,16 +15,31 @@ export default function DoctorPage() {
     setIsAnalyzing(true);
     
     try {
-      const response = await fetch('/api/predict', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
+      // Map form data to clinical API format
+      const apiData = {
+        gender: formData.gender || 'Male',
+        age: parseInt(formData.age) || 0,
+        smoking_history: formData.smoking || 'never',
+        hypertension: formData.hypertension ? 1 : 0,
+        heart_disease: formData.heart_disease ? 1 : 0,
+        bmi: parseFloat(formData.bmi) || 0,
+        hba1c: parseFloat(formData.hba1c) || 0,
+        glucose: parseInt(formData.glucose) || 0,
+      };
+
+      // Call backend clinical API
+      const response = await predictClinical(apiData);
       
-      if (!response.ok) throw new Error('Prediction failed');
+      // Transform backend response to match UI expectations
+      const transformedResults = {
+        probability: response.probability / 100,
+        conclusion: response.status,
+        riskLevel: response.probability > 70 ? "high" : response.probability > 30 ? "medium" : "low",
+        impacts: response.impacts || [],
+        aiAdvice: response.ai_advice || ""
+      };
       
-      const data = await response.json();
-      setResults(data);
+      setResults(transformedResults);
     } catch (error) {
       console.error('Error:', error);
       // Fallback to mock data if API fails
@@ -62,6 +79,11 @@ export default function DoctorPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
+        {/* Connection Status */}
+        <div className="mb-8">
+          <ConnectionTest />
+        </div>
+        
         <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-md text-sm font-medium mb-4">
             <span>👨‍⚕️</span>
