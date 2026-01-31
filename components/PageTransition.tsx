@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react';
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   return (
-    <div className={isVisible ? 'page-transition' : ''}>
+    <div className="page-transition">
       {children}
     </div>
   );

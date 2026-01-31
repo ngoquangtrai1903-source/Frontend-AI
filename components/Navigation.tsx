@@ -12,7 +12,59 @@ export function Navigation() {
     setMounted(true);
   }, []);
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) => {
+    if (!mounted) return false;
+    return pathname === path;
+  };
+
+  // Render placeholder during SSR to avoid hydration mismatch
+  const navLinks = (
+    <div className="flex items-center gap-1">
+      <Link
+        href="/"
+        className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+          isActive('/')
+            ? 'bg-blue-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+        }`}
+      >
+        Home
+      </Link>
+
+      <Link
+        href="/user-prediction"
+        className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+          isActive('/user-prediction')
+            ? 'bg-blue-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+        }`}
+      >
+        User Check
+      </Link>
+
+      <Link
+        href="/doctor"
+        className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+          isActive('/doctor')
+            ? 'bg-blue-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+        }`}
+      >
+        Doctor
+      </Link>
+
+      <Link
+        href="/about"
+        className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
+          isActive('/about')
+            ? 'bg-blue-600 text-white shadow-sm'
+            : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+        }`}
+      >
+        About
+      </Link>
+    </div>
+  );
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
@@ -29,54 +81,8 @@ export function Navigation() {
             </div>
           </Link>
 
-          {/* Navigation Links */}
-          {mounted && (
-            <div className="flex items-center gap-1">
-              <Link
-                href="/"
-                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                  isActive('/')
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                Home
-              </Link>
-
-              <Link
-                href="/user-prediction"
-                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                  isActive('/user-prediction')
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                User Check
-              </Link>
-
-              <Link
-                href="/doctor"
-                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                  isActive('/doctor')
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                Doctor
-              </Link>
-
-              <Link
-                href="/about"
-                className={`px-4 py-2 rounded-md font-medium transition-all duration-150 ${
-                  isActive('/about')
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`}
-              >
-                About
-              </Link>
-            </div>
-          )}
+          {/* Navigation Links - only rendered after mount to prevent hydration mismatch */}
+          {mounted ? navLinks : <div className="w-96 h-10" />}
         </div>
       </div>
     </nav>
