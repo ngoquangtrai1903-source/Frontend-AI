@@ -7,65 +7,113 @@ interface RecommendationsPanelProps {
   isDoctorMode?: boolean;
 }
 
-export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: RecommendationsPanelProps) {
+const getIconForKeyword = (text: string): string => {
+  const lowerText = text.toLowerCase();
+
+  if (
+    lowerText.includes('hba1c') ||
+    lowerText.includes('glucose') ||
+    lowerText.includes('đường huyết') ||
+    lowerText.includes('kiểm soát')
+  ) {
+    return '📊';
+  }
+  if (
+    lowerText.includes('bmi') ||
+    lowerText.includes('cân nặng') ||
+    lowerText.includes('hoạt động') ||
+    lowerText.includes('tập luyện') ||
+    lowerText.includes('phút')
+  ) {
+    return '🏃';
+  }
+  if (
+    lowerText.includes('ăn') ||
+    lowerText.includes('thực phẩm') ||
+    lowerText.includes('chế độ') ||
+    lowerText.includes('thực') ||
+    lowerText.includes('đồ ăn')
+  ) {
+    return '🥗';
+  }
+  if (
+    lowerText.includes('kiểm tra') ||
+    lowerText.includes('tháng') ||
+    lowerText.includes('theo dõi') ||
+    lowerText.includes('định kỳ')
+  ) {
+    return '📅';
+  }
+  if (
+    lowerText.includes('stress') ||
+    lowerText.includes('ngủ') ||
+    lowerText.includes('xã hội') ||
+    lowerText.includes('giấc ngủ')
+  ) {
+    return '😴';
+  }
+  if (
+    lowerText.includes('dược') ||
+    lowerText.includes('thuốc') ||
+    lowerText.includes('liệu pháp') ||
+    lowerText.includes('insulin')
+  ) {
+    return '💊';
+  }
+  if (
+    lowerText.includes('bác sĩ') ||
+    lowerText.includes('chuyên khoa') ||
+    lowerText.includes('tư vấn') ||
+    lowerText.includes('cơ sở')
+  ) {
+    return '👨‍⚕️';
+  }
+  return '✓';
+};
+
+export function RecommendationsPanel({
+  aiAdvice,
+  isDoctorMode = false,
+}: RecommendationsPanelProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setIsVisible(true), 200);
   }, []);
 
-  // Parse the advice into structured sections
-  const parseAdvice = (advice: string) => {
-    const sections = [];
+  // Parse recommendations into individual items
+  const parseRecommendations = (advice: string) => {
+    const items = [];
     const lines = advice.split('\n').filter((line) => line.trim().length > 0);
-
-    let currentSection = null;
-    let currentContent = [];
 
     lines.forEach((line) => {
       const trimmedLine = line.trim();
 
-      // Check for section headers (markdown bold text)
-      if (trimmedLine.match(/^\*\*.*\*\*:/)) {
-        // Save previous section
-        if (currentSection) {
-          sections.push({
-            title: currentSection,
-            content: currentContent.join('\n'),
-          });
-        }
-        // Start new section
-        currentSection = trimmedLine.replace(/\*\*|\*|:/g, '').trim();
-        currentContent = [];
-      } else if (trimmedLine.match(/^\*\*.*\*\*$/)) {
-        // Save previous section
-        if (currentSection) {
-          sections.push({
-            title: currentSection,
-            content: currentContent.join('\n'),
-          });
-        }
-        // New section header
-        currentSection = trimmedLine.replace(/\*\*|\*|$/g, '').trim();
-        currentContent = [];
-      } else if (trimmedLine) {
-        // Add content to current section or general content
-        currentContent.push(trimmedLine);
+      // Skip section headers
+      if (trimmedLine.match(/^\*\*.*\*\*/) || trimmedLine.length === 0) {
+        return;
+      }
+
+      // Remove markdown formatting and bullet markers
+      const cleanedText = trimmedLine
+        .replace(/^\*\*/, '')
+        .replace(/\*\*:?$/, '')
+        .replace(/^[\d\.\-\*]\s*/, '')
+        .replace(/\*\*/g, '')
+        .trim();
+
+      if (cleanedText.length > 2) {
+        items.push({
+          text: cleanedText,
+          icon: getIconForKeyword(cleanedText),
+        });
       }
     });
 
-    // Save last section
-    if (currentSection) {
-      sections.push({
-        title: currentSection,
-        content: currentContent.join('\n'),
-      });
-    }
-
-    return sections;
+    return items;
   };
 
-  const sections = parseAdvice(aiAdvice);
+  const recommendations = parseRecommendations(aiAdvice);
 
   return (
     <div
@@ -77,9 +125,7 @@ export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: Recomme
         {/* Header */}
         <div
           className={`px-6 py-4 bg-gradient-to-r ${
-            isDoctorMode
-              ? 'from-amber-600 to-amber-700'
-              : 'from-blue-600 to-blue-700'
+            isDoctorMode ? 'from-amber-600 to-amber-700' : 'from-blue-600 to-blue-700'
           }`}
         >
           <h3 className="text-lg font-bold text-white flex items-center gap-2">
@@ -90,42 +136,33 @@ export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: Recomme
           </p>
         </div>
 
-        {/* Recommendations Content */}
-        <div className="p-6 max-h-96 overflow-y-auto space-y-5">
-          {sections.length === 0 ? (
+        {/* Recommendations as Cards */}
+        <div className="p-6 max-h-96 overflow-y-auto space-y-3">
+          {recommendations.length === 0 ? (
             <p className="text-gray-600 text-sm">No recommendations available</p>
           ) : (
-            sections.map((section, idx) => (
-              <div key={idx} className="animate-slide-in-up" style={{ animationDelay: `${idx * 100}ms` }}>
-                {/* Section Title */}
+            recommendations.map((rec, idx) => (
+              <div
+                key={idx}
+                className="animate-slide-in-up"
+                style={{ animationDelay: `${idx * 60}ms` }}
+              >
                 <div
-                  className={`font-bold text-sm uppercase tracking-wider mb-2 pb-2 border-b-2 ${
+                  className={`flex gap-3 p-3 rounded-lg border-l-4 transition-all hover:shadow-md ${
                     isDoctorMode
-                      ? 'text-amber-700 border-amber-200'
-                      : 'text-blue-700 border-blue-200'
+                      ? 'bg-amber-50 border-l-amber-500 hover:bg-amber-100'
+                      : 'bg-blue-50 border-l-blue-500 hover:bg-blue-100'
                   }`}
                 >
-                  {section.title}
-                </div>
+                  {/* Icon */}
+                  <div className="text-2xl flex-shrink-0 pt-0.5">{rec.icon}</div>
 
-                {/* Section Content */}
-                <div className="space-y-2">
-                  {section.content.split('\n').map((line, lineIdx) => {
-                    const cleanLine = line.replace(/^[\d\.\-\*]+\s*/, '').trim();
-                    const isBullet = line.trim().match(/^[\d\.\-\*]/);
-
-                    return (
-                      <p
-                        key={lineIdx}
-                        className={`text-sm leading-relaxed ${
-                          isBullet ? 'ml-2 text-gray-800' : 'text-gray-800'
-                        }`}
-                      >
-                        {isBullet && <span className="font-semibold mr-1">•</span>}
-                        {cleanLine}
-                      </p>
-                    );
-                  })}
+                  {/* Text Content */}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm leading-relaxed text-gray-800 break-words">
+                      {rec.text}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))
@@ -135,13 +172,14 @@ export function RecommendationsPanel({ aiAdvice, isDoctorMode = false }: Recomme
         {/* Footer Note */}
         <div
           className={`px-6 py-3 border-t ${
-            isDoctorMode
-              ? 'bg-amber-50 border-amber-200'
-              : 'bg-blue-50 border-blue-200'
+            isDoctorMode ? 'bg-amber-50 border-amber-200' : 'bg-blue-50 border-blue-200'
           }`}
         >
           <p className="text-xs text-gray-600">
-            ℹ️ {isDoctorMode ? 'These are AI-generated clinical suggestions. Always apply your clinical judgment.' : 'These are AI-generated suggestions. Always consult with a healthcare professional for medical advice.'}
+            ℹ️{' '}
+            {isDoctorMode
+              ? 'These are AI-generated clinical suggestions. Always apply your clinical judgment.'
+              : 'These are AI-generated suggestions. Always consult with a healthcare professional for medical advice.'}
           </p>
         </div>
       </div>
