@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./enhanced-globals.css";
 import { PageTransition } from "@/components/PageTransition";
 
@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: "DiabeTwin - Hệ thống Dự đoán Tiểu đường AI",
   description: "Công nghệ AI tiên tiến giúp đánh giá nguy cơ tiểu đường chính xác và khoa học",
   keywords: "tiểu đường, AI, machine learning, y tế, chẩn đoán, sức khỏe",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#2563eb",
 };
 
 export default function RootLayout({

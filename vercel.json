@@ -1,0 +1,19 @@
+{
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "pnpm install --frozen-lockfile --no-optional",
+  "env": {
+    "NEXT_PUBLIC_API_URL": {
+      "description": "Base URL for API calls",
+      "example": "https://api.example.com"
+    }
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 60
+    }
+  },
+  "ignoreCommand": "git diff --quiet HEAD~ HEAD -- . ':!node_modules' ':!.next'",
+  "framework": "nextjs",
+  "nodejs": "20.x"
+}
