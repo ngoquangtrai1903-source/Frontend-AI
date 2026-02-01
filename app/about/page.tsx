@@ -11,19 +11,19 @@ export default function AboutPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-5xl font-bold mb-4">Về DiabeTwin</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+      <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Về DiabeTwin</h1>
+          <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
             Hệ thống dự đoán tiểu đường AI tiên tiến, mang lại giải pháp chẩn đoán chính xác và kịp thời
           </p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-gray-200 sticky top-16 bg-white z-40">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-8">
+      <div className="border-b border-gray-200 sticky top-16 bg-white z-40 overflow-x-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex gap-4 sm:gap-8 min-w-full sm:min-w-0">
             <TabButton
               active={activeTab === 'overview'}
               onClick={() => setActiveTab('overview')}
@@ -47,15 +47,15 @@ export default function AboutPage() {
       </div>
 
       {/* Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {activeTab === 'overview' && <OverviewTab />}
         {activeTab === 'model' && <ModelTab />}
         {activeTab === 'research' && <ResearchTab />}
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 border-t border-gray-200 bg-gray-50 py-8">
-        <div className="max-w-7xl mx-auto px-6 text-center text-gray-600">
+      <footer className="mt-16 sm:mt-20 border-t border-gray-200 bg-gray-50 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center text-gray-600">
           <p>© 2026 DiabeTwin - AI-Powered Health Assessment</p>
           <p className="text-sm mt-2">
             Kết quả chỉ mang tính tham khảo. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa.
@@ -70,14 +70,15 @@ function TabButton({ active, onClick, icon, label }: any) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-4 font-semibold border-b-2 transition-colors ${
+      className={`px-2 sm:px-4 py-3 sm:py-4 font-semibold border-b-2 transition-colors whitespace-nowrap text-sm sm:text-base ${
         active
           ? 'border-blue-600 text-blue-600'
           : 'border-transparent text-gray-600 hover:text-gray-900'
       }`}
     >
-      <span className="mr-2">{icon}</span>
-      {label}
+      <span className="mr-1 sm:mr-2">{icon}</span>
+      <span className="hidden sm:inline">{label}</span>
+      <span className="sm:hidden">{label.substring(0, 3)}</span>
     </button>
   );
 }
@@ -103,8 +104,8 @@ function OverviewTab() {
 
       {/* Statistics */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📈 Thống kê & Tác động</h2>
-        <div className="grid md:grid-cols-4 gap-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Thống kê & Tác động</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <StatCard
             value="95.3%"
             label="Độ chính xác"
@@ -136,30 +137,30 @@ function OverviewTab() {
       <section>
         <h2 className="text-3xl font-bold text-gray-900 mb-6">👥 Đội ngũ phát triển</h2>
         <div className="bg-white rounded-xl border border-gray-200 p-8">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <TeamMember
               name="Mr. Ngô Quang Trãi"
               role="ML Engineer"
-              avatar="👨‍⚕️"
-              description="Sinh viên ngành Trí tuệ nhân tạo trường đại học FPT"
+              avatar="👨‍🔬"
+              description="Chuyên gia Machine Learning, trường đại học FPT"
             />
             <TeamMember
               name="Mr. Nguyễn Phương Huy"
               role="Web Developer"
-              avatar="👩‍💻"
-              description="Sinh viên ngành kĩ thuật phần mềm trường đại học FPT"
+              avatar="👨‍💻"
+              description="Full-stack Developer, trường đại học FPT"
             />
             <TeamMember
               name="Mr. Võ Trần Gia Bảo"
-              role="Scientific Researcher"
+              role="Data Scientist"
               avatar="👨‍🔬"
-              description="Sinh viên ngành Trí tuệ nhân tạo trường đại học FPT"
+              description="Data Science Specialist, trường đại học FPT"
             />
             <TeamMember
-              name="Mr. Phan Văn Quốc "
-              role="Research Team Leader"
-              avatar="👨‍🔬"
-              description="Sinh viên ngành kĩ thuật phần mềm trường đại học FPT"
+              name="Mr. Phan Văn Quốc"
+              role="Technical Lead"
+              avatar="👨‍💼"
+              description="Project Lead & Researcher, trường đại học FPT"
             />
           </div>
         </div>
@@ -167,8 +168,8 @@ function OverviewTab() {
 
       {/* Features */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">✨ Tính năng nổi bật</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">✨ Tính năng nổi bật</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <FeatureCard
             icon="🎯"
             title="Dự đoán chính xác"
@@ -223,7 +224,7 @@ function ModelTab() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
               <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
                 <h4 className="font-bold text-blue-900 mb-3">XGBoost Model</h4>
                 <ul className="space-y-2 text-sm text-gray-700">
@@ -252,7 +253,7 @@ function ModelTab() {
       {/* Training Data */}
       <section>
         <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 Dữ liệu huấn luyện</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <DataCard
             title="Tổng số mẫu"
             value="253,680"
@@ -298,8 +299,8 @@ function ModelTab() {
       {/* Performance Metrics */}
       <section>
         <h2 className="text-3xl font-bold text-gray-900 mb-6">📈 Hiệu suất mô hình</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-8">
             <h3 className="text-xl font-bold text-gray-900 mb-6">Classification Metrics</h3>
             <div className="space-y-4">
               <MetricBar label="Accuracy" value={95.3} color="bg-green-500" />
@@ -540,8 +541,8 @@ function ResearchTab() {
 
       {/* Clinical Guidelines */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📋 Hướng dẫn lâm sàng</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📋 Hướng dẫn lâm sàng</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {clinicalGuidelines.map((guideline, index) => (
             <GuidelineCard key={index} {...guideline} />
           ))}
@@ -550,8 +551,8 @@ function ResearchTab() {
 
       {/* Educational Resources */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🎓 Tài liệu học tập</h2>
-        <div className="grid md:grid-cols-2 gap-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎓 Tài liệu học tập</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <ResourceCard
             icon="📖"
             title="Hiểu về Tiểu đường"
@@ -585,24 +586,24 @@ function ResearchTab() {
 // Helper Components
 function StatCard({ value, label, description, color }: any) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
-      <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center mb-4`}>
-        <span className="text-2xl text-white font-bold">📊</span>
+    <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-shadow">
+      <div className={`w-12 sm:w-16 h-12 sm:h-16 rounded-lg bg-gradient-to-br ${color} flex items-center justify-center mb-3 sm:mb-4`}>
+        <span className="text-xl sm:text-2xl text-white font-bold">📊</span>
       </div>
-      <div className="text-4xl font-bold text-gray-900 mb-2">{value}</div>
-      <div className="text-lg font-semibold text-gray-700 mb-1">{label}</div>
-      <div className="text-sm text-gray-600">{description}</div>
+      <div className="text-2xl sm:text-4xl font-bold text-gray-900 mb-1 sm:mb-2 break-words">{value}</div>
+      <div className="text-base sm:text-lg font-semibold text-gray-700 mb-1">{label}</div>
+      <div className="text-xs sm:text-sm text-gray-600">{description}</div>
     </div>
   );
 }
 
 function TeamMember({ name, role, avatar, description }: any) {
   return (
-    <div className="text-center">
-      <div className="text-6xl mb-4">{avatar}</div>
-      <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-      <p className="text-blue-600 font-semibold mb-2">{role}</p>
-      <p className="text-sm text-gray-600">{description}</p>
+    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-all hover:-translate-y-1 text-center flex flex-col items-center">
+      <div className="text-6xl mb-4 flex-shrink-0">{avatar}</div>
+      <h3 className="text-lg font-bold text-gray-900 mb-1 line-clamp-2">{name}</h3>
+      <p className="text-blue-600 font-semibold mb-3 text-sm">{role}</p>
+      <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
     </div>
   );
 }
