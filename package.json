@@ -9,10 +9,6 @@
     "lint": "eslint",
     "postinstall": "pnpm ls sharp unrs-resolver || true"
   },
-  "engines": {
-  "node": "20.x",
-  "pnpm": "9.x"
-},
   "dependencies": {
     "next": "16.1.6",
     "react": "19.2.3",
