@@ -1,6 +1,3 @@
 {
-  "buildCommand": "next build",
-  "devCommand": "next dev",
-  "installCommand": "pnpm install --frozen-lockfile --no-optional",
   "framework": "nextjs"
 }
