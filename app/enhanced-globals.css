@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@theme inline {
+  /* Medical Color Palette */
+  --color-primary: rgb(37, 99, 235); /* Blue */
+  --color-secondary: rgb(16, 185, 129); /* Emerald */
+  --color-danger: rgb(239, 68, 68); /* Red */
+  --color-warning: rgb(245, 158, 11); /* Amber */
+  --color-success: rgb(16, 185, 129); /* Emerald */
+  --color-neutral: rgb(107, 114, 128); /* Gray */
+  --color-light: rgb(249, 250, 251); /* Light Gray */
+  --color-dark: rgb(17, 24, 39); /* Dark Gray */
+  
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  /* Border Radius */
+  --radius: 0.5rem;
+}
+
 /* Enhanced Form Styles */
 @layer components {
   .form-input,
@@ -331,4 +350,63 @@ input[type="checkbox"] {
 
 .glow-pulse {
   animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* Professional Chart Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--width);
+  }
+}
+
+.animate-expand-width {
+  animation: expandWidth 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+/* Enhanced Color Palette for Medical Theme */
+.medical-gradient-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+}
+
+.medical-gradient-success {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+}
+
+.medical-gradient-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+}
+
+.medical-gradient-warning {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
 }

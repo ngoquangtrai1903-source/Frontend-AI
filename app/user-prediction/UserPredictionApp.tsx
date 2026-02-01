@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Navigation } from "@/components/Navigation";
+import { EnhancedResultsDisplay } from "@/components/EnhancedResultsDisplay";
 import { predictHome } from "@/lib/api";
 
 // Types
@@ -159,7 +160,7 @@ export default function UserPredictionApp() {
   };
 
   if (results) {
-    return <ResultsView results={results} onReset={() => { setResults(null); setStep(1); }} />;
+    return <UserResultsView results={results} onReset={() => { setResults(null); setStep(1); }} />;
   }
 
   if (isAnalyzing) {
@@ -498,131 +499,26 @@ function AnalyzingScreen() {
   );
 }
 
-// Results View
-function ResultsView({ results, onReset }: { results: PredictionResults; onReset: () => void }) {
-  const getRiskColor = (level: string) => {
-    switch (level) {
-      case "high": return { bg: "bg-red-600", text: "text-red-600" };
-      case "medium": return { bg: "bg-yellow-600", text: "text-yellow-600" };
-      default: return { bg: "bg-green-600", text: "text-green-600" };
-    }
+// User Results View - wrapper that adapts the enhanced display for user mode
+function UserResultsView({ results, onReset }: { results: PredictionResults; onReset: () => void }) {
+  // Transform internal results format to enhanced display format
+  const transformedResults = {
+    probability: results.probability,
+    conclusion: results.riskLevel === "high" ? "DƯƠNG TÍNH" : "ÂM TÍNH",
+    riskLevel: results.riskLevel,
+    impacts: results.impacts,
+    aiAdvice: results.insights.recommendations.join('\n'),
   };
-
-  const colors = getRiskColor(results.riskLevel);
 
   return (
     <div className="min-h-screen bg-white py-12 px-4">
       <Navigation />
-      <div className="max-w-6xl mx-auto space-y-6">
-        {/* Hero Card */}
-        <div className={`${colors.bg} rounded-lg shadow-md p-8 text-white animate-fadeIn`}>
-          <div className="text-center">
-            <div className="text-6xl mb-4">
-              {results.riskLevel === "high" ? "⚠️" : results.riskLevel === "medium" ? "⚡" : "✅"}
-            </div>
-            <h2 className="text-4xl font-bold mb-2">Nguy cơ tiểu đường</h2>
-            <div className="text-7xl font-black my-6">{(results.probability * 100).toFixed(1)}%</div>
-            <p className="text-xl opacity-90">
-              {results.riskLevel === "high" ? "Nguy cơ cao - Cần chú ý ngay" : 
-               results.riskLevel === "medium" ? "Nguy cơ trung bình - Cần theo dõi" : 
-               "Nguy cơ thấp - Hãy duy trì!"}
-            </p>
-          </div>
-        </div>
-
-        {/* Insights Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {results.insights.topRisks.length > 0 && (
-            <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
-                ⚠️ Yếu tố nguy cơ
-              </h3>
-              <ul className="space-y-2">
-                {results.insights.topRisks.map((risk, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-red-500 mt-1">●</span>
-                    <span className="text-gray-700">{risk}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {results.insights.protectiveFactors.length > 0 && (
-            <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-green-600 mb-4 flex items-center gap-2">
-                🛡️ Yếu tố bảo vệ
-              </h3>
-              <ul className="space-y-2">
-                {results.insights.protectiveFactors.map((factor, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <span className="text-green-500 mt-1">●</span>
-                    <span className="text-gray-700">{factor}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* Impact Visualization */}
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-          <h3 className="text-2xl font-bold text-blue-600 mb-6">📊 Phân tích tác động</h3>
-          <div className="space-y-3">
-            {results.impacts.slice(0, 8).map((impact, i) => {
-              const isPositive = impact.impact > 0;
-              const maxImpact = Math.max(...results.impacts.map(imp => Math.abs(imp.impact)));
-              const width = (Math.abs(impact.impact) / maxImpact) * 100;
-              
-              return (
-                <div key={i} className="animate-fadeIn" style={{ animationDelay: `${i * 100}ms` }}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium text-gray-700">{impact.feature}</span>
-                    <span className={`text-sm font-bold ${isPositive ? 'text-red-600' : 'text-green-600'}`}>
-                      {isPositive ? '+' : ''}{impact.impact.toFixed(1)}%
-                    </span>
-                  </div>
-                  <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-full rounded-full transition-all duration-1000 ease-out ${
-                        isPositive ? 'bg-gradient-to-r from-red-400 to-rose-400' : 'bg-gradient-to-r from-green-400 to-emerald-400'
-                      }`}
-                      style={{ width: `${width}%`, transitionDelay: `${i * 100}ms` }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Recommendations */}
-        <div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
-          <h3 className="text-2xl font-bold text-blue-600 mb-4 flex items-center gap-2">
-            💡 Khuyến nghị
-          </h3>
-          <ul className="space-y-3">
-            {results.insights.recommendations.map((rec, i) => (
-              <li key={i} className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
-                <span className="text-blue-600 text-xl mt-0.5">{i + 1}.</span>
-                <span className="text-gray-700 flex-1">{rec}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-            <p className="text-sm text-yellow-800">
-              ⚠️ <strong>Lưu ý:</strong> Kết quả chỉ mang tính tham khảo. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa để được tư vấn chính xác.
-            </p>
-          </div>
-        </div>
-
-        {/* Reset Button */}
-        <button
-          onClick={onReset}
-          className="w-full bg-gray-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-gray-700 transition-colors"
-        >
-          🔄 Kiểm tra lại
-        </button>
+      <div className="max-w-7xl mx-auto">
+        <EnhancedResultsDisplay 
+          results={transformedResults}
+          onReset={onReset}
+          isDoctorMode={false}
+        />
       </div>
     </div>
   );
