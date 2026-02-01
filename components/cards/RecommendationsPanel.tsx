@@ -83,7 +83,7 @@ export function RecommendationsPanel({
 
   // Parse recommendations into individual items
   const parseRecommendations = (advice: string) => {
-    const items = [];
+    const items: { text: string; icon: string }[] = [];
     const lines = advice.split('\n').filter((line) => line.trim().length > 0);
 
     lines.forEach((line) => {
