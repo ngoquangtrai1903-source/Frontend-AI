@@ -210,168 +210,165 @@ function OverviewTab() {
 function ModelTab() {
   return (
     <div className="space-y-12 animate-fadeIn">
-      {/* Model Architecture */}
+      {/* Twin Model Architecture */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🏗️ Kiến trúc mô hình</h2>
-        <div className="bg-white rounded-xl border border-gray-200 p-8">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Thuật toán: XGBoost + Neural Network Ensemble</h3>
-              <p className="text-gray-700 leading-relaxed">
-                DiabeTwin sử dụng kết hợp hai mô hình mạnh mẽ: <strong>XGBoost</strong> (Extreme Gradient Boosting) 
-                để nắm bắt các mẫu phức tạp trong dữ liệu và <strong>Neural Network</strong> để học các đặc trưng phi tuyến. 
-                Kết quả từ hai mô hình được kết hợp thông qua weighted ensemble để tối ưu độ chính xác.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6">
-              <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">
-                <h4 className="font-bold text-blue-900 mb-3">XGBoost Model</h4>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ Max Depth: 6</li>
-                  <li>✓ Learning Rate: 0.05</li>
-                  <li>✓ N Estimators: 500</li>
-                  <li>✓ Subsample: 0.8</li>
-                  <li>✓ Objective: binary:logistic</li>
-                </ul>
-              </div>
-              <div className="bg-purple-50 rounded-lg p-6 border border-purple-200">
-                <h4 className="font-bold text-purple-900 mb-3">Neural Network</h4>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  <li>✓ Architecture: [128, 64, 32, 16]</li>
-                  <li>✓ Activation: ReLU + Dropout(0.3)</li>
-                  <li>✓ Optimizer: Adam (lr=0.001)</li>
-                  <li>✓ Loss: Binary Cross-Entropy</li>
-                  <li>✓ Batch Size: 256</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Training Data */}
-      <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 Dữ liệu huấn luyện</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          <DataCard
-            title="Tổng số mẫu"
-            value="253,680"
-            description="Hồ sơ bệnh nhân từ nhiều nguồn"
-            color="bg-blue-600"
-          />
-          <DataCard
-            title="Số đặc trưng"
-            value="21"
-            description="Chỉ số y tế và lối sống"
-            color="bg-purple-600"
-          />
-          <DataCard
-            title="Tỷ lệ cân bằng"
-            value="14.8%"
-            description="Positive cases (sau SMOTE)"
-            color="bg-green-600"
-          />
-        </div>
-
-        <div className="mt-8 bg-white rounded-xl border border-gray-200 p-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Nguồn dữ liệu</h3>
-          <div className="space-y-3">
-            <DataSource
-              name="CDC BRFSS Dataset"
-              size="253,680 samples"
-              description="Behavioral Risk Factor Surveillance System từ CDC, bao gồm dữ liệu sức khỏe của người dân Mỹ"
-            />
-            <DataSource
-              name="Clinical Validation Dataset"
-              size="15,420 samples"
-              description="Dữ liệu xác thực từ các bệnh viện và phòng khám tại Việt Nam"
-            />
-            <DataSource
-              name="Synthetic Augmentation"
-              size="50,000 samples"
-              description="Dữ liệu tăng cường sử dụng SMOTE và GAN để cân bằng phân phối"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Performance Metrics */}
-      <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📈 Hiệu suất mô hình</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-4 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Classification Metrics</h3>
-            <div className="space-y-4">
-              <MetricBar label="Accuracy" value={95.3} color="bg-green-500" />
-              <MetricBar label="Precision" value={93.7} color="bg-blue-500" />
-              <MetricBar label="Recall (Sensitivity)" value={91.2} color="bg-purple-500" />
-              <MetricBar label="F1-Score" value={92.4} color="bg-orange-500" />
-              <MetricBar label="Specificity" value={96.8} color="bg-teal-500" />
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl border border-gray-200 p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-6">Advanced Metrics</h3>
-            <div className="space-y-4">
-              <MetricBar label="AUC-ROC" value={98.7} color="bg-indigo-500" />
-              <MetricBar label="AUC-PR" value={96.3} color="bg-fuchsia-500" />
-              <MetricBar label="Matthews Correlation" value={88.5} color="bg-rose-500" />
-              <MetricBar label="Brier Score (lower better)" value={4.2} max={10} color="bg-amber-500" />
-              <MetricBar label="Log Loss (lower better)" value={12.1} max={50} color="bg-cyan-500" />
-            </div>
-          </div>
-        </div>
-
-        {/* Confusion Matrix */}
-        <div className="mt-8 bg-white rounded-xl border border-gray-200 p-8">
-          <h3 className="text-xl font-bold text-gray-900 mb-6">Confusion Matrix (Test Set)</h3>
-          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-            <div></div>
-            <div className="text-center font-bold text-gray-700">Predicted: No</div>
-            <div className="text-center font-bold text-gray-700">Predicted: Yes</div>
-            
-            <div className="text-right font-bold text-gray-700 pr-4">Actual: No</div>
-            <div className="bg-green-100 border-2 border-green-500 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-green-700">48,532</div>
-              <div className="text-xs text-green-600 mt-1">True Negative</div>
-            </div>
-            <div className="bg-red-100 border-2 border-red-300 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-red-700">1,604</div>
-              <div className="text-xs text-red-600 mt-1">False Positive</div>
-            </div>
-            
-            <div className="text-right font-bold text-gray-700 pr-4">Actual: Yes</div>
-            <div className="bg-red-100 border-2 border-red-300 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-red-700">658</div>
-              <div className="text-xs text-red-600 mt-1">False Negative</div>
-            </div>
-            <div className="bg-green-100 border-2 border-green-500 rounded-lg p-6 text-center">
-              <div className="text-3xl font-bold text-green-700">6,842</div>
-              <div className="text-xs text-green-600 mt-1">True Positive</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Feature Importance */}
-      <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🔍 Độ quan trọng của đặc trưng</h2>
-        <div className="bg-white rounded-xl border border-gray-200 p-8">
-          <p className="text-gray-700 mb-6">
-            Các yếu tố sau đây có tác động lớn nhất đến dự đoán của mô hình (theo SHAP values):
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">🏗️ Hai tuyến mô hình AI (Doctor & Home)</h2>
+        <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+          <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
+            DiabeTwin được thiết kế như một hệ thống <strong>&quot;twin&quot; AI</strong> gồm hai mô hình khác nhau, 
+            tối ưu riêng cho hai bối cảnh sử dụng:
           </p>
-          <div className="space-y-3">
-            <FeatureImportanceBar feature="HbA1c Level" importance={24.3} />
-            <FeatureImportanceBar feature="Blood Glucose" importance={21.7} />
-            <FeatureImportanceBar feature="BMI" importance={15.2} />
-            <FeatureImportanceBar feature="Age" importance={12.8} />
-            <FeatureImportanceBar feature="High Blood Pressure" importance={8.9} />
-            <FeatureImportanceBar feature="High Cholesterol" importance={6.4} />
-            <FeatureImportanceBar feature="Smoking History" importance={4.2} />
-            <FeatureImportanceBar feature="Physical Activity" importance={3.1} />
-            <FeatureImportanceBar feature="General Health" importance={2.1} />
-            <FeatureImportanceBar feature="Gender" importance={1.3} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
+            <div className="bg-blue-50 rounded-lg p-5 sm:p-6 border border-blue-200 flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-blue-900 mb-2">Mô hình cho Bác sĩ</h3>
+                <p className="text-sm sm:text-base text-gray-700 mb-3">
+                  Huấn luyện bằng <strong>AdaBoostClassifier</strong> trên khoảng <strong>100.000 hồ sơ lâm sàng</strong>, 
+                  dành cho môi trường bệnh viện/phòng khám nơi bác sĩ cần công cụ hỗ trợ chẩn đoán có độ chính xác cao.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• Tối ưu cho <strong>độ nhạy (recall)</strong> với ca dương tính để hạn chế bỏ sót bệnh.</li>
+                  <li>• Giao diện kết quả chi tiết, kèm giải thích SHAP cho từng bệnh nhân.</li>
+                  <li>• Thích hợp dùng song song với quy trình chẩn đoán chuẩn của bác sĩ.</li>
+                </ul>
+              </div>
+              <div className="mt-4">
+                <a
+                  href="/diabetes_report.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto"
+                >
+                  Xem báo cáo huấn luyện (HTML)
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-purple-50 rounded-lg p-5 sm:p-6 border border-purple-200 flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold text-purple-900 mb-2">Mô hình cho Người dùng tại nhà</h3>
+                <p className="text-sm sm:text-base text-gray-700 mb-3">
+                  Huấn luyện bằng <strong>LGBMClassifier</strong> trên <strong>70.692 mẫu</strong> từ bộ dữ liệu 
+                  <strong> BRFSS (Behavioral Risk Factor Surveillance System)</strong>, tập trung vào các yếu tố hành vi và lối sống.
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2">
+                  <li>• Ưu tiên <strong>tốc độ và tính ổn định</strong> để chạy mượt trên nhiều thiết bị.</li>
+                  <li>• Thiết kế câu hỏi thân thiện, giúp người dùng không chuyên y tế dễ trả lời.</li>
+                  <li>• Cho phép sử dụng tại nhà để <strong>sàng lọc nguy cơ sớm</strong>, không thay thế bác sĩ.</li>
+                </ul>
+              </div>
+              <div className="mt-4">
+                <a
+                  href="/diabetes_report_for_AI_at_home.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition-colors w-full sm:w-auto"
+                >
+                  Xem báo cáo mô hình tại nhà (HTML)
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Training Data & Metrics */}
+      <section>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 Dữ liệu huấn luyện & chất lượng mô hình</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Mô hình cho Bác sĩ (AdaBoost)</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <DataCard
+                title="Số mẫu huấn luyện"
+                value="~100.000"
+                description="Hồ sơ bệnh nhân lâm sàng"
+                color="bg-blue-600"
+              />
+              <DataCard
+                title="Bối cảnh sử dụng"
+                value="Bệnh viện"
+                description="Hỗ trợ ra quyết định cho bác sĩ"
+                color="bg-sky-600"
+              />
+            </div>
+            <p className="text-sm text-gray-700 mb-3">
+              Trên tập kiểm thử, mô hình cho bác sĩ đạt <strong>độ chính xác tổng thể cao</strong>, 
+              với khả năng nhận diện ca có nguy cơ tiểu đường tốt (recall nhóm dương tính khoảng 0.87).
+            </p>
+            <p className="text-sm text-gray-700">
+              Confusion matrix cho thấy <strong>số lượng lớn ca âm tính được phân loại đúng</strong>, 
+              đồng thời vẫn ưu tiên không bỏ sót bệnh nhân có nguy cơ cao.
+            </p>
+          </div>
+
+          <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Mô hình cho Người dùng (LGBM)</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <DataCard
+                title="Số mẫu BRFSS"
+                value="70.692"
+                description="Dữ liệu sức khỏe cộng đồng từ CDC"
+                color="bg-purple-600"
+              />
+              <DataCard
+                title="Mục tiêu"
+                value="Sàng lọc tại nhà"
+                description="Đánh giá nhanh nguy cơ cá nhân"
+                color="bg-fuchsia-600"
+              />
+            </div>
+            <p className="text-sm text-gray-700 mb-3">
+              Trên tập kiểm thử, mô hình LGBM đạt <strong>precision khoảng 0.77</strong> và <strong>recall khoảng 0.71</strong> 
+              cho nhóm nguy cơ cao, cân bằng giữa việc phát hiện bệnh và hạn chế cảnh báo giả.
+            </p>
+            <p className="text-sm text-gray-700">
+              Kết quả được hiển thị bằng giao diện trực quan, giúp người dùng dễ hiểu tình trạng của mình 
+              mà không cần kiến thức chuyên sâu về thống kê.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Explainability & LLM Assistant */}
+      <section>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">🔍 Giải thích kết quả bằng SHAP & Trợ lý LLM</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">SHAP – hiểu rõ vì sao bạn có nguy cơ</h3>
+            <p className="text-sm sm:text-base text-gray-700 mb-4">
+              Thay vì chỉ trả về một con số &quot;có/không&quot;, DiabeTwin sử dụng <strong>SHAP (SHapley Additive exPlanations)</strong> 
+              để phân tích mức độ đóng góp của từng yếu tố tới kết quả dự đoán của bạn.
+            </p>
+            <p className="text-sm sm:text-base text-gray-700 mb-4">
+              Bạn sẽ nhìn thấy <strong>top các yếu tố rủi ro cá nhân</strong> (ví dụ: tuổi, BMI, huyết áp, thói quen hút thuốc, 
+              mức độ vận động...), giúp hiểu rõ điều gì đang kéo nguy cơ của mình tăng lên hoặc giảm đi.
+            </p>
+            <div className="space-y-3">
+              <FeatureImportanceBar feature="BMI & Cân nặng" importance={23.5} />
+              <FeatureImportanceBar feature="Tuổi" importance={18.2} />
+              <FeatureImportanceBar feature="Tăng huyết áp" importance={15.7} />
+              <FeatureImportanceBar feature="Ít vận động" importance={12.4} />
+              <FeatureImportanceBar feature="Tiền sử gia đình" importance={9.3} />
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Trợ lý LLM – giải thích & gợi ý hành động</h3>
+            <p className="text-sm sm:text-base text-gray-700 mb-3">
+              Sau khi mô hình ML đưa ra dự đoán và SHAP chỉ ra các yếu tố quan trọng, 
+              chúng tôi sử dụng <strong>Large Language Model (LLM)</strong> để diễn giải kết quả 
+              bằng ngôn ngữ đời thường, dễ hiểu.
+            </p>
+            <ul className="text-sm sm:text-base text-gray-700 space-y-2 mb-4">
+              <li>• Tóm tắt nguy cơ hiện tại của bạn theo từng mức độ (thấp, trung bình, cao).</li>
+              <li>• Giải thích tại sao một số yếu tố lại làm nguy cơ tăng/giảm.</li>
+              <li>• Gợi ý các <strong>bước hành động cụ thể</strong> về dinh dưỡng, vận động, khám sàng lọc...</li>
+            </ul>
+            <p className="text-xs sm:text-sm text-gray-500">
+              Lưu ý: Trợ lý LLM chỉ đóng vai trò <strong>tư vấn tham khảo</strong>. 
+              Mọi quyết định liên quan đến điều trị cần được trao đổi với bác sĩ chuyên khoa.
+            </p>
           </div>
         </div>
       </section>
