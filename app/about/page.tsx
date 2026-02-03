@@ -239,7 +239,7 @@ function ModelTab() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto"
                 >
-                  Xem báo cáo huấn luyện (HTML)
+                  📊 Xem báo cáo huấn luyện mô hình Bác sĩ
                 </a>
               </div>
             </div>
@@ -264,7 +264,7 @@ function ModelTab() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition-colors w-full sm:w-auto"
                 >
-                  Xem báo cáo mô hình tại nhà (HTML)
+                  📈 Xem báo cáo mô hình Người dùng tại nhà
                 </a>
               </div>
             </div>
