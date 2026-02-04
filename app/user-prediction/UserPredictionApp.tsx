@@ -9,7 +9,8 @@ import { predictHome } from "@/lib/api";
 interface UserFormData {
   sex: number;
   age: number;
-  bmi: number;
+  height: number; // height in meters
+  weight: number; // weight in kg
   genhlth: number;
   highBP: number;
   highChol: number;
@@ -42,7 +43,8 @@ export default function UserPredictionApp() {
   const [formData, setFormData] = useState<UserFormData>({
     sex: 1,
     age: 5,
-    bmi: 22,
+    height: 1.70, // height in meters
+    weight: 70, // weight in kg
     genhlth: 3,
     highBP: 0,
     highChol: 0,
@@ -58,6 +60,14 @@ export default function UserPredictionApp() {
     mentHlth: 0,
     physHlth: 0,
   });
+
+  // Calculate BMI from height and weight
+  const calculateBMI = (height: number, weight: number): number => {
+    if (height <= 0 || weight <= 0) return 0;
+    return Number((weight / (height * height)).toFixed(1));
+  };
+
+  const currentBMI = calculateBMI(formData.height, formData.weight);
   const [results, setResults] = useState<PredictionResults | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -73,7 +83,7 @@ export default function UserPredictionApp() {
         HighBP: formData.highBP,
         HighChol: formData.highChol,
         CholCheck: formData.cholCheck,
-        BMI: formData.bmi,
+        BMI: calculateBMI(formData.height, formData.weight), // Calculate BMI
         Smoker: formData.smoker,
         Stroke: formData.stroke,
         HeartDiseaseorAttack: formData.heartDis,
@@ -135,6 +145,8 @@ export default function UserPredictionApp() {
     const topRisks = [];
     const protective = [];
     const recommendations = [];
+    
+    const calculatedBMI = calculateBMI(data.height, data.weight);
 
     if (data.highBP === 1) {
       topRisks.push("Huyết áp cao");
@@ -144,7 +156,7 @@ export default function UserPredictionApp() {
       topRisks.push("Cholesterol cao");
       recommendations.push("Giảm chất béo bão hòa trong chế độ ăn");
     }
-    if (data.bmi > 30) {
+    if (calculatedBMI > 30) {
       topRisks.push("BMI cao (thừa cân/béo phì)");
       recommendations.push("Lập kế hoạch giảm cân lành mạnh với chuyên gia dinh dưỡng");
     }
@@ -194,20 +206,20 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
       <div className="flex justify-between mb-2">
         {[1, 2, 3].map(step => (
           <div key={step} className="flex flex-col items-center">
-            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 ${
+            <div className={`w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 rounded-full flex items-center justify-center font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 ${
               currentStep >= step 
                 ? 'bg-blue-600 text-white shadow-md' 
                 : 'bg-gray-200 text-gray-400'
             }`}>
               {step}
             </div>
-            <span className={`text-xs mt-2 font-medium ${currentStep >= step ? 'text-blue-600' : 'text-gray-400'}`}>
+            <span className={`text-xs mt-1 sm:mt-2 font-medium ${currentStep >= step ? 'text-blue-600' : 'text-gray-400'}`}>
               {step === 1 ? 'Cá nhân' : step === 2 ? 'Y tế' : 'Lối sống'}
             </span>
           </div>
         ))}
       </div>
-      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="h-1.5 sm:h-2 bg-gray-200 rounded-full overflow-hidden">
         <div 
           className="h-full bg-blue-600 transition-all duration-500"
           style={{ width: `${progress}%` }}
@@ -220,16 +232,16 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
 // Step 1: Personal Info
 function Step1Personal({ formData, updateField, onNext }: any) {
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
         👤 Thông tin cá nhân
       </h2>
       
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* Gender */}
         <div className="group">
-          <label className="block text-sm font-semibold text-gray-700 mb-3">Giới tính</label>
-          <div className="grid grid-cols-2 gap-4">
+          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Giới tính</label>
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {[
               { value: 0, label: '👩 Nữ' },
               { value: 1, label: '👨 Nam' }
@@ -237,7 +249,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
               <button
                 key={option.value}
                 onClick={() => updateField('sex', option.value)}
-                className={`p-4 rounded-lg font-semibold text-lg transition-colors duration-150 ${
+                className={`p-3 sm:p-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg transition-colors duration-150 ${
                   formData.sex === option.value
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -251,8 +263,8 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 
         {/* Age Slider */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Nhóm tuổi: <span className="text-blue-600 text-xl">{
+          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+            Nhóm tuổi: <span className="text-blue-600 text-lg sm:text-xl">{
               formData.age === 1 ? "18-24" :
               formData.age === 2 ? "25-29" :
               formData.age === 3 ? "30-34" :
@@ -264,7 +276,8 @@ function Step1Personal({ formData, updateField, onNext }: any) {
               formData.age === 9 ? "60-64" :
               formData.age === 10 ? "65-69" :
               formData.age === 11 ? "70-74" :
-              formData.age === 12 ? "75-79" : "80+"
+              formData.age === 12 ? "75-79" : 
+              formData.age === 13 ? "80+" : ""
             }</span>
           </label>
           <input
@@ -273,41 +286,78 @@ function Step1Personal({ formData, updateField, onNext }: any) {
             max="13"
             value={formData.age}
             onChange={(e) => updateField('age', parseInt(e.target.value))}
-            className="w-full h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer slider"
+            className="w-full h-2 sm:h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer slider"
           />
         </div>
 
-        {/* BMI */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">
-            Chỉ số BMI: <span className="text-blue-600 text-xl">{formData.bmi.toFixed(1)}</span>
-          </label>
-          <input
-            type="range"
-            min="15"
-            max="50"
-            step="0.5"
-            value={formData.bmi}
-            onChange={(e) => updateField('bmi', parseFloat(e.target.value))}
-            className="w-full h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer"
-          />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
-            <span>Gầy</span>
-            <span>Bình thường</span>
-            <span>Thừa cân</span>
-            <span>Béo phì</span>
+        {/* Height and Weight */}
+        <div className="space-y-4 sm:space-y-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+              Chiều cao (mét): <span className="text-blue-600 text-lg sm:text-xl">{formData.height.toFixed(2)}m</span>
+            </label>
+            <input
+              type="range"
+              min="1.0"
+              max="2.2"
+              step="0.01"
+              value={formData.height}
+              onChange={(e) => updateField('height', parseFloat(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg appearance-none cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>1.0m</span>
+              <span>2.2m</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+              Cân nặng (kg): <span className="text-blue-600 text-lg sm:text-xl">{formData.weight}kg</span>
+            </label>
+            <input
+              type="range"
+              min="30"
+              max="150"
+              step="1"
+              value={formData.weight}
+              onChange={(e) => updateField('weight', parseInt(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-green-400 to-yellow-400 rounded-lg appearance-none cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>30kg</span>
+              <span>150kg</span>
+            </div>
+          </div>
+
+          {/* BMI Display */}
+          <div className="p-3 sm:p-4 bg-gradient-to-r from-emerald-50 to-red-50 rounded-lg border border-emerald-200">
+            <p className="text-sm sm:text-base font-semibold text-gray-700 text-center">
+              BMI: <span className={`text-lg sm:text-xl font-bold ${
+                formData.weight / (formData.height * formData.height) < 18.5 ? 'text-blue-600' :
+                formData.weight / (formData.height * formData.height) < 25 ? 'text-green-600' :
+                formData.weight / (formData.height * formData.height) < 30 ? 'text-yellow-600' :
+                'text-red-600'
+              }`}>{(formData.weight / (formData.height * formData.height)).toFixed(2)}</span>
+              <span className="text-gray-500 ml-2">
+                {formData.weight / (formData.height * formData.height) < 18.5 ? '(Gầy)' :
+                 formData.weight / (formData.height * formData.height) < 25 ? '(Bình thường)' :
+                 formData.weight / (formData.height * formData.height) < 30 ? '(Thừa cân)' :
+                 '(Béo phì)'}
+              </span>
+            </p>
           </div>
         </div>
 
         {/* Health Status */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-3">Sức khỏe tổng quát</label>
-          <div className="grid grid-cols-5 gap-2">
+          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Sức khỏe tổng quát</label>
+          <div className="grid grid-cols-5 gap-1 sm:gap-2">
             {[1, 2, 3, 4, 5].map(level => (
               <button
                 key={level}
                 onClick={() => updateField('genhlth', level)}
-                className={`p-3 rounded-lg font-medium transition-colors duration-150 ${
+                className={`p-2 sm:p-3 rounded-lg font-medium text-xs sm:text-sm transition-colors duration-150 ${
                   formData.genhlth === level
                     ? level === 1 ? 'bg-green-600 text-white shadow-md' :
                       level === 2 ? 'bg-green-500 text-white shadow-md' :
@@ -317,12 +367,12 @@ function Step1Personal({ formData, updateField, onNext }: any) {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {level === 1 ? '😊' : level === 2 ? '🙂' : level === 3 ? '😐' : level === 4 ? '😟' : '😞'}
+                <span className="text-lg sm:text-xl">{level === 1 ? '😊' : level === 2 ? '🙂' : level === 3 ? '😐' : level === 4 ? '😟' : '😞'}</span>
               </button>
             ))}
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-2">
-            <span>Rất tốt</span>
+            <span className="hidden sm:inline">Rất tốt</span>
             <span>Kém</span>
           </div>
         </div>
@@ -330,7 +380,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 
       <button
         onClick={onNext}
-        className="w-full mt-8 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
+        className="w-full mt-6 sm:mt-8 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
       >
         Tiếp theo →
       </button>
@@ -341,20 +391,20 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 // Step 2: Medical History
 function Step2Medical({ formData, updateField, onNext, onBack }: any) {
   const Toggle = ({ label, field, icon }: any) => (
-    <div className="bg-gray-50 rounded-xl p-4 hover:shadow-md transition-shadow">
+    <div className="bg-gray-50 rounded-xl p-3 sm:p-4 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{icon}</span>
-          <span className="font-medium text-gray-700">{label}</span>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-xl sm:text-2xl">{icon}</span>
+          <span className="font-medium text-gray-700 text-sm sm:text-base">{label}</span>
         </div>
         <button
           onClick={() => updateField(field, formData[field] === 1 ? 0 : 1)}
-          className={`relative w-16 h-8 rounded-full transition-colors duration-150 ${
+          className={`relative w-14 sm:w-16 h-6 sm:h-8 rounded-full transition-colors duration-150 ${
             formData[field] === 1 ? 'bg-red-600' : 'bg-gray-300'
           }`}
         >
-          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
-            formData[field] === 1 ? 'translate-x-9' : 'translate-x-1'
+          <div className={`absolute top-0.5 sm:top-1 w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
+            formData[field] === 1 ? 'translate-x-7 sm:translate-x-9' : 'translate-x-0.5 sm:translate-x-1'
           }`} />
         </button>
       </div>
@@ -362,12 +412,12 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
   );
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
         🏥 Tiền sử y tế
       </h2>
       
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         <Toggle label="Huyết áp cao" field="highBP" icon="❤️" />
         <Toggle label="Cholesterol cao" field="highChol" icon="🧪" />
         <Toggle label="Đã kiểm tra Cholesterol (5 năm qua)" field="cholCheck" icon="📋" />
@@ -376,16 +426,16 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
         <Toggle label="Khó khăn khi đi bộ/leo cầu thang" field="diffWalk" icon="🚶" />
       </div>
 
-      <div className="flex gap-4 mt-8">
+      <div className="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
         <button
           onClick={onBack}
-          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-lg font-bold text-lg hover:bg-gray-300 transition-colors"
+          className="flex-1 bg-gray-200 text-gray-700 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-300 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
           ← Quay lại
         </button>
         <button
           onClick={onNext}
-          className="flex-1 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
+          className="flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
           Tiếp theo →
         </button>
@@ -397,22 +447,22 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
 // Step 3: Lifestyle
 function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
   const Toggle = ({ label, field, icon, goodValue = 1 }: any) => (
-    <div className="bg-gray-50 rounded-xl p-4 hover:shadow-md transition-shadow">
+    <div className="bg-gray-50 rounded-xl p-3 sm:p-4 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">{icon}</span>
-          <span className="font-medium text-gray-700">{label}</span>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-xl sm:text-2xl">{icon}</span>
+          <span className="font-medium text-gray-700 text-sm sm:text-base">{label}</span>
         </div>
         <button
           onClick={() => updateField(field, formData[field] === goodValue ? (goodValue === 1 ? 0 : 1) : goodValue)}
-          className={`relative w-16 h-8 rounded-full transition-colors duration-150 ${
+          className={`relative w-14 sm:w-16 h-6 sm:h-8 rounded-full transition-colors duration-150 ${
             formData[field] === goodValue 
               ? 'bg-green-600' 
               : 'bg-red-600'
           }`}
         >
-          <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
-            formData[field] === goodValue ? 'translate-x-9' : 'translate-x-1'
+          <div className={`absolute top-0.5 sm:top-1 w-5 sm:w-6 h-5 sm:h-6 bg-white rounded-full shadow-md transition-transform duration-150 ${
+            formData[field] === goodValue ? 'translate-x-7 sm:translate-x-9' : 'translate-x-0.5 sm:translate-x-1'
           }`} />
         </button>
       </div>
@@ -420,12 +470,12 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
   );
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-8 animate-fadeIn">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
         🥗 Lối sống & Thói quen
       </h2>
       
-      <div className="space-y-4 mb-6">
+      <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
         <Toggle label="Hút thuốc (>100 điếu trong đời)" field="smoker" icon="🚬" goodValue={0} />
         <Toggle label="Vận động thể chất (30 ngày qua)" field="physAct" icon="🏃" />
         <Toggle label="Ăn trái cây hàng ngày" field="fruits" icon="🍎" />
@@ -433,45 +483,93 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
         <Toggle label="Uống nhiều rượu bia" field="hvyAlcohol" icon="🍺" goodValue={0} />
       </div>
 
-      <div className="space-y-4 mb-8">
+      <div className="space-y-4 mb-6 sm:mb-8">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600">{formData.mentHlth}</span>
+            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.mentHlth}</span>
           </label>
-          <input
-            type="range"
-            min="0"
-            max="30"
-            value={formData.mentHlth}
-            onChange={(e) => updateField('mentHlth', parseInt(e.target.value))}
-            className="w-full"
-          />
+          <div className="relative h-8 flex items-center">
+            <input
+              type="range"
+              min="0"
+              max="30"
+              value={formData.mentHlth}
+              onChange={(e) => updateField('mentHlth', parseInt(e.target.value))}
+              className="absolute inset-0 w-full h-2 sm:h-3 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg appearance-none cursor-pointer z-10"
+              style={{ marginTop: '0.75rem' }}
+            />
+            {/* Visual line indicator - background */}
+            <div className="absolute inset-0 h-2 sm:h-3 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg pointer-events-none" 
+                 style={{ marginTop: '0.75rem' }} />
+            {/* Visual line indicator - fill */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ 
+                   width: `${(formData.mentHlth / 30) * 100}%`,
+                   marginTop: '0.75rem'
+                 }} />
+            {/* Day markers */}
+            <div className="absolute -bottom-4 left-0 right-0 flex justify-between text-xs text-gray-500">
+              <span>0</span>
+              <span>15</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div className="mt-6 text-xs text-gray-600">
+            {formData.mentHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
+             formData.mentHlth <= 7 ? '🟡 Tốt' :
+             formData.mentHlth <= 14 ? '🟠 Trung bình' :
+             '🔴 Cần quan tâm'}
+          </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600">{formData.physHlth}</span>
+            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.physHlth}</span>
           </label>
-          <input
-            type="range"
-            min="0"
-            max="30"
-            value={formData.physHlth}
-            onChange={(e) => updateField('physHlth', parseInt(e.target.value))}
-            className="w-full"
-          />
+          <div className="relative h-8 flex items-center">
+            <input
+              type="range"
+              min="0"
+              max="30"
+              value={formData.physHlth}
+              onChange={(e) => updateField('physHlth', parseInt(e.target.value))}
+              className="absolute inset-0 w-full h-2 sm:h-3 bg-gradient-to-r from-orange-200 to-red-200 rounded-lg appearance-none cursor-pointer z-10"
+              style={{ marginTop: '0.75rem' }}
+            />
+            {/* Visual line indicator - background */}
+            <div className="absolute inset-0 h-2 sm:h-3 bg-gradient-to-r from-orange-200 to-red-200 rounded-lg pointer-events-none" 
+                 style={{ marginTop: '0.75rem' }} />
+            {/* Visual line indicator - fill */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ 
+                   width: `${(formData.physHlth / 30) * 100}%`,
+                   marginTop: '0.75rem'
+                 }} />
+            {/* Day markers */}
+            <div className="absolute -bottom-4 left-0 right-0 flex justify-between text-xs text-gray-500">
+              <span>0</span>
+              <span>15</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div className="mt-6 text-xs text-gray-600">
+            {formData.physHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
+             formData.physHlth <= 7 ? '🟡 Tốt' :
+             formData.physHlth <= 14 ? '🟠 Trung bình' :
+             '🔴 Cần quan tâm'}
+          </div>
         </div>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-3 sm:gap-4">
         <button
           onClick={onBack}
-          className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-lg font-bold text-lg hover:bg-gray-300 transition-colors"
+          className="flex-1 bg-gray-200 text-gray-700 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-300 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
           ← Quay lại
         </button>
         <button
           onClick={onSubmit}
-          className="flex-1 bg-blue-600 text-white py-4 rounded-lg font-bold text-lg shadow-md hover:bg-blue-700 transition-colors"
+          className="flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
           🔍 Phân tích nguy cơ
         </button>

@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Medical Color Palette */
+  --color-primary: rgb(37, 99, 235); /* Blue */
+  --color-secondary: rgb(16, 185, 129); /* Emerald */
+  --color-danger: rgb(239, 68, 68); /* Red */
+  --color-warning: rgb(245, 158, 11); /* Amber */
+  --color-success: rgb(16, 185, 129); /* Emerald */
+  --color-neutral: rgb(107, 114, 128); /* Gray */
+  --color-light: rgb(249, 250, 251); /* Light Gray */
+  --color-dark: rgb(17, 24, 39); /* Dark Gray */
+  
+  /* Typography */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  /* Border Radius */
+  --radius: 0.5rem;
+}
+
+/* Custom animations for vibrant effects */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-10px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Apply custom animations */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-slide {
+  animation: slide 2s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.5s ease-out;
+}
+
+/* Background patterns for feature cards */
+.bg-pattern-lightning {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(251, 191, 36, 0.1) 10px,
+    rgba(251, 191, 36, 0.1) 20px
+  );
+}
+
+.bg-pattern-target {
+  background-image: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+}
+
+.bg-pattern-shield {
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 10px,
+    rgba(34, 197, 94, 0.1) 10px,
+    rgba(34, 197, 94, 0.1) 20px
+  );
+}
+
+.bg-pattern-chart {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 10px,
+    rgba(168, 85, 247, 0.1) 10px,
+    rgba(168, 85, 247, 0.1) 20px
+  );
+}
+
+.bg-pattern-idea {
+  background-image: radial-gradient(circle at 20% 80%, rgba(251, 146, 60, 0.1) 0%, transparent 50%);
+}
+
+.bg-pattern-devices {
+  background-image: repeating-linear-gradient(
+    60deg,
+    transparent,
+    transparent 10px,
+    rgba(6, 182, 212, 0.1) 10px,
+    rgba(6, 182, 212, 0.1) 20px
+  );
+}
+
+/* Enhanced form styles */
+.form-input {
+  padding: 0.75rem;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.5rem;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  border-color: rgb(59, 130, 246);
+  box-shadow: 0 0 0 2px rgb(59, 130, 246);
+  border-color: transparent;
+}
+
+.form-select {
+  padding: 0.75rem;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.5rem;
+  width: 100%;
+  outline: none;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.form-select:focus {
+  border-color: rgb(59, 130, 246);
+  box-shadow: 0 0 0 2px rgb(59, 130, 246);
+  border-color: transparent;
+}
+
+.form-radio {
+  width: 1rem;
+  height: 1rem;
+  color: rgb(59, 130, 246);
+  border-color: rgb(209, 213, 219);
+  outline: none;
+}
+
+.form-radio:focus {
+  box-shadow: 0 0 0 2px rgb(59, 130, 246);
+}
+
+/* Slider styles */
+input[type="range"] {
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background-color: rgb(229, 231, 235);
+  border-radius: 0.5rem;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: rgb(59, 130, 246);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: rgb(29, 78, 216);
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: rgb(229, 231, 235);
+  border-radius: 0.5rem;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background-color: rgb(59, 130, 246);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 0;
+  transition: all 0.2s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background-color: rgb(29, 78, 216);
+}

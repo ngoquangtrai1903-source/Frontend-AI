@@ -34,36 +34,54 @@ export default function Home() {
       <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10 md:mb-14">Why Choose DiabeTwin?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            <FeatureCard
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <VibrantFeatureCard
               icon="⚡"
-              title="Fast Results"
-              description="Get instant analysis in seconds with our advanced AI model."
+              title="Kết quả tức thì"
+              description="Phân tích AI nhanh chóng trong vài giây với công nghệ tiên tiến nhất."
+              gradient="from-yellow-400 to-orange-500"
+              bgPattern="lightning"
+              animation="pulse"
             />
-            <FeatureCard
+            <VibrantFeatureCard
               icon="🎯"
-              title="Accurate"
-              description="Industry-leading accuracy based on medical research and clinical validation."
+              title="Độ chính xác vượt trội"
+              description="Độ chính xác hàng đầu ngành dựa trên nghiên cứu y tế và kiểm chứng lâm sàng."
+              gradient="from-blue-400 to-purple-500"
+              bgPattern="target"
+              animation="bounce"
             />
-            <FeatureCard
+            <VibrantFeatureCard
               icon="🔒"
-              title="Secure"
-              description="Your health data is encrypted and never shared with third parties."
+              title="Bảo mật tuyệt đối"
+              description="Dữ liệu sức khỏe của bạn được mã hóa và không bao giờ chia sẻ với bên thứ ba."
+              gradient="from-green-400 to-emerald-500"
+              bgPattern="shield"
+              animation="spin"
             />
-            <FeatureCard
+            <VibrantFeatureCard
               icon="📊"
-              title="Transparent"
-              description="Understand why through SHAP-based explanations of AI predictions."
+              title="Minh bạch đầy đủ"
+              description="Hiểu rõ lý do đằng sau dự đoán AI qua giải thích dựa trên SHAP."
+              gradient="from-purple-400 to-pink-500"
+              bgPattern="chart"
+              animation="float"
             />
-            <FeatureCard
+            <VibrantFeatureCard
               icon="💡"
-              title="Personalized"
-              description="Receive customized recommendations based on your health profile."
+              title="Cá nhân hóa thông minh"
+              description="Nhận khuyến nghị tùy chỉnh dựa trên hồ sơ sức khỏe của riêng bạn."
+              gradient="from-amber-400 to-red-500"
+              bgPattern="idea"
+              animation="glow"
             />
-            <FeatureCard
+            <VibrantFeatureCard
               icon="📱"
-              title="Multi-Platform"
-              description="Use on any device: computer, phone, or tablet anytime, anywhere."
+              title="Đa nền tảng linh hoạt"
+              description="Sử dụng trên mọi thiết bị: máy tính, điện thoại, máy tính bảng mọi lúc, mọi nơi."
+              gradient="from-cyan-400 to-blue-500"
+              bgPattern="devices"
+              animation="slide"
             />
           </div>
         </div>
@@ -103,10 +121,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10 md:mb-14">Our Impact</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            <StatBox value="95.3%" label="Accuracy" description="State-of-the-art model" />
+            <StatBox value="92%" label="Accuracy" description="State-of-the-art model" />
             <StatBox value="15K+" label="Users" description="Trusting DiabeTwin" />
-            <StatBox value="98.7%" label="AUC Score" description="Clinical validation" />
-            <StatBox value="<2s" label="Speed" description="Average analysis time" />
+            <StatBox value="87%" label="Recall Score" description="Clinical validation" />
+            <StatBox value="<5s" label="Speed" description="Average analysis time" />
           </div>
         </div>
       </section>
@@ -138,12 +156,76 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: string; title: string; description: string }) {
+function VibrantFeatureCard({ 
+  icon, 
+  title, 
+  description, 
+  gradient,
+  bgPattern,
+  animation
+}: { 
+  icon: string; 
+  title: string; 
+  description: string;
+  gradient: string;
+  bgPattern: string;
+  animation: string;
+}) {
+  const getAnimationClass = (anim: string) => {
+    switch(anim) {
+      case 'pulse': return 'animate-pulse';
+      case 'bounce': return 'animate-bounce';
+      case 'spin': return 'animate-spin';
+      case 'float': return 'animate-float';
+      case 'glow': return 'animate-glow';
+      case 'slide': return 'animate-slide';
+      default: return '';
+    }
+  };
+
+  const getBgPattern = (pattern: string) => {
+    switch(pattern) {
+      case 'lightning': return 'bg-pattern-lightning';
+      case 'target': return 'bg-pattern-target';
+      case 'shield': return 'bg-pattern-shield';
+      case 'chart': return 'bg-pattern-chart';
+      case 'idea': return 'bg-pattern-idea';
+      case 'devices': return 'bg-pattern-devices';
+      default: return '';
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 sm:p-8 hover:shadow-lg transition-shadow text-center">
-      <div className="text-3xl sm:text-4xl mb-4">{icon}</div>
-      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-sm sm:text-base text-gray-600">{description}</p>
+    <div className="group relative overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+      {/* Background Pattern */}
+      <div className={`absolute inset-0 opacity-5 ${getBgPattern(bgPattern)}`} />
+      
+      {/* Gradient Border Effect */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
+      
+      {/* Content */}
+      <div className="relative p-6 sm:p-8">
+        {/* Icon with gradient background */}
+        <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-2xl bg-gradient-to-br ${gradient} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 ${getAnimationClass(animation)}`}>
+          <span className="text-3xl sm:text-4xl text-white filter drop-shadow-md">{icon}</span>
+        </div>
+        
+        {/* Title with gradient text */}
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-center bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}>
+          {title}
+        </h3>
+        
+        {/* Description */}
+        <p className="text-sm sm:text-base text-gray-600 text-center leading-relaxed">
+          {description}
+        </p>
+        
+        {/* Hover effect overlay */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`} />
+      </div>
+      
+      {/* Decorative corner */}
+      <div className={`absolute top-2 right-2 w-8 h-8 bg-gradient-to-br ${gradient} opacity-20 rounded-bl-xl`} />
     </div>
   );
 }
