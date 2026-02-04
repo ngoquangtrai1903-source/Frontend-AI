@@ -332,3 +332,18 @@ input[type="checkbox"] {
 .glow-pulse {
   animation: glowPulse 2s ease-in-out infinite;
 }
+
+@keyframes slide-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.4s ease-out forwards;
+}
