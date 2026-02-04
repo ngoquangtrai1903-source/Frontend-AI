@@ -201,7 +201,7 @@ export function RecommendationsPanel({
         </div>
 
         {/* Enhanced Recommendations Display */}
-        <div className="p-6 max-h-96 overflow-y-auto space-y-4">
+        <div className="p-6 space-y-4 max-h-[600px] overflow-y-auto">
           {recommendations.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-4xl mb-2">🤔</div>
@@ -237,7 +237,7 @@ export function RecommendationsPanel({
 
                       {/* Text Content */}
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm leading-relaxed text-gray-800 break-words">
+                        <p className="text-sm leading-relaxed text-gray-800 break-words whitespace-pre-wrap">
                           {item.text}
                         </p>
                       </div>

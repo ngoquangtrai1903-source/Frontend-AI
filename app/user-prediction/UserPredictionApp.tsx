@@ -488,26 +488,33 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.mentHlth}</span>
           </label>
-          <div className="relative">
+          <div className="relative h-8 flex items-center">
             <input
               type="range"
               min="0"
               max="30"
               value={formData.mentHlth}
               onChange={(e) => updateField('mentHlth', parseInt(e.target.value))}
-              className="w-full h-2 sm:h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg appearance-none cursor-pointer"
+              className="absolute inset-0 w-full h-2 sm:h-3 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg appearance-none cursor-pointer z-10"
+              style={{ marginTop: '0.75rem' }}
             />
-            {/* Visual line indicator */}
-            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-purple-600 rounded-lg pointer-events-none transition-all duration-300" 
-                 style={{ width: `${(formData.mentHlth / 30) * 100}%` }} />
+            {/* Visual line indicator - background */}
+            <div className="absolute inset-0 h-2 sm:h-3 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg pointer-events-none" 
+                 style={{ marginTop: '0.75rem' }} />
+            {/* Visual line indicator - fill */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ 
+                   width: `${(formData.mentHlth / 30) * 100}%`,
+                   marginTop: '0.75rem'
+                 }} />
             {/* Day markers */}
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="absolute -bottom-4 left-0 right-0 flex justify-between text-xs text-gray-500">
               <span>0</span>
               <span>15</span>
               <span>30</span>
             </div>
           </div>
-          <div className="mt-2 text-xs text-gray-600">
+          <div className="mt-6 text-xs text-gray-600">
             {formData.mentHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
              formData.mentHlth <= 7 ? '🟡 Tốt' :
              formData.mentHlth <= 14 ? '🟠 Trung bình' :
@@ -518,26 +525,33 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.physHlth}</span>
           </label>
-          <div className="relative">
+          <div className="relative h-8 flex items-center">
             <input
               type="range"
               min="0"
               max="30"
               value={formData.physHlth}
               onChange={(e) => updateField('physHlth', parseInt(e.target.value))}
-              className="w-full h-2 sm:h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-lg appearance-none cursor-pointer"
+              className="absolute inset-0 w-full h-2 sm:h-3 bg-gradient-to-r from-orange-200 to-red-200 rounded-lg appearance-none cursor-pointer z-10"
+              style={{ marginTop: '0.75rem' }}
             />
-            {/* Visual line indicator */}
-            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-orange-600 rounded-lg pointer-events-none transition-all duration-300" 
-                 style={{ width: `${(formData.physHlth / 30) * 100}%` }} />
+            {/* Visual line indicator - background */}
+            <div className="absolute inset-0 h-2 sm:h-3 bg-gradient-to-r from-orange-200 to-red-200 rounded-lg pointer-events-none" 
+                 style={{ marginTop: '0.75rem' }} />
+            {/* Visual line indicator - fill */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ 
+                   width: `${(formData.physHlth / 30) * 100}%`,
+                   marginTop: '0.75rem'
+                 }} />
             {/* Day markers */}
-            <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <div className="absolute -bottom-4 left-0 right-0 flex justify-between text-xs text-gray-500">
               <span>0</span>
               <span>15</span>
               <span>30</span>
             </div>
           </div>
-          <div className="mt-2 text-xs text-gray-600">
+          <div className="mt-6 text-xs text-gray-600">
             {formData.physHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
              formData.physHlth <= 7 ? '🟡 Tốt' :
              formData.physHlth <= 14 ? '🟠 Trung bình' :
