@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { EnhancedResultsDisplay } from "@/components/EnhancedResultsDisplay";
 import { PatientForm } from "@/components/PatientForm";
@@ -10,6 +10,13 @@ import { predictClinical } from "@/lib/api";
 export default function DoctorPage() {
   const [results, setResults] = useState<any>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  // Scroll to top when results are displayed
+  useEffect(() => {
+    if (results) {
+      window.scrollTo(0, 0);
+    }
+  }, [results]);
 
   const handleAnalyze = async (formData: any) => {
     setIsAnalyzing(true);

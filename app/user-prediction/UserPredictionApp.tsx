@@ -599,13 +599,51 @@ function AnalyzingScreen() {
 
 // User Results View - wrapper that adapts the enhanced display for user mode
 function UserResultsView({ results, onReset }: { results: PredictionResults; onReset: () => void }) {
+  // Generate structured GEMINI-style response for user mode
+  const generateStructuredAdvice = (data: PredictionResults) => {
+    const riskLevel = data.riskLevel;
+    const probability = data.probability;
+    
+    // Create structured response similar to GEMINI format
+    let structuredResponse = `**Đánh giá sức khỏe**
+- Nguy cơ mắc bệnh tiểu đường của bạn hiện ở mức ${riskLevel === 'high' ? 'cao' : riskLevel === 'medium' ? 'trung bình' : 'thấp'}, lên tới ${(probability * 100).toFixed(1)}%. Điều này đồng nghĩa với việc bạn cần có những thay đổi lối sống và thăm khám y tế kịp thời để giảm thiểu rủi ro.
+- ${data.impacts.length > 0 ? 'Các yếu tố sức khỏe hiện tại của bạn đang có tác động đáng kể đến nguy cơ tiểu đường.' : 'Các chỉ số sức khỏe của bạn đang ở mức tương đối ổn định.'}
+- ${riskLevel === 'high' ? 'Điều đáng chú ý nhất là tình trạng sức khỏe tổng quát của bạn, đây là yếu tố có tác động lớn nhất đến nguy cơ mắc bệnh tiểu đường.' : riskLevel === 'medium' ? 'Bạn cần chú ý hơn đến các yếu tố nguy cơ tiềm ẩn để ngăn ngừa bệnh tiểu đường.' : 'Sức khỏe tổng thể của bạn đang tốt, hãy tiếp tục duy trì lối sống lành mạnh hiện tại.'}
+
+**Lời khuyên hành động (Cụ thể số liệu)**
+- **Chế độ ăn:**
+    - Hãy tập trung vào rau xanh và trái cây tươi; ăn đủ trái cây và rau xanh mỗi ngày giúp giảm nguy cơ tiểu đường.
+    - Hạn chế tối đa đường tinh luyện, nước ngọt có ga và các thực phẩm chế biến sẵn để kiểm soát đường huyết.
+    - Giảm lượng muối ăn xuống dưới 5 gam mỗi ngày (khoảng 1 thìa cà phê) để hỗ trợ kiểm soát huyết áp.
+    - Tăng cường chất xơ từ ngũ cốc nguyên hạt (gạo lứt, yến mạch), đậu, hạt, và rau xanh. Mục tiêu khoảng 25-30 gam chất xơ mỗi ngày.
+    - Chọn các loại protein nạc như cá (2-3 bữa/tuần), thịt gà bỏ da, đậu phụ thay vì thịt đỏ chế biến.
+
+- **Vận động:**
+    - Hãy cố gắng tăng cường lên ít nhất 150 phút hoạt động cường độ vừa phải mỗi tuần (ví dụ: đi bộ nhanh, bơi lội), chia đều thành 30 phút/ngày, 5 ngày/tuần.
+    - Cân nhắc các bài tập tăng cường sức mạnh cho cơ bắp ít nhất 2 ngày/tuần, mỗi buổi 20-30 phút.
+    - Bắt đầu với các bài tập nhẹ nhàng như đi bộ đều đặn hàng ngày, tăng dần cường độ và thời gian.
+
+- **Mục tiêu:**
+    - Mục tiêu chính là cải thiện tổng thể sức khỏe thể chất và khả năng vận động để giảm nguy cơ tiểu đường.
+    - Cố gắng đưa chỉ số huyết áp về mức lý tưởng dưới 130/80 mmHg thông qua chế độ ăn và vận động.
+    - Duy trì chỉ số BMI khỏe mạnh trong khoảng 18.5-24.9 kg/m².
+
+**Lưu ý quan trọng**
+- Bạn cần tái khám định kỳ với bác sĩ chuyên khoa nội tiết để theo dõi sát sao nguy cơ tiểu đường.
+- Hãy thông báo ngay cho bác sĩ nếu bạn xuất hiện các triệu chứng như khát nước nhiều, đi tiểu thường xuyên, sụt cân không rõ nguyên nhân, mờ mắt hoặc vết thương lâu lành.
+- Đừng ngần ngại chia sẻ về những khó khăn trong việc thay đổi lối sống để có phác đồ điều trị và hỗ trợ phù hợp.
+- ${riskLevel === 'high' ? 'Nguy cơ cao đòi hỏi sự chú ý đặc biệt và can thiệp y tế kịp thời.' : riskLevel === 'medium' ? 'Nguy cơ trung bình cần có biện pháp phòng ngừa chủ động.' : 'Tiếp tục duy trì lối sống lành mạnh để giữ nguy cơ ở mức thấp.'}`;
+
+    return structuredResponse;
+  };
+
   // Transform internal results format to enhanced display format
   const transformedResults = {
     probability: results.probability,
     conclusion: results.riskLevel === "high" ? "DƯƠNG TÍNH" : "ÂM TÍNH",
     riskLevel: results.riskLevel,
     impacts: results.impacts,
-    aiAdvice: results.insights.recommendations.join('\n'),
+    aiAdvice: generateStructuredAdvice(results),
   };
 
   return (
