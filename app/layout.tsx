@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import "./enhanced-globals.css";
+import "./globals.css";
 import { PageTransition } from "@/components/PageTransition";
 
 export const metadata: Metadata = {

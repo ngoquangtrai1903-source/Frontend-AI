@@ -14,14 +14,28 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
     smoking: "never",
     hypertension: false,
     heart_disease: false,
-    bmi: 24.5,
+    height: 1.70, // height in meters
+    weight: 70, // weight in kg
     hba1c: 5.5,
     glucose: 100
   });
 
+  // Calculate BMI from height and weight
+  const calculateBMI = (height: number, weight: number): number => {
+    if (height <= 0 || weight <= 0) return 0;
+    return Number((weight / (height * height)).toFixed(1));
+  };
+
+  const currentBMI = calculateBMI(formData.height, formData.weight);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    // Calculate BMI before submitting
+    const calculatedBMI = calculateBMI(formData.height, formData.weight);
+    onSubmit({
+      ...formData,
+      bmi: calculatedBMI
+    });
   };
 
   const updateField = (field: string, value: any) => {
@@ -82,6 +96,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
                 <option value="current">Current</option>
                 <option value="ever">Sometimes</option>
                 <option value="not current">Not Current</option>
+                <option value="No Info">Unknow</option>
               </select>
             </FormField>
           </div>
@@ -134,23 +149,49 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
               </div>
             </FormField>
 
-            <FormField label="BMI Index" icon="⚖️">
+            <FormField label="Chiều cao (mét)" icon="📏">
               <input
                 type="number"
-                min="10"
-                max="50"
-                step="0.1"
-                value={formData.bmi}
-                onChange={(e) => updateField("bmi", parseFloat(e.target.value))}
+                min="0.5"
+                max="2.5"
+                step="0.01"
+                value={formData.height}
+                onChange={(e) => updateField("height", parseFloat(e.target.value))}
                 className="form-input w-full text-sm sm:text-base"
+                placeholder="1.70"
               />
-              <div className="mt-3">
-                <div className="h-2 bg-gradient-to-r from-emerald-400 via-yellow-400 to-red-500 rounded-full" />
-                <div className="mt-1 flex justify-between text-xs text-slate-500">
-                  <span className="hidden xs:inline">Underweight</span>
-                  <span>Normal</span>
-                  <span className="hidden xs:inline">Obese</span>
-                </div>
+              <div className="mt-2 flex justify-between text-xs text-slate-500">
+                <span>0.5m</span>
+                <span>2.5m</span>
+              </div>
+            </FormField>
+
+            <FormField label="Cân nặng (kg)" icon="⚖️">
+              <input
+                type="number"
+                min="20"
+                max="200"
+                step="0.5"
+                value={formData.weight}
+                onChange={(e) => updateField("weight", parseFloat(e.target.value))}
+                className="form-input w-full text-sm sm:text-base"
+                placeholder="70"
+              />
+              <div className="mt-2 p-3 bg-gradient-to-r from-emerald-50 to-red-50 rounded-lg border border-emerald-200">
+                <p className="text-xs sm:text-sm font-semibold text-gray-700">
+                  BMI: <span className={`font-bold ${
+                    currentBMI < 18.5 ? 'text-blue-600' :
+                    currentBMI < 25 ? 'text-green-600' :
+                    currentBMI < 30 ? 'text-yellow-600' :
+                    'text-red-600'
+                  }`}>{currentBMI}</span>
+                  <span className="text-gray-500 ml-2">
+                    {currentBMI < 18.5 ? '(Gầy)' :
+                     currentBMI < 25 ? '(Bình thường)' :
+                     currentBMI < 30 ? '(Thừa cân)' :
+                     '(Béo phì)'}
+                  </span>
+                </p>
               </div>
             </FormField>
           </div>

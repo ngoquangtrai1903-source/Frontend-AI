@@ -107,7 +107,7 @@ function OverviewTab() {
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Thống kê & Tác động</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <StatCard
-            value="95.3%"
+            value="92%"
             label="Độ chính xác"
             description="Độ chính xác trung bình của mô hình"
             color="from-green-400 to-emerald-500"
@@ -119,13 +119,13 @@ function OverviewTab() {
             color="from-blue-400 to-indigo-500"
           />
           <StatCard
-            value="98.7%"
-            label="AUC Score"
-            description="Diện tích dưới đường cong ROC"
+            value="87%"
+            label="Recall Score"
+            description="Chỉ số độ bao phủ"
             color="from-purple-400 to-fuchsia-500"
           />
           <StatCard
-            value="<2s"
+            value="<5s"
             label="Tốc độ"
             description="Thời gian phân tích trung bình"
             color="from-orange-400 to-red-500"
@@ -142,7 +142,7 @@ function OverviewTab() {
               name="Mr. Ngô Quang Trãi"
               role="ML Engineer"
               avatar="👨‍🔬"
-              description="Chuyên gia Machine Learning, trường đại học FPT"
+              description="Machine Learning Engineer, trường đại học FPT"
             />
             <TeamMember
               name="Mr. Nguyễn Phương Huy"
@@ -294,7 +294,7 @@ function ModelTab() {
             </div>
             <p className="text-sm text-gray-700 mb-3">
               Trên tập kiểm thử, mô hình cho bác sĩ đạt <strong>độ chính xác tổng thể cao</strong>, 
-              với khả năng nhận diện ca có nguy cơ tiểu đường tốt (recall nhóm dương tính khoảng 0.87).
+              với khả năng nhận diện ca có nguy cơ tiểu đường tốt <strong>(recall nhóm dương tính khoảng 87%)</strong>.
             </p>
             <p className="text-sm text-gray-700">
               Confusion matrix cho thấy <strong>số lượng lớn ca âm tính được phân loại đúng</strong>, 
@@ -319,7 +319,7 @@ function ModelTab() {
               />
             </div>
             <p className="text-sm text-gray-700 mb-3">
-              Trên tập kiểm thử, mô hình LGBM đạt <strong>precision khoảng 0.77</strong> và <strong>recall khoảng 0.71</strong> 
+              Trên tập kiểm thử, mô hình LGBM đạt <strong>precision khoảng 74%</strong> và <strong>recall khoảng 80% </strong> 
               cho nhóm nguy cơ cao, cân bằng giữa việc phát hiện bệnh và hạn chế cảnh báo giả.
             </p>
             <p className="text-sm text-gray-700">

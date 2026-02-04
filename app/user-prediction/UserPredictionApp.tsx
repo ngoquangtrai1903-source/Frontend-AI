@@ -9,7 +9,8 @@ import { predictHome } from "@/lib/api";
 interface UserFormData {
   sex: number;
   age: number;
-  bmi: number;
+  height: number; // height in meters
+  weight: number; // weight in kg
   genhlth: number;
   highBP: number;
   highChol: number;
@@ -42,7 +43,8 @@ export default function UserPredictionApp() {
   const [formData, setFormData] = useState<UserFormData>({
     sex: 1,
     age: 5,
-    bmi: 22,
+    height: 1.70, // height in meters
+    weight: 70, // weight in kg
     genhlth: 3,
     highBP: 0,
     highChol: 0,
@@ -58,6 +60,14 @@ export default function UserPredictionApp() {
     mentHlth: 0,
     physHlth: 0,
   });
+
+  // Calculate BMI from height and weight
+  const calculateBMI = (height: number, weight: number): number => {
+    if (height <= 0 || weight <= 0) return 0;
+    return Number((weight / (height * height)).toFixed(1));
+  };
+
+  const currentBMI = calculateBMI(formData.height, formData.weight);
   const [results, setResults] = useState<PredictionResults | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -73,7 +83,7 @@ export default function UserPredictionApp() {
         HighBP: formData.highBP,
         HighChol: formData.highChol,
         CholCheck: formData.cholCheck,
-        BMI: formData.bmi,
+        BMI: calculateBMI(formData.height, formData.weight), // Calculate BMI
         Smoker: formData.smoker,
         Stroke: formData.stroke,
         HeartDiseaseorAttack: formData.heartDis,
@@ -135,6 +145,8 @@ export default function UserPredictionApp() {
     const topRisks = [];
     const protective = [];
     const recommendations = [];
+    
+    const calculatedBMI = calculateBMI(data.height, data.weight);
 
     if (data.highBP === 1) {
       topRisks.push("Huyết áp cao");
@@ -144,7 +156,7 @@ export default function UserPredictionApp() {
       topRisks.push("Cholesterol cao");
       recommendations.push("Giảm chất béo bão hòa trong chế độ ăn");
     }
-    if (data.bmi > 30) {
+    if (calculatedBMI > 30) {
       topRisks.push("BMI cao (thừa cân/béo phì)");
       recommendations.push("Lập kế hoạch giảm cân lành mạnh với chuyên gia dinh dưỡng");
     }
@@ -264,7 +276,8 @@ function Step1Personal({ formData, updateField, onNext }: any) {
               formData.age === 9 ? "60-64" :
               formData.age === 10 ? "65-69" :
               formData.age === 11 ? "70-74" :
-              formData.age === 12 ? "75-79" : "80+"
+              formData.age === 12 ? "75-79" : 
+              formData.age === 13 ? "80+" : ""
             }</span>
           </label>
           <input
@@ -277,25 +290,62 @@ function Step1Personal({ formData, updateField, onNext }: any) {
           />
         </div>
 
-        {/* BMI */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-            Chỉ số BMI: <span className="text-blue-600 text-lg sm:text-xl">{formData.bmi.toFixed(1)}</span>
-          </label>
-          <input
-            type="range"
-            min="15"
-            max="50"
-            step="0.5"
-            value={formData.bmi}
-            onChange={(e) => updateField('bmi', parseFloat(e.target.value))}
-            className="w-full h-2 sm:h-3 bg-gradient-to-r from-green-400 via-yellow-400 to-red-400 rounded-lg appearance-none cursor-pointer"
-          />
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
-            <span className="hidden sm:inline">Gầy</span>
-            <span>Bình thường</span>
-            <span className="hidden sm:inline">Thừa cân</span>
-            <span>Béo phì</span>
+        {/* Height and Weight */}
+        <div className="space-y-4 sm:space-y-6">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+              Chiều cao (mét): <span className="text-blue-600 text-lg sm:text-xl">{formData.height.toFixed(2)}m</span>
+            </label>
+            <input
+              type="range"
+              min="1.0"
+              max="2.2"
+              step="0.01"
+              value={formData.height}
+              onChange={(e) => updateField('height', parseFloat(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg appearance-none cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>1.0m</span>
+              <span>2.2m</span>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
+              Cân nặng (kg): <span className="text-blue-600 text-lg sm:text-xl">{formData.weight}kg</span>
+            </label>
+            <input
+              type="range"
+              min="30"
+              max="150"
+              step="1"
+              value={formData.weight}
+              onChange={(e) => updateField('weight', parseInt(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-green-400 to-yellow-400 rounded-lg appearance-none cursor-pointer"
+            />
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>30kg</span>
+              <span>150kg</span>
+            </div>
+          </div>
+
+          {/* BMI Display */}
+          <div className="p-3 sm:p-4 bg-gradient-to-r from-emerald-50 to-red-50 rounded-lg border border-emerald-200">
+            <p className="text-sm sm:text-base font-semibold text-gray-700 text-center">
+              BMI: <span className={`text-lg sm:text-xl font-bold ${
+                formData.weight / (formData.height * formData.height) < 18.5 ? 'text-blue-600' :
+                formData.weight / (formData.height * formData.height) < 25 ? 'text-green-600' :
+                formData.weight / (formData.height * formData.height) < 30 ? 'text-yellow-600' :
+                'text-red-600'
+              }`}>{(formData.weight / (formData.height * formData.height)).toFixed(2)}</span>
+              <span className="text-gray-500 ml-2">
+                {formData.weight / (formData.height * formData.height) < 18.5 ? '(Gầy)' :
+                 formData.weight / (formData.height * formData.height) < 25 ? '(Bình thường)' :
+                 formData.weight / (formData.height * formData.height) < 30 ? '(Thừa cân)' :
+                 '(Béo phì)'}
+              </span>
+            </p>
           </div>
         </div>
 
@@ -436,29 +486,63 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
       <div className="space-y-4 mb-6 sm:mb-8">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base">{formData.mentHlth}</span>
+            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.mentHlth}</span>
           </label>
-          <input
-            type="range"
-            min="0"
-            max="30"
-            value={formData.mentHlth}
-            onChange={(e) => updateField('mentHlth', parseInt(e.target.value))}
-            className="w-full h-2 sm:h-3"
-          />
+          <div className="relative">
+            <input
+              type="range"
+              min="0"
+              max="30"
+              value={formData.mentHlth}
+              onChange={(e) => updateField('mentHlth', parseInt(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg appearance-none cursor-pointer"
+            />
+            {/* Visual line indicator */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-purple-600 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ width: `${(formData.mentHlth / 30) * 100}%` }} />
+            {/* Day markers */}
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>0</span>
+              <span>15</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div className="mt-2 text-xs text-gray-600">
+            {formData.mentHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
+             formData.mentHlth <= 7 ? '🟡 Tốt' :
+             formData.mentHlth <= 14 ? '🟠 Trung bình' :
+             '🔴 Cần quan tâm'}
+          </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base">{formData.physHlth}</span>
+            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.physHlth}</span>
           </label>
-          <input
-            type="range"
-            min="0"
-            max="30"
-            value={formData.physHlth}
-            onChange={(e) => updateField('physHlth', parseInt(e.target.value))}
-            className="w-full h-2 sm:h-3"
-          />
+          <div className="relative">
+            <input
+              type="range"
+              min="0"
+              max="30"
+              value={formData.physHlth}
+              onChange={(e) => updateField('physHlth', parseInt(e.target.value))}
+              className="w-full h-2 sm:h-3 bg-gradient-to-r from-orange-400 to-red-400 rounded-lg appearance-none cursor-pointer"
+            />
+            {/* Visual line indicator */}
+            <div className="absolute top-0 left-0 h-2 sm:h-3 bg-orange-600 rounded-lg pointer-events-none transition-all duration-300" 
+                 style={{ width: `${(formData.physHlth / 30) * 100}%` }} />
+            {/* Day markers */}
+            <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <span>0</span>
+              <span>15</span>
+              <span>30</span>
+            </div>
+          </div>
+          <div className="mt-2 text-xs text-gray-600">
+            {formData.physHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
+             formData.physHlth <= 7 ? '🟡 Tốt' :
+             formData.physHlth <= 14 ? '🟠 Trung bình' :
+             '🔴 Cần quan tâm'}
+          </div>
         </div>
       </div>
 
