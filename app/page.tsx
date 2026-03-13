@@ -121,10 +121,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 text-center mb-10 md:mb-14">Our Impact</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            <StatBox value="92%" label="Accuracy" description="State-of-the-art model" />
+            <StatBox value="95%" label="Accuracy" description="State-of-the-art model" />
             <StatBox value="15K+" label="Users" description="Trusting DiabeTwin" />
-            <StatBox value="87%" label="Recall Score" description="Clinical validation" />
-            <StatBox value="<5s" label="Speed" description="Average analysis time" />
+            <StatBox value="80%" label="Recall Score" description="Clinical validation" />
+            <StatBox value="<10s" label="Speed" description="Average analysis time" />
           </div>
         </div>
       </section>

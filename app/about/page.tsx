@@ -107,7 +107,7 @@ function OverviewTab() {
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Thống kê & Tác động</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <StatCard
-            value="92%"
+            value="95%"
             label="Độ chính xác"
             description="Độ chính xác trung bình của mô hình"
             color="from-green-400 to-emerald-500"
@@ -119,13 +119,13 @@ function OverviewTab() {
             color="from-blue-400 to-indigo-500"
           />
           <StatCard
-            value="87%"
+            value="80%"
             label="Recall Score"
             description="Chỉ số độ bao phủ"
             color="from-purple-400 to-fuchsia-500"
           />
           <StatCard
-            value="<5s"
+            value="<10s"
             label="Tốc độ"
             description="Thời gian phân tích trung bình"
             color="from-orange-400 to-red-500"
@@ -145,20 +145,20 @@ function OverviewTab() {
               description="Machine Learning Engineer, trường đại học FPT"
             />
             <TeamMember
-              name="Mr. Nguyễn Phương Huy"
-              role="Web Developer"
+              name="Mr. Đào Đức Anh Kiệt"
+              role="AI Engineer"
               avatar="👨‍💻"
               description="Full-stack Developer, trường đại học FPT"
             />
             <TeamMember
-              name="Mr. Võ Trần Gia Bảo"
+              name="Mr. Nguyễn Nho Huy Hoàng"
               role="Data Scientist"
               avatar="👨‍🔬"
               description="Data Science Specialist, trường đại học FPT"
             />
             <TeamMember
               name="Mr. Phan Văn Quốc"
-              role="Technical Lead"
+              role="Researcher"
               avatar="👨‍💼"
               description="Project Lead & Researcher, trường đại học FPT"
             />
@@ -472,7 +472,7 @@ function ResearchTab() {
       title: "Breakthrough: New AI Model Predicts Diabetes 5 Years in Advance",
       source: "Medical News Today",
       date: "2024-01-15",
-      summary: "Các nhà nghiên cứu phát triển mô hình AI có thể dự đoán tiểu đường trước 5 năm với độ chính xác 92%.",
+      summary: "Các nhà nghiên cứu phát triển mô hình AI có thể dự đoán tiểu đường trước 5 năm với độ chính xác 95%.",
       link: "#"
     },
     {
