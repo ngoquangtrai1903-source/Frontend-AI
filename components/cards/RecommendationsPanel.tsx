@@ -13,58 +13,58 @@ const getIconForKeyword = (text: string): string => {
   if (
     lowerText.includes('hba1c') ||
     lowerText.includes('glucose') ||
-    lowerText.includes('đường huyết') ||
-    lowerText.includes('kiểm soát')
+    lowerText.includes('blood sugar') ||
+    lowerText.includes('control')
   ) {
     return '📊';
   }
   if (
     lowerText.includes('bmi') ||
-    lowerText.includes('cân nặng') ||
-    lowerText.includes('hoạt động') ||
-    lowerText.includes('tập luyện') ||
-    lowerText.includes('phút')
+    lowerText.includes('weight') ||
+    lowerText.includes('activity') ||
+    lowerText.includes('exercise') ||
+    lowerText.includes('minutes')
   ) {
     return '🏃';
   }
   if (
-    lowerText.includes('ăn') ||
-    lowerText.includes('thực phẩm') ||
-    lowerText.includes('chế độ') ||
-    lowerText.includes('thực') ||
-    lowerText.includes('đồ ăn')
+    lowerText.includes('eat') ||
+    lowerText.includes('food') ||
+    lowerText.includes('diet') ||
+    lowerText.includes('eating') ||
+    lowerText.includes('meal')
   ) {
     return '🥗';
   }
   if (
-    lowerText.includes('kiểm tra') ||
-    lowerText.includes('tháng') ||
-    lowerText.includes('theo dõi') ||
-    lowerText.includes('định kỳ')
+    lowerText.includes('test') ||
+    lowerText.includes('month') ||
+    lowerText.includes('monitoring') ||
+    lowerText.includes('regular')
   ) {
     return '📅';
   }
   if (
     lowerText.includes('stress') ||
-    lowerText.includes('ngủ') ||
-    lowerText.includes('xã hội') ||
-    lowerText.includes('giấc ngủ')
+    lowerText.includes('sleep') ||
+    lowerText.includes('social') ||
+    lowerText.includes('sleep')
   ) {
     return '😴';
   }
   if (
-    lowerText.includes('dược') ||
-    lowerText.includes('thuốc') ||
-    lowerText.includes('liệu pháp') ||
+    lowerText.includes('medicine') ||
+    lowerText.includes('medication') ||
+    lowerText.includes('therapy') ||
     lowerText.includes('insulin')
   ) {
     return '💊';
   }
   if (
-    lowerText.includes('bác sĩ') ||
-    lowerText.includes('chuyên khoa') ||
-    lowerText.includes('tư vấn') ||
-    lowerText.includes('cơ sở')
+    lowerText.includes('doctor') ||
+    lowerText.includes('specialist') ||
+    lowerText.includes('consult') ||
+    lowerText.includes('facility')
   ) {
     return '👨‍⚕️';
   }
@@ -132,9 +132,9 @@ export function RecommendationsPanel({
             let priority: 'high' | 'medium' | 'low' = 'medium';
             const lowerText = afterHeader.toLowerCase();
             
-            if (lowerText.includes('nguy hiểm') || lowerText.includes('khẩn') || lowerText.includes('ngay') || lowerText.includes('quan trọng') || lowerText.includes('cấp cứu') || lowerText.includes('nguy cơ') || lowerText.includes('triệu chứng')) {
+            if (lowerText.includes('dangerous') || lowerText.includes('emergency') || lowerText.includes('immediate') || lowerText.includes('important') || lowerText.includes('urgent') || lowerText.includes('risk') || lowerText.includes('symptoms')) {
               priority = 'high';
-            } else if (lowerText.includes('nên') || lowerText.includes('khuyến') || lowerText.includes('gợi ý') || lowerText.includes('cần') || lowerText.includes('hãy') || lowerText.includes('mục tiêu')) {
+            } else if (lowerText.includes('should') || lowerText.includes('recommend') || lowerText.includes('suggest') || lowerText.includes('need') || lowerText.includes('please') || lowerText.includes('goal')) {
               priority = 'medium';
             } else {
               priority = 'low';
@@ -168,9 +168,9 @@ export function RecommendationsPanel({
           let priority: 'high' | 'medium' | 'low' = 'medium';
           const lowerText = cleanedText.toLowerCase();
           
-          if (lowerText.includes('nguy hiểm') || lowerText.includes('khẩn') || lowerText.includes('ngay') || lowerText.includes('quan trọng') || lowerText.includes('cấp cứu') || lowerText.includes('nguy cơ') || lowerText.includes('triệu chứng')) {
+          if (lowerText.includes('nguy hiểm') || lowerText.includes('khẩn cấp') || lowerText.includes('ngay lập tức') || lowerText.includes('quan trọng') || lowerText.includes('cấp cứu') || lowerText.includes('nguy cơ') || lowerText.includes('triệu chứng')) {
             priority = 'high';
-          } else if (lowerText.includes('nên') || lowerText.includes('khuyến') || lowerText.includes('gợi ý') || lowerText.includes('cần') || lowerText.includes('hãy') || lowerText.includes('mục tiêu')) {
+          } else if (lowerText.includes('nên') || lowerText.includes('khuyến nghị') || lowerText.includes('gợi ý') || lowerText.includes('cần') || lowerText.includes('hãy') || lowerText.includes('mục tiêu')) {
             priority = 'medium';
           } else {
             priority = 'low';
@@ -187,7 +187,7 @@ export function RecommendationsPanel({
           } else {
             // Create default section if none exists
             if (!sections.length) {
-              sections.push({ title: isDoctorMode ? 'Khuyến nghị lâm sàng' : 'Lời khuyên sức khỏe', items: [] });
+              sections.push({ title: isDoctorMode ? 'Clinical Recommendations' : 'Health Advice', items: [] });
             }
             sections[0].items.push(item);
           }
@@ -202,7 +202,7 @@ export function RecommendationsPanel({
       if (sections.length === 0 || sections.every(s => s.items.length === 0)) {
         return {
           sections: [{
-            title: isDoctorMode ? 'Khuyến nghị lâm sàng' : 'Lời khuyên sức khỏe',
+            title: isDoctorMode ? 'Clinical Recommendations' : 'Health Advice',
             items: [{
               text: cleanedAdvice,
               icon: '💡',
@@ -219,7 +219,7 @@ export function RecommendationsPanel({
       console.error('Parse error:', error);
       return {
         sections: [{
-          title: 'Lời khuyên từ AI',
+          title: 'AI Advice',
           items: [{
             text: advice,
             icon: '💡',
@@ -270,10 +270,10 @@ export function RecommendationsPanel({
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                    {isDoctorMode ? '👨‍⚕️ Clinical Recommendations' : '💡 Lời khuyên sức khỏe cá nhân hóa'}
+                    {isDoctorMode ? '👨‍⚕️ Clinical Recommendations' : '💡 Personalized Health Advice'}
                   </h3>
                   <p className={`text-sm mt-2 ${isDoctorMode ? 'text-amber-100' : 'text-blue-100'}`}>
-                    {isDoctorMode ? 'Evidence-based clinical suggestions' : 'Phân tích AI dựa trên chỉ số sức khỏe của bạn'}
+                    {isDoctorMode ? 'Evidence-based clinical suggestions' : 'AI analysis based on your health indicators'}
                   </p>
                 </div>
                 <button
@@ -296,7 +296,7 @@ export function RecommendationsPanel({
                     </div>
                     <div className="ml-3">
                       <p className="text-sm text-yellow-700">
-                        Đang hiển thị ở chế độ đơn giản do format dữ liệu không chuẩn.
+                        Displaying in simple mode due to non-standard data format.
                       </p>
                     </div>
                   </div>
@@ -306,51 +306,10 @@ export function RecommendationsPanel({
               {recommendations.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-4xl mb-2">🤔</div>
-                  <p className="text-gray-600 text-sm">Không có khuyến nghị nào</p>
+                  <p className="text-gray-600 text-sm">No recommendations available</p>
                 </div>
               ) : (
                 <div className="space-y-8">
-                  {/* Summary Cards for Both Modes */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-xl border border-red-200">
-                      <div className="flex items-center gap-4">
-                        <span className="text-3xl">🚨</span>
-                        <div>
-                          <p className="text-lg font-semibold text-red-800">Ưu tiên cao</p>
-                          <p className="text-2xl font-bold text-red-600">
-                            {recommendations.reduce((count, section) => 
-                              count + section.items.filter(item => item.priority === 'high').length, 0
-                            )} việc
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-xl border border-amber-200">
-                      <div className="flex items-center gap-4">
-                        <span className="text-3xl">📌</span>
-                        <div>
-                          <p className="text-lg font-semibold text-amber-800">Trung bình</p>
-                          <p className="text-2xl font-bold text-amber-600">
-                            {recommendations.reduce((count, section) => 
-                              count + section.items.filter(item => item.priority === 'medium').length, 0
-                            )} việc
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-xl border border-blue-200">
-                      <div className="flex items-center gap-4">
-                        <span className="text-3xl">📋</span>
-                        <div>
-                          <p className="text-lg font-semibold text-blue-800">Tổng cộng</p>
-                          <p className="text-2xl font-bold text-blue-600">
-                            {recommendations.reduce((count, section) => count + section.items.length, 0)} lời khuyên
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
                   {/* Section Items */}
                   {recommendations.map((section, sectionIdx) => (
                     <div key={sectionIdx} className="space-y-4">
@@ -361,7 +320,7 @@ export function RecommendationsPanel({
                         <div className="flex items-center justify-between">
                           <span>{section.title}</span>
                           <span className="text-sm bg-white/50 px-3 py-1 rounded-full">
-                            {section.items.length} mục
+                            {section.items.length} items
                           </span>
                         </div>
                       </div>
@@ -396,7 +355,7 @@ export function RecommendationsPanel({
                                     item.priority === 'medium' ? 'bg-amber-100 text-amber-700' :
                                     'bg-green-100 text-green-700'
                                   }`}>
-                                    {item.priority === 'high' ? '🚨 Cao' : item.priority === 'medium' ? '📌 Trung bình' : '✅ Thấp'}
+                                    {item.priority === 'high' ? '🚨 High' : item.priority === 'medium' ? '📌 Medium' : '✅ Low'}
                                   </span>
                                 </div>
                               </div>
@@ -408,7 +367,7 @@ export function RecommendationsPanel({
                                   item.priority === 'medium' ? 'bg-amber-100 text-amber-700' :
                                   'bg-green-100 text-green-700'
                                 }`}>
-                                  {item.priority === 'high' ? 'Cao' : item.priority === 'medium' ? 'Trung bình' : 'Thấp'}
+                                  {item.priority === 'high' ? 'High' : item.priority === 'medium' ? 'Medium' : 'Low'}
                                 </span>
                               </div>
                             </div>
@@ -432,7 +391,7 @@ export function RecommendationsPanel({
                   ℹ️{' '}
                   {isDoctorMode
                     ? 'These are AI-generated clinical suggestions. Always apply your clinical judgment.'
-                    : 'Đây là gợi ý từ AI. Luôn tham khảo ý kiến bác sĩ chuyên khoa để được tư vấn y tế chính xác.'}
+                    : 'This is AI advice. Always consult a specialist doctor for accurate medical advice.'}
                 </p>
                 
                 <button
@@ -443,7 +402,7 @@ export function RecommendationsPanel({
                       : 'bg-blue-600 hover:bg-blue-700 text-white'
                   }`}
                 >
-                  <span>Đóng</span>
+                  <span>Close</span>
                 </button>
               </div>
             </div>
@@ -465,10 +424,10 @@ export function RecommendationsPanel({
             }`}
           >
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              {isDoctorMode ? '👨‍⚕️ Clinical Recommendations' : '💡 Lời khuyên sức khỏe cá nhân hóa'}
+              {isDoctorMode ? '👨‍⚕️ Clinical Recommendations' : '💡 Personalized Health Advice'}
             </h3>
             <p className={`text-sm mt-1 ${isDoctorMode ? 'text-amber-100' : 'text-blue-100'}`}>
-              {isDoctorMode ? 'Evidence-based clinical suggestions' : 'Phân tích AI dựa trên chỉ số sức khỏe của bạn'}
+              {isDoctorMode ? 'Evidence-based clinical suggestions' : 'AI analysis based on your health indicators'}
             </p>
           </div>
 
@@ -477,38 +436,10 @@ export function RecommendationsPanel({
             {recommendations.length === 0 ? (
               <div className="text-center py-8">
                 <div className="text-4xl mb-2">🤔</div>
-                <p className="text-gray-600 text-sm">Không có khuyến nghị nào</p>
+                <p className="text-gray-600 text-sm">No recommendations available</p>
               </div>
             ) : (
               <div className="space-y-3">
-                {/* Quick Summary */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                  <div className="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-lg border border-red-200">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">🚨</span>
-                      <div>
-                        <p className="text-sm font-semibold text-red-800">Ưu tiên cao</p>
-                        <p className="text-xl font-bold text-red-600">
-                          {recommendations.reduce((count, section) => 
-                            count + section.items.filter(item => item.priority === 'high').length, 0
-                          )} việc
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-gradient-to-r from-blue-50 to-green-50 p-4 rounded-lg border border-blue-200">
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl">📋</span>
-                      <div>
-                        <p className="text-sm font-semibold text-blue-800">Tổng cộng</p>
-                        <p className="text-xl font-bold text-blue-600">
-                          {recommendations.reduce((count, section) => count + section.items.length, 0)} lời khuyên
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
                 {/* First few items as preview */}
                 {recommendations.slice(0, 2).map((section, sectionIdx) => (
                   <div key={sectionIdx} className="space-y-3">
@@ -524,14 +455,14 @@ export function RecommendationsPanel({
                       </div>
                     ))}
                     {section.items.length > 2 && (
-                      <p className="text-xs text-gray-500 italic">... và {section.items.length - 2} mục khác</p>
+                      <p className="text-xs text-gray-500 italic">... and {section.items.length - 2} more items</p>
                     )}
                   </div>
                 ))}
                 
                 {recommendations.length > 2 && (
                   <p className="text-xs text-gray-500 text-center py-2">
-                    ... và {recommendations.length - 2} nhóm khác
+                    ... and {recommendations.length - 2} more groups
                   </p>
                 )}
               </div>
@@ -549,7 +480,7 @@ export function RecommendationsPanel({
                 ℹ️{' '}
                 {isDoctorMode
                   ? 'These are AI-generated clinical suggestions. Always apply your clinical judgment.'
-                  : 'Đây là gợi ý từ AI. Luôn tham khảo ý kiến bác sĩ chuyên khoa để được tư vấn y tế chính xác.'}
+                  : 'This is AI advice. Always consult a specialist doctor for accurate medical advice.'}
               </p>
               
               <button
@@ -561,7 +492,7 @@ export function RecommendationsPanel({
                 }`}
               >
                 <span>🔍</span>
-                Xem đầy đủ
+                View Full Details
               </button>
             </div>
           </div>

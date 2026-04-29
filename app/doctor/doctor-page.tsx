@@ -52,27 +52,27 @@ export default function DoctorPage() {
       // Fallback to mock data if API fails
       const mockResults = {
         probability: 0.42,
-        conclusion: formData.hba1c > 6.5 ? "DƯƠNG TÍNH" : "ÂM TÍNH",
+        conclusion: formData.hba1c > 6.5 ? "POSITIVE" : "NEGATIVE",
         riskLevel: formData.hba1c > 7 ? "high" : formData.hba1c > 5.7 ? "medium" : "low",
         impacts: [
           { feature: "HbA1c", impact: formData.hba1c > 6 ? 12.5 : -3.2 },
-          { feature: "Đường huyết", impact: formData.glucose > 120 ? 8.3 : -2.1 },
+          { feature: "Blood Glucose", impact: formData.glucose > 120 ? 8.3 : -2.1 },
           { feature: "BMI", impact: formData.bmi > 25 ? 5.7 : -1.5 },
-          { feature: "Tuổi", impact: formData.age > 50 ? 4.2 : -0.8 },
-          { feature: "Hút thuốc", impact: formData.smoking !== "never" ? 3.8 : -0.5 },
-          { feature: "Huyết áp", impact: formData.hypertension ? 2.9 : -0.3 },
-          { feature: "Bệnh tim", impact: formData.heart_disease ? 2.1 : -0.2 },
-          { feature: "Giới tính", impact: 0.5 }
+          { feature: "Age", impact: formData.age > 50 ? 4.2 : -0.8 },
+          { feature: "Smoking", impact: formData.smoking !== "never" ? 3.8 : -0.5 },
+          { feature: "Blood Pressure", impact: formData.hypertension ? 2.9 : -0.3 },
+          { feature: "Heart Disease", impact: formData.heart_disease ? 2.1 : -0.2 },
+          { feature: "Gender", impact: 0.5 }
         ],
-        aiAdvice: `Dựa trên phân tích của tôi, bệnh nhân có nguy cơ tiểu đường ở mức ${formData.hba1c > 7 ? "cao" : "trung bình"}. 
+        aiAdvice: `Based on my analysis, the patient has ${formData.hba1c > 7 ? "high" : "moderate"} diabetes risk. 
 
-**3 Khuyến nghị quan trọng:**
+**3 Important Recommendations:**
 
-1. **Kiểm soát HbA1c:** Chỉ số HbA1c hiện tại ${formData.hba1c}% ${formData.hba1c > 6.5 ? "cao hơn ngưỡng bình thường" : "cần theo dõi"}. Nên duy trì chế độ ăn ít đường và tinh bột.
+1. **HbA1c Control:** Current HbA1c level is ${formData.hba1c}% ${formData.hba1c > 6.5 ? "higher than normal threshold" : "needs monitoring"}. Should maintain low-sugar and low-refined-carb diet.
 
-2. **Quản lý cân nặng:** BMI ${formData.bmi} ${formData.bmi > 25 ? "cho thấy thừa cân" : "ở mức tốt"}. Tăng cường hoạt động thể chất 150 phút/tuần.
+2. **Weight Management:** BMI ${formData.bmi} ${formData.bmi > 25 ? "indicates overweight" : "is at good level"}. Increase physical activity to 150 minutes/week.
 
-3. **Theo dõi thường xuyên:** ${formData.hba1c > 6.5 ? "Nên khám kiểm tra mỗi 3 tháng" : "Kiểm tra lại sau 6 tháng"} và duy trì lối sống lành mạnh.`
+3. **Regular Monitoring:** ${formData.hba1c > 6.5 ? "Should have check-ups every 3 months" : "Recheck after 6 months"} and maintain healthy lifestyle.`
       };
       setResults(mockResults);
     }

@@ -66,27 +66,27 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
     
     // Validate height
     if (!formData.height || formData.height < 0.5 || formData.height > 2.5) {
-      errors.push("Chiều cao phải từ 0.5m đến 2.5m");
+      errors.push("Height must be between 0.5m and 2.5m");
     }
     
     // Validate weight
     if (!formData.weight || formData.weight < 20 || formData.weight > 300) {
-      errors.push("Cân nặng phải từ 20kg đến 300kg");
+      errors.push("Weight must be between 20kg and 300kg");
     }
     
     // Validate age
     if (!formData.age || formData.age < 0 || formData.age > 120) {
-      errors.push("Tuổi phải từ 0 đến 120");
+      errors.push("Age must be between 0 and 120");
     }
     
     // Validate HbA1c
     if (!formData.hba1c || formData.hba1c < 3 || formData.hba1c > 15) {
-      errors.push("HbA1c phải từ 3% đến 15%");
+      errors.push("HbA1c must be between 3% and 15%");
     }
     
     // Validate glucose
     if (!formData.glucose || formData.glucose < 50 || formData.glucose > 500) {
-      errors.push("Đường huyết phải từ 50 đến 500 mg/dL");
+      errors.push("Blood glucose must be between 50 and 500 mg/dL");
     }
     
     return errors;
@@ -116,7 +116,7 @@ export function PatientForm({ onSubmit, isLoading }: PatientFormProps) {
               <div className="flex items-start gap-3">
                 <span className="text-red-600 text-xl">⚠️</span>
                 <div>
-                  <h4 className="text-red-800 font-semibold mb-2">Vui lòng kiểm tra lại các thông tin:</h4>
+                  <h4 className="text-red-800 font-semibold mb-2">Please check the following information:</h4>
                   <ul className="space-y-1">
                     {errors.map((error, index) => (
                       <li key={index} className="text-red-700 text-sm">• {error}</li>

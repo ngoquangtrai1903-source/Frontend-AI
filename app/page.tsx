@@ -37,48 +37,48 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <VibrantFeatureCard
               icon="⚡"
-              title="Kết quả tức thì"
-              description="Phân tích AI nhanh chóng trong vài giây với công nghệ tiên tiến nhất."
+              title="Instant Results"
+              description="Fast AI analysis in seconds with cutting-edge technology."
               gradient="from-yellow-400 to-orange-500"
               bgPattern="lightning"
               animation="pulse"
             />
             <VibrantFeatureCard
               icon="🎯"
-              title="Độ chính xác vượt trội"
-              description="Độ chính xác hàng đầu ngành dựa trên nghiên cứu y tế và kiểm chứng lâm sàng."
+              title="Superior Accuracy"
+              description="Industry-leading accuracy based on medical research and clinical validation."
               gradient="from-blue-400 to-purple-500"
               bgPattern="target"
               animation="bounce"
             />
             <VibrantFeatureCard
               icon="🔒"
-              title="Bảo mật tuyệt đối"
-              description="Dữ liệu sức khỏe của bạn được mã hóa và không bao giờ chia sẻ với bên thứ ba."
+              title="Absolute Security"
+              description="Your health data is encrypted and never shared with third parties."
               gradient="from-green-400 to-emerald-500"
               bgPattern="shield"
               animation="spin"
             />
             <VibrantFeatureCard
               icon="📊"
-              title="Minh bạch đầy đủ"
-              description="Hiểu rõ lý do đằng sau dự đoán AI qua giải thích dựa trên SHAP."
+              title="Full Transparency"
+              description="Understand the reasons behind AI predictions through SHAP-based explanations."
               gradient="from-purple-400 to-pink-500"
               bgPattern="chart"
               animation="float"
             />
             <VibrantFeatureCard
               icon="💡"
-              title="Cá nhân hóa thông minh"
-              description="Nhận khuyến nghị tùy chỉnh dựa trên hồ sơ sức khỏe của riêng bạn."
+              title="Smart Personalization"
+              description="Get customized recommendations based on your unique health profile."
               gradient="from-amber-400 to-red-500"
               bgPattern="idea"
               animation="glow"
             />
             <VibrantFeatureCard
               icon="📱"
-              title="Đa nền tảng linh hoạt"
-              description="Sử dụng trên mọi thiết bị: máy tính, điện thoại, máy tính bảng mọi lúc, mọi nơi."
+              title="Cross-Platform Flexibility"
+              description="Use on any device: computer, phone, tablet anytime, anywhere."
               gradient="from-cyan-400 to-blue-500"
               bgPattern="devices"
               animation="slide"
