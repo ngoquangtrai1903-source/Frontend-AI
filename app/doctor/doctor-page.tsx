@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { EnhancedResultsDisplay } from "@/components/EnhancedResultsDisplay";
 import { PatientForm } from "@/components/PatientForm";
-import { ConnectionTest } from "@/components/ConnectionTest";
 import { predictClinical } from "@/lib/api";
 
 export default function DoctorPage() {
@@ -86,11 +85,6 @@ export default function DoctorPage() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
-        {/* Connection Status */}
-        <div className="mb-8">
-          <ConnectionTest />
-        </div>
-        
         <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-md text-sm font-medium mb-4">
             <span>👨‍⚕️</span>
