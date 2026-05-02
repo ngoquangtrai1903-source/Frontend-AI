@@ -114,15 +114,15 @@ export function EnhancedResultsDisplay({
             <h3 className="text-lg font-bold text-gray-900 mb-4">Assessment Result</h3>
             <div
               className={`text-center py-4 px-6 rounded-lg font-bold text-lg ${
-                results.conclusion === 'DƯƠNG TÍNH'
+                results.conclusion === 'POSITIVE'
                   ? 'bg-red-50 text-red-700 border border-red-200'
                   : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
               }`}
             >
-              {results.conclusion === 'DƯƠNG TÍNH' ? '🔴 POSITIVE' : '🟢 NEGATIVE'}
+              {results.conclusion === 'POSITIVE' ? '🔴 POSITIVE' : '🟢 NEGATIVE'}
             </div>
             <p className="text-sm text-gray-600 mt-4 leading-relaxed">
-              {results.conclusion === 'DƯƠNG TÍNH'
+              {results.conclusion === 'POSITIVE'
                 ? 'Assessment suggests potential diabetes indicators. Consult healthcare provider for confirmation.'
                 : 'Current assessment shows low diabetes indicators. Continue with regular health monitoring.'}
             </p>

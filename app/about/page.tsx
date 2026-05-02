@@ -13,9 +13,9 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Về DiabeTwin</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">About DiabeTwin</h1>
           <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
-            Hệ thống dự đoán tiểu đường AI tiên tiến, mang lại giải pháp chẩn đoán chính xác và kịp thời
+            Advanced AI-powered diabetes prediction system, providing accurate and timely diagnostic solutions
           </p>
         </div>
       </div>
@@ -28,19 +28,19 @@ export default function AboutPage() {
               active={activeTab === 'overview'}
               onClick={() => setActiveTab('overview')}
               icon="📊"
-              label="Tổng quan"
+              label="Overview"
             />
             <TabButton
               active={activeTab === 'model'}
               onClick={() => setActiveTab('model')}
               icon="🤖"
-              label="Mô hình AI"
+              label="AI Model"
             />
             <TabButton
               active={activeTab === 'research'}
               onClick={() => setActiveTab('research')}
               icon="📚"
-              label="Nghiên cứu"
+              label="Research"
             />
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center text-gray-600">
           <p>© 2026 DiabeTwin - AI-Powered Health Assessment</p>
           <p className="text-sm mt-2">
-            Kết quả chỉ mang tính tham khảo. Vui lòng tham khảo ý kiến bác sĩ chuyên khoa.
+            Results are for reference only. Please consult a specialist doctor.
           </p>
         </div>
       </footer>
@@ -89,45 +89,45 @@ function OverviewTab() {
     <div className="space-y-12 animate-fadeIn">
       {/* Mission */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🎯 Sứ mệnh của chúng tôi</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">🎯 Our Mission</h2>
         <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-8 border border-blue-200">
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
-            DiabeTwin được phát triển với sứ mệnh <strong>dân chủ hóa việc tiếp cận chăm sóc sức khỏe</strong> thông qua công nghệ AI tiên tiến. 
-            Chúng tôi tin rằng mọi người đều xứng đáng có được công cụ đánh giá sức khỏe chính xác, nhanh chóng và dễ tiếp cận.
+            DiabeTwin was developed with the mission to <strong>democratize access to healthcare</strong> through advanced AI technology. 
+            We believe everyone deserves access to accurate, fast, and accessible health assessment tools.
           </p>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Bệnh tiểu đường ảnh hưởng đến hàng triệu người trên toàn thế giới. Phát hiện sớm có thể cứu sống và cải thiện chất lượng cuộc sống. 
-            Đó là lý do tại sao chúng tôi xây dựng DiabeTwin - để mang lại công cụ dự đoán tiên tiến nhất cho mọi người.
+            Diabetes affects millions of people worldwide. Early detection can save lives and improve quality of life. 
+            That's why we built DiabeTwin - to bring the most advanced prediction tools to everyone.
           </p>
         </div>
       </section>
 
       {/* Statistics */}
       <section>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Thống kê & Tác động</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📈 Statistics & Impact</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <StatCard
             value="95%"
-            label="Độ chính xác"
-            description="Độ chính xác trung bình của mô hình"
+            label="Accuracy"
+            description="Average model accuracy"
             color="from-green-400 to-emerald-500"
           />
           <StatCard
             value="15,000+"
-            label="Người dùng"
-            description="Đã sử dụng hệ thống"
+            label="Users"
+            description="Have used the system"
             color="from-blue-400 to-indigo-500"
           />
           <StatCard
             value="80%"
             label="Recall Score"
-            description="Chỉ số độ bao phủ"
+            description="Coverage score"
             color="from-purple-400 to-fuchsia-500"
           />
           <StatCard
             value="<10s"
-            label="Tốc độ"
-            description="Thời gian phân tích trung bình"
+            label="Speed"
+            description="Average analysis time"
             color="from-orange-400 to-red-500"
           />
         </div>
@@ -135,32 +135,32 @@ function OverviewTab() {
 
       {/* Team */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">👥 Đội ngũ phát triển</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">👥 Development Team</h2>
         <div className="bg-white rounded-xl border border-gray-200 p-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <TeamMember
               name="Mr. Ngô Quang Trãi"
               role="ML Engineer"
               avatar="👨‍🔬"
-              description="Machine Learning Engineer, trường đại học FPT"
+              description="Machine Learning Engineer, FPT University"
             />
             <TeamMember
               name="Mr. Đào Đức Anh Kiệt"
               role="AI Engineer"
               avatar="👨‍💻"
-              description="Full-stack Developer, trường đại học FPT"
+              description="Full-stack Developer, FPT University"
             />
             <TeamMember
               name="Mr. Nguyễn Nho Huy Hoàng"
               role="Data Scientist"
               avatar="👨‍🔬"
-              description="Data Science Specialist, trường đại học FPT"
+              description="Data Science Specialist, FPT University"
             />
             <TeamMember
               name="Mr. Phan Văn Quốc"
               role="Researcher"
               avatar="👨‍💼"
-              description="Project Lead & Researcher, trường đại học FPT"
+              description="Project Lead & Researcher, FPT University"
             />
           </div>
         </div>
@@ -168,37 +168,37 @@ function OverviewTab() {
 
       {/* Features */}
       <section>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">✨ Tính năng nổi bật</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">✨ Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <FeatureCard
             icon="🎯"
-            title="Dự đoán chính xác"
-            description="Sử dụng thuật toán ML tiên tiến với độ chính xác cao, được kiểm chứng bởi nghiên cứu lâm sàng"
+            title="Accurate Prediction"
+            description="Uses advanced ML algorithms with high accuracy, validated by clinical research"
           />
           <FeatureCard
             icon="📊"
-            title="Phân tích SHAP"
-            description="Giải thích minh bạch về các yếu tố ảnh hưởng đến kết quả dự đoán của bạn"
+            title="SHAP Analysis"
+            description="Transparent explanation of factors affecting your prediction results"
           />
           <FeatureCard
             icon="⚡"
-            title="Kết quả tức thì"
-            description="Nhận kết quả phân tích chi tiết chỉ trong vài giây"
+            title="Instant Results"
+            description="Get detailed analysis results in just a few seconds"
           />
           <FeatureCard
             icon="🔒"
-            title="Bảo mật tuyệt đối"
-            description="Dữ liệu được mã hóa end-to-end, không lưu trữ thông tin cá nhân"
+            title="Absolute Security"
+            description="End-to-end encrypted data, no personal information stored"
           />
           <FeatureCard
             icon="💡"
-            title="Tư vấn AI"
-            description="Nhận khuyến nghị cá nhân hóa dựa trên tình trạng sức khỏe của bạn"
+            title="AI Consultation"
+            description="Get personalized recommendations based on your health condition"
           />
           <FeatureCard
             icon="📱"
-            title="Đa nền tảng"
-            description="Sử dụng trên mọi thiết bị: máy tính, điện thoại, máy tính bảng"
+            title="Cross-Platform"
+            description="Use on any device: computer, phone, tablet"
           />
         </div>
       </section>
@@ -212,24 +212,24 @@ function ModelTab() {
     <div className="space-y-12 animate-fadeIn">
       {/* Twin Model Architecture */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🏗️ Hai tuyến mô hình AI (Doctor & Home)</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">🏗️ Dual AI Model Architecture (Doctor & Home)</h2>
         <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
           <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-            DiabeTwin được thiết kế như một hệ thống <strong>&quot;twin&quot; AI</strong> gồm hai mô hình khác nhau, 
-            tối ưu riêng cho hai bối cảnh sử dụng:
+            DiabeTwin is designed as a <strong>"twin" AI system</strong> with two different models, 
+            optimized separately for two use contexts:
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6">
             <div className="bg-blue-50 rounded-lg p-5 sm:p-6 border border-blue-200 flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-bold text-blue-900 mb-2">Mô hình cho Bác sĩ</h3>
+                <h3 className="text-xl font-bold text-blue-900 mb-2">Doctor Model</h3>
                 <p className="text-sm sm:text-base text-gray-700 mb-3">
-                  Huấn luyện bằng <strong>AdaBoostClassifier</strong> trên khoảng <strong>100.000 hồ sơ lâm sàng</strong>, 
-                  dành cho môi trường bệnh viện/phòng khám nơi bác sĩ cần công cụ hỗ trợ chẩn đoán có độ chính xác cao.
+                  Trained with <strong>AdaBoostClassifier</strong> on approximately <strong>100,000 clinical profiles</strong>, 
+                  designed for hospital/clinic environments where doctors need high-accuracy diagnostic support tools.
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Tối ưu cho <strong>độ nhạy (recall)</strong> với ca dương tính để hạn chế bỏ sót bệnh.</li>
-                  <li>• Giao diện kết quả chi tiết, kèm giải thích SHAP cho từng bệnh nhân.</li>
-                  <li>• Thích hợp dùng song song với quy trình chẩn đoán chuẩn của bác sĩ.</li>
+                  <li>• Optimized for <strong>sensitivity (recall)</strong> with positive cases to minimize missed diagnoses.</li>
+                  <li>• Detailed results interface with SHAP explanations for each patient.</li>
+                  <li>• Suitable for parallel use with standard diagnostic procedures.</li>
                 </ul>
               </div>
               <div className="mt-4">
@@ -239,22 +239,22 @@ function ModelTab() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto"
                 >
-                  📊 Xem báo cáo huấn luyện mô hình Bác sĩ
+                  📊 View Doctor Model Training Report
                 </a>
               </div>
             </div>
 
             <div className="bg-purple-50 rounded-lg p-5 sm:p-6 border border-purple-200 flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-bold text-purple-900 mb-2">Mô hình cho Người dùng tại nhà</h3>
+                <h3 className="text-xl font-bold text-purple-900 mb-2">Home User Model</h3>
                 <p className="text-sm sm:text-base text-gray-700 mb-3">
-                  Huấn luyện bằng <strong>LGBMClassifier</strong> trên <strong>70.692 mẫu</strong> từ bộ dữ liệu 
-                  <strong> BRFSS (Behavioral Risk Factor Surveillance System)</strong>, tập trung vào các yếu tố hành vi và lối sống.
+                  Trained with <strong>LGBMClassifier</strong> on <strong>70,692 samples</strong> from the 
+                  <strong>BRFSS (Behavioral Risk Factor Surveillance System)</strong>, focusing on behavioral and lifestyle factors.
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• Ưu tiên <strong>tốc độ và tính ổn định</strong> để chạy mượt trên nhiều thiết bị.</li>
-                  <li>• Thiết kế câu hỏi thân thiện, giúp người dùng không chuyên y tế dễ trả lời.</li>
-                  <li>• Cho phép sử dụng tại nhà để <strong>sàng lọc nguy cơ sớm</strong>, không thay thế bác sĩ.</li>
+                  <li>• Prioritizes <strong>speed and stability</strong> for smooth performance across multiple devices.</li>
+                  <li>• User-friendly question design, helping non-medical users answer easily.</li>
+                  <li>• Enables home use for <strong>early risk screening</strong>, not a replacement for doctors.</li>
                 </ul>
               </div>
               <div className="mt-4">
@@ -264,7 +264,7 @@ function ModelTab() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold hover:bg-purple-700 transition-colors w-full sm:w-auto"
                 >
-                  📈 Xem báo cáo mô hình Người dùng tại nhà
+                  📈 View Home User Model Report
                 </a>
               </div>
             </div>
@@ -274,57 +274,57 @@ function ModelTab() {
 
       {/* Training Data & Metrics */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 Dữ liệu huấn luyện & chất lượng mô hình</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">📊 Training Data & Model Quality</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Mô hình cho Bác sĩ (AdaBoost)</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Doctor Model (AdaBoost)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <DataCard
-                title="Số mẫu huấn luyện"
+                title="Training Samples"
                 value="~100.000"
-                description="Hồ sơ bệnh nhân lâm sàng"
+                description="Clinical patient profiles"
                 color="bg-blue-600"
               />
               <DataCard
-                title="Bối cảnh sử dụng"
-                value="Bệnh viện"
-                description="Hỗ trợ ra quyết định cho bác sĩ"
+                title="Use Context"
+                value="Hospital"
+                description="Decision support for doctors"
                 color="bg-sky-600"
               />
             </div>
             <p className="text-sm text-gray-700 mb-3">
-              Trên tập kiểm thử, mô hình cho bác sĩ đạt <strong>độ chính xác tổng thể cao</strong>, 
-              với khả năng nhận diện ca có nguy cơ tiểu đường tốt <strong>(recall nhóm dương tính khoảng 87%)</strong>.
+              On the test set, the doctor model achieves <strong>high overall accuracy</strong>, 
+              with good ability to identify diabetes risk cases <strong>(positive group recall 80%)</strong>.
             </p>
             <p className="text-sm text-gray-700">
-              Confusion matrix cho thấy <strong>số lượng lớn ca âm tính được phân loại đúng</strong>, 
-              đồng thời vẫn ưu tiên không bỏ sót bệnh nhân có nguy cơ cao.
+              Confusion matrix shows <strong>large numbers of correctly classified negative cases</strong>, 
+              while still prioritizing not missing high-risk patients.
             </p>
           </div>
 
           <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Mô hình cho Người dùng (LGBM)</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">User Model (LGBM)</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <DataCard
-                title="Số mẫu BRFSS"
+                title="BRFSS Samples"
                 value="70.692"
-                description="Dữ liệu sức khỏe cộng đồng từ CDC"
+                description="Community health data from CDC"
                 color="bg-purple-600"
               />
               <DataCard
-                title="Mục tiêu"
-                value="Sàng lọc tại nhà"
-                description="Đánh giá nhanh nguy cơ cá nhân"
+                title="Objective"
+                value="Home Screening"
+                description="Quick personal risk assessment"
                 color="bg-fuchsia-600"
               />
             </div>
             <p className="text-sm text-gray-700 mb-3">
-              Trên tập kiểm thử, mô hình LGBM đạt <strong>precision khoảng 74%</strong> và <strong>recall khoảng 80% </strong> 
-              cho nhóm nguy cơ cao, cân bằng giữa việc phát hiện bệnh và hạn chế cảnh báo giả.
+              On the test set, the LGBM model achieves <strong>precision ~74%</strong> and <strong>recall ~80%</strong> 
+              for the high-risk group, balancing disease detection and minimizing false alarms.
             </p>
             <p className="text-sm text-gray-700">
-              Kết quả được hiển thị bằng giao diện trực quan, giúp người dùng dễ hiểu tình trạng của mình 
-              mà không cần kiến thức chuyên sâu về thống kê.
+              Results are displayed with an intuitive interface, helping users understand their status 
+              without deep statistical knowledge.
             </p>
           </div>
         </div>
@@ -332,42 +332,42 @@ function ModelTab() {
 
       {/* Explainability & LLM Assistant */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">🔍 Giải thích kết quả bằng SHAP & Trợ lý LLM</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">🔍 SHAP Results Explanation & LLM Assistant</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">SHAP – hiểu rõ vì sao bạn có nguy cơ</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">SHAP – Understanding Why You're at Risk</h3>
             <p className="text-sm sm:text-base text-gray-700 mb-4">
-              Thay vì chỉ trả về một con số &quot;có/không&quot;, DiabeTwin sử dụng <strong>SHAP (SHapley Additive exPlanations)</strong> 
-              để phân tích mức độ đóng góp của từng yếu tố tới kết quả dự đoán của bạn.
+              Instead of just returning a "yes/no" number, DiabeTwin uses <strong>SHAP (SHapley Additive exPlanations)</strong> 
+              to analyze each factor's contribution to your prediction results.
             </p>
             <p className="text-sm sm:text-base text-gray-700 mb-4">
-              Bạn sẽ nhìn thấy <strong>top các yếu tố rủi ro cá nhân</strong> (ví dụ: tuổi, BMI, huyết áp, thói quen hút thuốc, 
-              mức độ vận động...), giúp hiểu rõ điều gì đang kéo nguy cơ của mình tăng lên hoặc giảm đi.
+              You will see <strong>top personal risk factors</strong> (e.g., age, BMI, blood pressure, smoking habits, 
+              activity level...), helping you understand what's increasing or decreasing your risk.
             </p>
             <div className="space-y-3">
-              <FeatureImportanceBar feature="BMI & Cân nặng" importance={23.5} />
-              <FeatureImportanceBar feature="Tuổi" importance={18.2} />
-              <FeatureImportanceBar feature="Tăng huyết áp" importance={15.7} />
-              <FeatureImportanceBar feature="Ít vận động" importance={12.4} />
-              <FeatureImportanceBar feature="Tiền sử gia đình" importance={9.3} />
+              <FeatureImportanceBar feature="BMI & Weight" importance={23.5} />
+              <FeatureImportanceBar feature="Age" importance={18.2} />
+              <FeatureImportanceBar feature="High Blood Pressure" importance={15.7} />
+              <FeatureImportanceBar feature="Low Activity" importance={12.4} />
+              <FeatureImportanceBar feature="Family History" importance={9.3} />
             </div>
           </div>
 
           <div className="bg-white rounded-xl border border-gray-200 p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Trợ lý LLM – giải thích & gợi ý hành động</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-4">LLM Assistant – Explanation & Action Suggestions</h3>
             <p className="text-sm sm:text-base text-gray-700 mb-3">
-              Sau khi mô hình ML đưa ra dự đoán và SHAP chỉ ra các yếu tố quan trọng, 
-              chúng tôi sử dụng <strong>Large Language Model (LLM)</strong> để diễn giải kết quả 
-              bằng ngôn ngữ đời thường, dễ hiểu.
+              After the ML model makes predictions and SHAP identifies key factors, 
+              we use a <strong>Large Language Model (LLM)</strong> to interpret results 
+              in everyday, easy-to-understand language.
             </p>
             <ul className="text-sm sm:text-base text-gray-700 space-y-2 mb-4">
-              <li>• Tóm tắt nguy cơ hiện tại của bạn theo từng mức độ (thấp, trung bình, cao).</li>
-              <li>• Giải thích tại sao một số yếu tố lại làm nguy cơ tăng/giảm.</li>
-              <li>• Gợi ý các <strong>bước hành động cụ thể</strong> về dinh dưỡng, vận động, khám sàng lọc...</li>
+              <li>• Summarizes your current risk by level (low, medium, high).</li>
+              <li>• Explains why certain factors increase/decrease risk.</li>
+              <li>• Suggests <strong>specific action steps</strong> for diet, exercise, screenings...</li>
             </ul>
             <p className="text-xs sm:text-sm text-gray-500">
-              Lưu ý: Trợ lý LLM chỉ đóng vai trò <strong>tư vấn tham khảo</strong>. 
-              Mọi quyết định liên quan đến điều trị cần được trao đổi với bác sĩ chuyên khoa.
+              Note: LLM assistant serves only as <strong>reference consultation</strong>. 
+              All treatment-related decisions should be discussed with specialist doctors.
             </p>
           </div>
         </div>
@@ -382,118 +382,262 @@ function ResearchTab() {
 
   const researchPapers = [
     {
-      title: "Machine Learning for Diabetes Prediction: A Systematic Review",
-      authors: "Smith et al.",
-      journal: "Journal of Medical Internet Research",
+      title: "IDF Diabetes Atlas, 10th ed.",
+      authors: "International Diabetes Federation",
+      journal: "International Diabetes Federation",
+      year: 2021,
+      impact: "Very High",
+      summary: "Comprehensive global diabetes statistics and epidemiological data from the International Diabetes Federation.",
+      link: "https://diabetesatlas.org/data-by-location/global/",
+      tags: ["Epidemiology", "Global Statistics", "Diabetes Atlas"]
+    },
+    {
+      title: "Diabetes",
+      authors: "World Health Organization",
+      journal: "WHO Fact Sheets",
+      year: 2023,
+      impact: "Very High",
+      summary: "WHO fact sheet providing essential information about diabetes, its types, complications, and global burden.",
+      link: "https://www.who.int/news-room/fact-sheets/detail/diabetes",
+      tags: ["WHO", "Fact Sheet", "Public Health"]
+    },
+    {
+      title: "Heart disease and stroke statistics---2000 update",
+      authors: "American Heart Association",
+      journal: "Circulation",
+      volume: "100",
+      number: "10",
+      pages: "1134--1146",
+      year: 1999,
+      impact: "High",
+      summary: "Comprehensive statistics on heart disease and stroke, including diabetes-related cardiovascular complications.",
+      link: "https://www.ahajournals.org/doi/full/10.1161/01.CIR.100.10.1134",
+      tags: ["Cardiovascular", "Statistics", "Complications"]
+    },
+    {
+      title: "Kidney failure and diabetes",
+      authors: "Centers for Disease Control and Prevention",
+      journal: "CDC",
+      year: 2023,
+      impact: "High",
+      summary: "CDC report on the relationship between diabetes and kidney failure, including prevention strategies.",
+      link: "https://www.cdc.gov/diabetes/data-research/research/kidney-failure-diabetes.html",
+      tags: ["Kidney Disease", "Complications", "CDC"]
+    },
+    {
+      title: "Promoting diabetic retinopathy screening",
+      authors: "World Health Organization Regional Office for Europe",
+      journal: "WHO Europe",
       year: 2024,
       impact: "High",
-      summary: "Nghiên cứu tổng quan về các phương pháp ML trong dự đoán tiểu đường, so sánh hiệu suất của XGBoost, Random Forest, và Neural Networks.",
-      link: "#",
-      tags: ["Machine Learning", "Systematic Review"]
+      summary: "WHO Europe initiative to promote screening for diabetic retinopathy, a major diabetes complication.",
+      link: "https://www.who.int/europe/activities/promoting-diabetic-retinopathy-screening",
+      tags: ["Retinopathy", "Screening", "WHO Europe"]
     },
     {
-      title: "Early Detection of Type 2 Diabetes Using AI: A Multicenter Study",
-      authors: "Johnson & Lee",
-      journal: "The Lancet Digital Health",
-      year: 2024,
+      title: "Global Report on Effective Access to Assistive Technology",
+      authors: "World Health Organization",
+      journal: "World Health Organization",
+      year: 2022,
       impact: "Very High",
-      summary: "Nghiên cứu đa trung tâm về việc sử dụng AI để phát hiện sớm tiểu đường type 2, với độ chính xác 96.2%.",
-      link: "#",
-      tags: ["AI", "Clinical Trial"]
+      summary: "WHO global report on access to assistive technology, including devices for diabetes management.",
+      link: "https://iris.who.int/server/api/core/bitstreams/1f4d4a08-b20d-4c36-9148-a59429ac3477/content",
+      tags: ["Assistive Technology", "Global Health", "WHO"]
     },
     {
-      title: "SHAP-based Interpretability in Clinical Decision Support Systems",
-      authors: "Chen et al.",
+      title: "The growing burden of diabetes in Viet Nam",
+      authors: "World Health Organization",
+      journal: "World Health Organization",
+      year: 2024,
+      impact: "High",
+      summary: "WHO report on the increasing diabetes burden in Vietnam, including epidemiological trends and challenges.",
+      link: "https://www.who.int/vietnam/news/feature-stories/detail/the-growing-burden-of-diabetes-in-viet-nam",
+      tags: ["Vietnam", "Epidemiology", "Burden"]
+    },
+    {
+      title: "What clinicians want: contextualizing explainable machine learning for clinical end use",
+      authors: "S. Tonekaboni, S. Joshi, K. D. McCradden, A. Goldenberg",
+      journal: "Proceedings of Machine Learning Research",
+      volume: "106",
+      year: 2019,
+      impact: "Very High",
+      summary: "Research on clinicians' needs for explainable AI in clinical settings, focusing on practical implementation.",
+      link: "https://proceedings.mlr.press/v106/tonekaboni19a.html",
+      tags: ["Explainable AI", "Clinical", "Machine Learning"]
+    },
+    {
+      title: "Assessment of machine learning algorithms to detect early disease outcomes",
+      authors: "R. A. Calvert and others",
+      journal: "BMC Medicine",
+      volume: "17",
+      number: "1",
+      pages: "142",
+      year: 2019,
+      impact: "Very High",
+      summary: "Comprehensive assessment of ML algorithms for early disease detection, including diabetes outcomes.",
+      link: "https://doi.org/10.1186/s12916-019-1426-2",
+      tags: ["Machine Learning", "Early Detection", "Algorithm Assessment"]
+    },
+    {
+      title: "Machine learning algorithm-based prediction of diabetes among female population using PIMA dataset",
+      authors: "A. Ahmed and others",
+      journal: "Healthcare",
+      volume: "13",
+      number: "1",
+      pages: "37",
+      year: 2025,
+      impact: "High",
+      summary: "ML-based diabetes prediction specifically for female population using the PIMA Indian diabetes dataset.",
+      link: "https://doi.org/10.3390/healthcare13010037",
+      tags: ["PIMA Dataset", "Female Population", "Prediction"]
+    },
+    {
+      title: "Machine learning tools for long-term type 2 diabetes risk prediction",
+      authors: "N. Fazakis, O. Kocsis, E. Dritsas, S. Alexiou, N. Fakotakis, K. Moustakas",
+      journal: "IEEE Access",
+      volume: "9",
+      pages: "103737--103757",
+      year: 2021,
+      impact: "Very High",
+      summary: "Development and evaluation of ML tools for long-term type 2 diabetes risk prediction.",
+      link: "https://doi.org/10.1109/ACCESS.2021.3098691",
+      tags: ["Type 2 Diabetes", "Long-term Prediction", "IEEE Access"]
+    },
+    {
+      title: "Diabetes prediction using machine learning and explainable AI techniques",
+      authors: "I. Tasin, T. U. Nabil, S. Islam, R. Khan",
+      journal: "Healthcare Technology Letters",
+      volume: "10",
+      number: "1-2",
+      pages: "1--10",
+      year: 2022,
+      impact: "High",
+      summary: "Integration of machine learning and explainable AI techniques for diabetes prediction and interpretation.",
+      link: "https://doi.org/10.1049/htl2.12039",
+      tags: ["Explainable AI", "Machine Learning", "Interpretation"]
+    },
+    {
+      title: "High-performance medicine: convergence of human and artificial intelligence",
+      authors: "E. J. Topol",
       journal: "Nature Medicine",
+      volume: "25",
+      pages: "44--56",
+      year: 2019,
+      impact: "Very High",
+      summary: "Vision for the convergence of human expertise and AI in high-performance medicine, including diabetes care.",
+      link: "https://www.nature.com/articles/s41591-018-0300-7",
+      tags: ["AI Convergence", "High-performance Medicine", "Future Medicine"]
+    },
+    {
+      title: "Using big data-machine learning models for diabetes prediction",
+      authors: "T. Nibareke, J. Laassiri",
+      journal: "Journal of Big Data",
+      year: 2020,
+      impact: "High",
+      summary: "Application of big data and machine learning models for diabetes prediction using large-scale datasets.",
+      link: "https://journalofbigdata.springeropen.com/articles/10.1186/s40537-020-00355-0",
+      tags: ["Big Data", "Machine Learning", "Large-scale"]
+    },
+    {
+      title: "A bimodal dataset for diabetes research",
+      authors: "J. Li and others",
+      journal: "Scientific Data",
+      year: 2026,
+      impact: "Very High",
+      summary: "Novel bimodal dataset specifically designed for comprehensive diabetes research applications.",
+      link: "https://www.nature.com/articles/s41597-026-06923-y",
+      tags: ["Dataset", "Bimodal", "Research"]
+    },
+    {
+      title: "Large language models encode clinical knowledge",
+      authors: "K. Singhal and others",
+      journal: "Nature",
+      volume: "620",
+      pages: "172--180",
       year: 2023,
       impact: "Very High",
-      summary: "Ứng dụng SHAP values để giải thích các mô hình ML trong y tế, tăng tính minh bạch và tin cậy.",
-      link: "#",
-      tags: ["Interpretability", "SHAP"]
+      summary: "Demonstration of how large language models can encode and apply clinical medical knowledge.",
+      link: "https://www.nature.com/articles/s41586-023-06291-2",
+      tags: ["Large Language Models", "Clinical Knowledge", "AI"]
     },
     {
-      title: "Lifestyle Factors and Diabetes Risk: A Machine Learning Approach",
-      authors: "Nguyễn Văn A, Trần Thị B",
-      journal: "Vietnamese Journal of Endocrinology",
-      year: 2023,
-      impact: "Medium",
-      summary: "Nghiên cứu về ảnh hưởng của các yếu tố lối sống đến nguy cơ tiểu đường ở người Việt Nam sử dụng ML.",
-      link: "#",
-      tags: ["Lifestyle", "Vietnamese Population"]
-    },
-    {
-      title: "XGBoost vs Neural Networks for Medical Diagnosis: A Comparative Study",
-      authors: "Park & Kim",
-      journal: "Artificial Intelligence in Medicine",
-      year: 2024,
-      impact: "High",
-      summary: "So sánh hiệu suất giữa XGBoost và Neural Networks trong chẩn đoán y khoa, kết luận ensemble approach cho kết quả tốt nhất.",
-      link: "#",
-      tags: ["XGBoost", "Comparison"]
-    },
-    {
-      title: "Data Augmentation Techniques for Imbalanced Medical Datasets",
-      authors: "Williams et al.",
-      journal: "IEEE Journal of Biomedical Informatics",
+      title: "The utilization of machine learning algorithms for assisting physicians in diagnosis of diabetes",
+      authors: "L. P. Nguyen and others",
+      journal: "Diagnostics",
+      volume: "13",
+      number: "12",
+      pages: "2087",
       year: 2023,
       impact: "High",
-      summary: "Các kỹ thuật SMOTE và GAN để cân bằng dữ liệu y tế, cải thiện hiệu suất mô hình trên class thiểu số.",
-      link: "#",
-      tags: ["Data Augmentation", "SMOTE"]
+      summary: "Machine learning algorithms designed to assist physicians in diabetes diagnosis and decision-making.",
+      link: "https://doi.org/10.3390/diagnostics13122087",
+      tags: ["Physician Assistance", "Diagnosis", "Clinical Decision Support"]
+    },
+    {
+      title: "Prediction of Diabetes Using Machine Learning: Analysis of 70,000 Clinical Database Patient Record",
+      authors: "S. M. Kuriakose, A. S. Nair, R. S. Kumar, P. V. S. Nair",
+      journal: "IEEE International Conference on Computing, Communication and Networking Technologies (ICCCNT)",
+      year: 2022,
+      impact: "High",
+      summary: "Large-scale study using 70,000 clinical patient records for diabetes prediction using machine learning.",
+      link: "https://ieeexplore.ieee.org/document/9984264",
+      tags: ["Large Dataset", "Clinical Records", "IEEE Conference"]
+    },
+    {
+      title: "Retrieval-augmented generation for knowledge-intensive NLP tasks",
+      authors: "P. Lewis and others",
+      journal: "Advances in Neural Information Processing Systems (NeurIPS)",
+      year: 2020,
+      impact: "Very High",
+      summary: "RAG framework for enhancing language models with external knowledge retrieval, applicable to medical AI systems.",
+      link: "https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
+      tags: ["RAG", "Knowledge Retrieval", "NeurIPS"]
+    },
+    {
+      title: "GatorTron: A large clinical language model to unlock patient information from electronic health records",
+      authors: "Y. Yang and others",
+      journal: "npj Digital Medicine",
+      volume: "5",
+      year: 2022,
+      impact: "Very High",
+      summary: "Large clinical language model specifically designed for processing electronic health records and patient information.",
+      link: "https://www.nature.com/articles/s41746-022-00742-2",
+      tags: ["Clinical Language Model", "EHR", "GatorTron"]
     }
   ];
+
+  // Filter research papers based on search query
+  const filteredPapers = researchPapers.filter(paper => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      paper.title.toLowerCase().includes(searchLower) ||
+      paper.authors.toLowerCase().includes(searchLower) ||
+      paper.journal.toLowerCase().includes(searchLower) ||
+      paper.summary.toLowerCase().includes(searchLower) ||
+      paper.tags.some(tag => tag.toLowerCase().includes(searchLower))
+    );
+  });
 
   const clinicalGuidelines = [
     {
       title: "American Diabetes Association Standards of Care 2024",
       organization: "ADA",
       year: 2024,
-      summary: "Hướng dẫn toàn diện về chẩn đoán, điều trị và quản lý bệnh tiểu đường từ ADA.",
+      summary: "Comprehensive guidelines for diabetes diagnosis, treatment and management from ADA.",
       link: "#"
     },
     {
       title: "WHO Guidelines on Diabetes Management",
       organization: "World Health Organization",
       year: 2023,
-      summary: "Khuyến nghị toàn cầu về quản lý và phòng ngừa bệnh tiểu đường.",
+      summary: "Global recommendations for diabetes management and prevention.",
       link: "#"
     },
     {
-      title: "Hướng dẫn Chẩn đoán và Điều trị Đái tháo đường - Bộ Y tế Việt Nam",
+      title: "Vietnam Diabetes Diagnosis and Treatment Guidelines - Ministry of Health",
       organization: "Ministry of Health Vietnam",
       year: 2023,
-      summary: "Hướng dẫn chính thức về chẩn đoán và điều trị đái tháo đường tại Việt Nam.",
-      link: "#"
-    }
-  ];
-
-  const latestNews = [
-    {
-      title: "Breakthrough: New AI Model Predicts Diabetes 5 Years in Advance",
-      source: "Medical News Today",
-      date: "2024-01-15",
-      summary: "Các nhà nghiên cứu phát triển mô hình AI có thể dự đoán tiểu đường trước 5 năm với độ chính xác 95%.",
-      link: "#"
-    },
-    {
-      title: "FDA Approves First AI-Based Diabetes Screening Tool",
-      source: "Healthcare IT News",
-      date: "2024-01-10",
-      summary: "FDA chấp thuận công cụ sàng lọc tiểu đường dựa trên AI đầu tiên cho sử dụng lâm sàng.",
-      link: "#"
-    },
-    {
-      title: "Study: Lifestyle Changes Can Reverse Prediabetes in 58% of Cases",
-      source: "The New England Journal of Medicine",
-      date: "2023-12-20",
-      summary: "Nghiên cứu mới cho thấy thay đổi lối sống có thể đảo ngược tiền tiểu đường ở 58% trường hợp.",
-      link: "#"
-    },
-    {
-      title: "Vietnam Launches National Diabetes Prevention Program",
-      source: "VnExpress Health",
-      date: "2023-12-15",
-      summary: "Việt Nam triển khai chương trình phòng ngừa đái tháo đường quốc gia, tích hợp công nghệ AI.",
+      summary: "Official guidelines for diabetes diagnosis and treatment in Vietnam.",
       link: "#"
     }
   ];
@@ -506,7 +650,7 @@ function ResearchTab() {
           <div className="relative">
             <input
               type="text"
-              placeholder="Tìm kiếm nghiên cứu, hướng dẫn, tin tức..."
+              placeholder="Search research papers and guidelines..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-6 py-4 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none text-lg"
@@ -516,21 +660,11 @@ function ResearchTab() {
         </div>
       </section>
 
-      {/* Latest News */}
-      <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📰 Tin tức mới nhất</h2>
-        <div className="space-y-4">
-          {latestNews.map((news, index) => (
-            <NewsCard key={index} {...news} />
-          ))}
-        </div>
-      </section>
-
       {/* Research Papers */}
       <section>
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">📚 Nghiên cứu khoa học</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">📚 Scientific Research</h2>
         <div className="space-y-6">
-          {researchPapers.map((paper, index) => (
+          {filteredPapers.map((paper, index) => (
             <ResearchPaperCard key={index} {...paper} />
           ))}
         </div>
@@ -538,7 +672,7 @@ function ResearchTab() {
 
       {/* Clinical Guidelines */}
       <section>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📋 Hướng dẫn lâm sàng</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">📋 Clinical Guidelines</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           {clinicalGuidelines.map((guideline, index) => (
             <GuidelineCard key={index} {...guideline} />
@@ -548,30 +682,30 @@ function ResearchTab() {
 
       {/* Educational Resources */}
       <section>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎓 Tài liệu học tập</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">🎓 Educational Resources</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <ResourceCard
             icon="📖"
-            title="Hiểu về Tiểu đường"
-            description="Tổng quan về bệnh tiểu đường, nguyên nhân, triệu chứng và biến chứng"
+            title="Understanding Diabetes"
+            description="Overview of diabetes, causes, symptoms and complications"
             link="#"
           />
           <ResourceCard
             icon="🍎"
-            title="Dinh dưỡng cho người tiểu đường"
-            description="Hướng dẫn chế độ ăn uống lành mạnh cho người bệnh tiểu đường"
+            title="Nutrition for Diabetes"
+            description="Healthy eating guidelines for diabetes patients"
             link="#"
           />
           <ResourceCard
             icon="🏃"
-            title="Vận động & Lối sống"
-            description="Các bài tập và hoạt động thể chất phù hợp"
+            title="Exercise & Lifestyle"
+            description="Suitable exercises and physical activities"
             link="#"
           />
           <ResourceCard
             icon="💊"
-            title="Thuốc điều trị"
-            description="Thông tin về các loại thuốc điều trị tiểu đường phổ biến"
+            title="Treatment Medications"
+            description="Information about common diabetes treatment medications"
             link="#"
           />
         </div>
@@ -686,7 +820,7 @@ function NewsCard({ title, source, date, summary, link }: any) {
       <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-600 mb-4">{summary}</p>
       <a href={link} className="text-blue-600 font-semibold hover:underline">
-        Đọc thêm →
+        Read More →
       </a>
     </div>
   );
@@ -720,7 +854,7 @@ function ResearchPaperCard({ title, authors, journal, year, impact, summary, lin
           ))}
         </div>
         <a href={link} className="text-blue-600 font-semibold hover:underline">
-          Chi tiết →
+          Details →
         </a>
       </div>
     </div>
@@ -735,7 +869,7 @@ function GuidelineCard({ title, organization, year, summary, link }: any) {
       <p className="text-sm text-blue-600 font-semibold mb-3">{organization} • {year}</p>
       <p className="text-sm text-gray-600 mb-4">{summary}</p>
       <a href={link} className="text-blue-600 font-semibold hover:underline text-sm">
-        Xem hướng dẫn →
+        View Guidelines →
       </a>
     </div>
   );
@@ -748,7 +882,7 @@ function ResourceCard({ icon, title, description, link }: any) {
       <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
       <a href={link} className="text-blue-600 font-semibold hover:underline">
-        Tìm hiểu thêm →
+        Learn More →
       </a>
     </div>
   );

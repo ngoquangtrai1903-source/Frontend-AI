@@ -138,7 +138,7 @@ export default function UserPredictionApp() {
       setStep(4);
     } catch (error) {
       console.error('Prediction error:', error);
-      alert('Lỗi phân tích. Vui lòng kiểm tra kết nối backend.');
+      alert('Analysis error. Please check backend connection.');
     } finally {
       setIsAnalyzing(false);
     }
@@ -158,23 +158,23 @@ export default function UserPredictionApp() {
     const calculatedBMI = calculateBMI(data.height, data.weight);
 
     if (data.highBP === 1) {
-      topRisks.push("Huyết áp cao");
-      recommendations.push("Kiểm soát huyết áp thường xuyên và theo dõi với bác sĩ");
+      topRisks.push("High blood pressure");
+      recommendations.push("Monitor blood pressure regularly and consult with doctor");
     }
     if (data.highChol === 1) {
-      topRisks.push("Cholesterol cao");
-      recommendations.push("Giảm chất béo bão hòa trong chế độ ăn");
+      topRisks.push("High cholesterol");
+      recommendations.push("Reduce saturated fats in diet");
     }
     if (calculatedBMI > 30) {
-      topRisks.push("BMI cao (thừa cân/béo phì)");
-      recommendations.push("Lập kế hoạch giảm cân lành mạnh với chuyên gia dinh dưỡng");
+      topRisks.push("High BMI (overweight/obese)");
+      recommendations.push("Create healthy weight loss plan with nutrition expert");
     }
-    if (data.physAct === 1) protective.push("Có hoạt động thể chất đều đặn");
-    if (data.fruits === 1) protective.push("Ăn trái cây hàng ngày");
-    if (data.veggies === 1) protective.push("Ăn rau xanh hàng ngày");
+    if (data.physAct === 1) protective.push("Regular physical activity");
+    if (data.fruits === 1) protective.push("Daily fruit consumption");
+    if (data.veggies === 1) protective.push("Daily vegetable consumption");
     
     if (topRisks.length === 0) {
-      recommendations.push("Duy trì lối sống lành mạnh hiện tại");
+      recommendations.push("Maintain current healthy lifestyle");
     }
 
     return { topRisks, protectiveFactors: protective, recommendations };
@@ -223,7 +223,7 @@ function ProgressBar({ currentStep, totalSteps }: { currentStep: number; totalSt
               {step}
             </div>
             <span className={`text-xs mt-1 sm:mt-2 font-medium ${currentStep >= step ? 'text-blue-600' : 'text-gray-400'}`}>
-              {step === 1 ? 'Cá nhân' : step === 2 ? 'Y tế' : 'Lối sống'}
+              {step === 1 ? 'Personal' : step === 2 ? 'Medical' : 'Lifestyle'}
             </span>
           </div>
         ))}
@@ -243,17 +243,17 @@ function Step1Personal({ formData, updateField, onNext }: any) {
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
-        👤 Thông tin cá nhân
+        👤 Personal Information
       </h2>
       
       <div className="space-y-4 sm:space-y-6">
         {/* Gender */}
         <div className="group">
-          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Giới tính</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Gender</label>
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {[
-              { value: 0, label: '👩 Nữ' },
-              { value: 1, label: '👨 Nam' }
+              { value: 0, label: '👩 Female' },
+              { value: 1, label: '👨 Male' }
             ].map(option => (
               <button
                 key={option.value}
@@ -273,7 +273,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
         {/* Age Slider */}
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-            Nhóm tuổi: <span className="text-blue-600 text-lg sm:text-xl">{
+            Age Group: <span className="text-blue-600 text-lg sm:text-xl">{
               formData.age === 1 ? "18-24" :
               formData.age === 2 ? "25-29" :
               formData.age === 3 ? "30-34" :
@@ -303,7 +303,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
         <div className="space-y-4 sm:space-y-6">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-              Chiều cao (mét): <span className="text-blue-600 text-lg sm:text-xl">{formData.height.toFixed(2)}m</span>
+              Height (meters): <span className="text-blue-600 text-lg sm:text-xl">{formData.height.toFixed(2)}m</span>
             </label>
             <input
               type="range"
@@ -322,7 +322,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">
-              Cân nặng (kg): <span className="text-blue-600 text-lg sm:text-xl">{formData.weight}kg</span>
+              Weight (kg): <span className="text-blue-600 text-lg sm:text-xl">{formData.weight}kg</span>
             </label>
             <input
               type="range"
@@ -349,10 +349,10 @@ function Step1Personal({ formData, updateField, onNext }: any) {
                 'text-red-600'
               }`}>{(formData.weight / (formData.height * formData.height)).toFixed(2)}</span>
               <span className="text-gray-500 ml-2">
-                {formData.weight / (formData.height * formData.height) < 18.5 ? '(Gầy)' :
-                 formData.weight / (formData.height * formData.height) < 25 ? '(Bình thường)' :
-                 formData.weight / (formData.height * formData.height) < 30 ? '(Thừa cân)' :
-                 '(Béo phì)'}
+                {formData.weight / (formData.height * formData.height) < 18.5 ? '(Underweight)' :
+                 formData.weight / (formData.height * formData.height) < 25 ? '(Normal)' :
+                 formData.weight / (formData.height * formData.height) < 30 ? '(Overweight)' :
+                 '(Obese)'}
               </span>
             </p>
           </div>
@@ -360,7 +360,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
 
         {/* Health Status */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">Sức khỏe tổng quát</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2 sm:mb-3">General Health</label>
           <div className="grid grid-cols-5 gap-1 sm:gap-2">
             {[1, 2, 3, 4, 5].map(level => (
               <button
@@ -381,8 +381,8 @@ function Step1Personal({ formData, updateField, onNext }: any) {
             ))}
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-2">
-            <span className="hidden sm:inline">Rất tốt</span>
-            <span>Kém</span>
+            <span className="hidden sm:inline">Excellent</span>
+            <span>Poor</span>
           </div>
         </div>
       </div>
@@ -391,7 +391,7 @@ function Step1Personal({ formData, updateField, onNext }: any) {
         onClick={onNext}
         className="w-full mt-6 sm:mt-8 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
       >
-        Tiếp theo →
+        Next →
       </button>
     </div>
   );
@@ -423,16 +423,16 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
-        🏥 Tiền sử y tế
+        🏥 Medical History
       </h2>
       
       <div className="space-y-3 sm:space-y-4">
-        <Toggle label="Huyết áp cao" field="highBP" icon="❤️" />
-        <Toggle label="Cholesterol cao" field="highChol" icon="🧪" />
-        <Toggle label="Đã kiểm tra Cholesterol (5 năm qua)" field="cholCheck" icon="📋" />
-        <Toggle label="Từng bị đột quỵ" field="stroke" icon="🧠" />
-        <Toggle label="Bệnh tim mạch" field="heartDis" icon="💔" />
-        <Toggle label="Khó khăn khi đi bộ/leo cầu thang" field="diffWalk" icon="🚶" />
+        <Toggle label="High Blood Pressure" field="highBP" icon="❤️" />
+        <Toggle label="High Cholesterol" field="highChol" icon="🧪" />
+        <Toggle label="Cholesterol Checked (last 5 years)" field="cholCheck" icon="📋" />
+        <Toggle label="History of Stroke" field="stroke" icon="🧠" />
+        <Toggle label="Heart Disease" field="heartDis" icon="💔" />
+        <Toggle label="Difficulty Walking/Climbing Stairs" field="diffWalk" icon="🚶" />
       </div>
 
       <div className="flex gap-3 sm:gap-4 mt-6 sm:mt-8">
@@ -440,13 +440,13 @@ function Step2Medical({ formData, updateField, onNext, onBack }: any) {
           onClick={onBack}
           className="flex-1 bg-gray-200 text-gray-700 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-300 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
-          ← Quay lại
+          ← Back
         </button>
         <button
           onClick={onNext}
           className="flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
-          Tiếp theo →
+          Next →
         </button>
       </div>
     </div>
@@ -481,21 +481,21 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 lg:p-8 animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
-        🥗 Lối sống & Thói quen
+        🥗 Lifestyle & Habits
       </h2>
       
       <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-        <Toggle label="Hút thuốc (>100 điếu trong đời)" field="smoker" icon="🚬" goodValue={0} />
-        <Toggle label="Vận động thể chất (30 ngày qua)" field="physAct" icon="🏃" />
-        <Toggle label="Ăn trái cây hàng ngày" field="fruits" icon="🍎" />
-        <Toggle label="Ăn rau xanh hàng ngày" field="veggies" icon="🥬" />
-        <Toggle label="Uống nhiều rượu bia" field="hvyAlcohol" icon="🍺" goodValue={0} />
+        <Toggle label="Smoker (>100 cigarettes in lifetime)" field="smoker" icon="🚬" goodValue={0} />
+        <Toggle label="Physical Activity (last 30 days)" field="physAct" icon="🏃" />
+        <Toggle label="Daily Fruit Consumption" field="fruits" icon="🍎" />
+        <Toggle label="Daily Vegetable Consumption" field="veggies" icon="🥬" />
+        <Toggle label="Heavy Alcohol Consumption" field="hvyAlcohol" icon="🍺" goodValue={0} />
       </div>
 
       <div className="space-y-4 mb-6 sm:mb-8">
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe tinh thần kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.mentHlth}</span>
+            Poor Mental Health Days (last 30 days): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.mentHlth}</span>
           </label>
           <div className="relative h-8 flex items-center">
             <input
@@ -524,15 +524,15 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
             </div>
           </div>
           <div className="mt-6 text-xs text-gray-600">
-            {formData.mentHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
-             formData.mentHlth <= 7 ? '🟡 Tốt' :
-             formData.mentHlth <= 14 ? '🟠 Trung bình' :
-             '🔴 Cần quan tâm'}
+            {formData.mentHlth === 0 ? '✅ Excellent! No days' :
+             formData.mentHlth <= 7 ? '🟡 Good' :
+             formData.mentHlth <= 14 ? '🟠 Average' :
+             '🔴 Needs attention'}
           </div>
         </div>
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
-            Số ngày sức khỏe thể chất kém (30 ngày qua): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.physHlth}</span>
+            Poor Physical Health Days (last 30 days): <span className="text-blue-600 text-sm sm:text-base font-bold">{formData.physHlth}</span>
           </label>
           <div className="relative h-8 flex items-center">
             <input
@@ -561,10 +561,10 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
             </div>
           </div>
           <div className="mt-6 text-xs text-gray-600">
-            {formData.physHlth === 0 ? '✅ Tuyệt vời! Không có ngày nào' :
-             formData.physHlth <= 7 ? '🟡 Tốt' :
-             formData.physHlth <= 14 ? '🟠 Trung bình' :
-             '🔴 Cần quan tâm'}
+            {formData.physHlth === 0 ? '✅ Excellent! No days' :
+             formData.physHlth <= 7 ? '🟡 Good' :
+             formData.physHlth <= 14 ? '🟠 Average' :
+             '🔴 Needs attention'}
           </div>
         </div>
       </div>
@@ -574,13 +574,13 @@ function Step3Lifestyle({ formData, updateField, onBack, onSubmit }: any) {
           onClick={onBack}
           className="flex-1 bg-gray-200 text-gray-700 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg hover:bg-gray-300 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
-          ← Quay lại
+          ← Back
         </button>
         <button
           onClick={onSubmit}
           className="flex-1 bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg shadow-md hover:bg-blue-700 transition-colors min-h-[48px] sm:min-h-[56px]"
         >
-          🔍 Phân tích nguy cơ
+          🔍 Analyze Risk
         </button>
       </div>
     </div>
@@ -599,8 +599,8 @@ function AnalyzingScreen() {
             <span className="text-4xl">🧬</span>
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">Đang phân tích dữ liệu...</h3>
-        <p className="text-gray-600">AI đang xử lý thông tin của bạn</p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Analyzing data...</h3>
+        <p className="text-gray-600">AI is processing your information</p>
       </div>
     </div>
   );
